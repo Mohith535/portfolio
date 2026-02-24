@@ -1,0 +1,959 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mohith Kannan K | AI Builder Portfolio</title>
+    <meta name="description"
+        content="Portfolio of Mohith Kannan K, a 19-year-old AI Builder specialized in Speech AI and Backend AI Systems.">
+
+    <!-- CDNs -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js"></script>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Poppins:wght@400;500;600;700;800&display=swap"
+        rel="stylesheet">
+
+    <!-- PWA & SEO -->
+    <link rel="manifest" href="manifest.json">
+    <meta name="theme-color" content="#00D4FF">
+
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "name": "Mohith Kannan K",
+      "jobTitle": "AI Builder",
+      "url": "https://mohithkannan.github.io",
+      "sameAs": [
+        "https://linkedin.com/in/mohith53",
+        "https://github.com/Mohith535",
+        "https://www.instagram.com/mohith_kannan_53/"
+      ],
+      "university": "SRM University"
+    }
+    </script>
+
+    <script>
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', () => {
+                navigator.serviceWorker.register('sw.js').catch(err => console.log('SW registration failed:', err));
+            });
+        }
+    </script>
+
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body class="bg-[#0b0f1a] text-gray-200 font-['Inter'] overflow-x-hidden selection:bg-[#00D4FF] selection:text-white">
+
+    <!-- Scroll Progress Bar -->
+    <div id="scroll-progress" class="fixed top-0 right-0 h-1 bg-[#00D4FF] z-[100] transition-all"></div>
+
+    <!-- Navigation -->
+    <nav id="navbar"
+        class="fixed top-0 w-full z-50 transition-all duration-300 py-4 px-6 md:px-12 flex justify-between items-center">
+        <div class="flex flex-col">
+            <a href="#hero" class="text-2xl font-bold font-['Poppins'] gradient-text leading-none uppercase">MOHITH
+                KANNAN K</a>
+            <span class="text-[10px] text-gray-500 uppercase tracking-widest mt-1 ml-0.5">19 • AI Builder</span>
+        </div>
+
+        <!-- Desktop Nav -->
+        <ul class="hidden xl:flex space-x-6 font-medium">
+            <li><a href="#hero" class="nav-link">Home</a></li>
+            <li><a href="#building" class="nav-link">Building</a></li>
+            <li><a href="#timeline" class="nav-link">Timeline</a></li>
+            <li><a href="#projects" class="nav-link">Projects</a></li>
+            <li><a href="#thoughts" class="nav-link">Thoughts</a></li>
+            <li><a href="#skills" class="nav-link">Skills</a></li>
+            <li><a href="#contact" class="nav-link">Contact</a></li>
+        </ul>
+
+        <div class="flex items-center space-x-3">
+            <!-- Social Icons Desktop -->
+            <div class="hidden md:flex items-center space-x-3 mr-4 border-r border-gray-800 pr-4">
+                <a href="https://github.com/Mohith535" target="_blank" class="social-nav-icon" title="GitHub"><i
+                        class="fab fa-github"></i></a>
+                <a href="https://www.linkedin.com/in/mohith53/" target="_blank" class="social-nav-icon"
+                    title="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+                <a href="https://devpost.com/Mohith53" target="_blank" class="social-nav-icon" title="Devpost"><i
+                        class="fas fa-terminal"></i></a>
+                <a href="https://vision.hack2skill.com/dashboard/user_private_profile/?userId=6969eeef1cd0a9a16f2fa7ce"
+                    target="_blank" class="social-nav-icon" title="Hack2Skill"><i class="fas fa-trophy"></i></a>
+                <a href="https://www.instagram.com/mohith_kannan_53/" target="_blank" class="social-nav-icon"
+                    title="Instagram"><i class="fab fa-instagram"></i></a>
+                <a href="mailto:promohith.535@gmail.com" class="social-nav-icon" title="Email"><i
+                        class="fas fa-envelope"></i></a>
+            </div>
+
+            <!-- Language & Theme -->
+            <div class="flex items-center space-x-3 relative">
+                <!-- Custom Language Dropdown Toggle -->
+                <button id="lang-toggle"
+                    class="flex items-center space-x-1 text-sm font-bold text-gray-400 hover:text-white transition-colors tracking-widest">
+                    <span id="current-lang">ENG</span>
+                    <i class="fas fa-chevron-down text-[10px] ml-1"></i>
+                </button>
+
+                <!-- Hidden Google Translate Element -->
+
+                <!-- Custom Dropdown Panel -->
+                <div id="lang-dropdown"
+                    class="absolute top-12 right-0 w-48 glass-container py-2 opacity-0 invisible translate-y-2 transition-all duration-300 z-[70]">
+                    <button
+                        class="w-full text-left px-4 py-2 text-sm text-gray-300 hover:bg-gray-800/50 hover:text-white transition-colors flex justify-between items-center lang-option"
+                        data-lang="en">
+                        English <i class="fas fa-check text-[#00D4FF] text-xs check-icon"></i>
+                    </button>
+                    <button
+                        class="w-full text-left px-4 py-2 text-sm text-gray-300 hover:bg-gray-800/50 hover:text-white transition-colors flex justify-between items-center lang-option"
+                        data-lang="ta">
+                        தமிழ் (Tamil) <i class="fas fa-check text-[#00D4FF] text-xs check-icon hidden"></i>
+                    </button>
+
+                    <div
+                        class="px-4 py-2 mt-2 text-[10px] text-gray-500 font-bold uppercase tracking-widest border-b border-gray-800/50 border-t">
+                        Dravidian Languages</div>
+                    <button
+                        class="w-full text-left px-4 py-2 text-sm text-gray-300 hover:bg-gray-800/50 hover:text-white transition-colors flex justify-between items-center lang-option"
+                        data-lang="te">
+                        తెలుగు (Telugu) <i class="fas fa-check text-[#00D4FF] text-xs check-icon hidden"></i>
+                    </button>
+                    <button
+                        class="w-full text-left px-4 py-2 text-sm text-gray-300 hover:bg-gray-800/50 hover:text-white transition-colors flex justify-between items-center lang-option"
+                        data-lang="ml">
+                        മലയാളം (Malayalam) <i class="fas fa-check text-[#00D4FF] text-xs check-icon hidden"></i>
+                    </button>
+                    <button
+                        class="w-full text-left px-4 py-2 text-sm text-gray-300 hover:bg-gray-800/50 hover:text-white transition-colors flex justify-between items-center lang-option"
+                        data-lang="kn">
+                        ಕನ್ನಡ (Kannada) <i class="fas fa-check text-[#00D4FF] text-xs check-icon hidden"></i>
+                    </button>
+
+                    <div
+                        class="px-4 py-2 mt-2 text-[10px] text-gray-500 font-bold uppercase tracking-widest border-b border-gray-800/50 border-t">
+                        Global</div>
+                    <button
+                        class="w-full text-left px-4 py-2 text-sm text-gray-300 hover:bg-gray-800/50 hover:text-white transition-colors flex justify-between items-center lang-option"
+                        data-lang="hi">
+                        हिंदी (Hindi) <i class="fas fa-check text-[#00D4FF] text-xs check-icon hidden"></i>
+                    </button>
+                    <button
+                        class="w-full text-left px-4 py-2 text-sm text-gray-300 hover:bg-gray-800/50 hover:text-white transition-colors flex justify-between items-center lang-option"
+                        data-lang="es">
+                        Español <i class="fas fa-check text-[#00D4FF] text-xs check-icon hidden"></i>
+                    </button>
+                    <button
+                        class="w-full text-left px-4 py-2 text-sm text-gray-300 hover:bg-gray-800/50 hover:text-white transition-colors flex justify-between items-center lang-option"
+                        data-lang="fr">
+                        Français <i class="fas fa-check text-[#00D4FF] text-xs check-icon hidden"></i>
+                    </button>
+                    <button
+                        class="w-full text-left px-4 py-2 text-sm text-gray-300 hover:bg-gray-800/50 hover:text-white transition-colors flex justify-between items-center lang-option"
+                        data-lang="de">
+                        Deutsch <i class="fas fa-check text-[#00D4FF] text-xs check-icon hidden"></i>
+                    </button>
+                    <button
+                        class="w-full text-left px-4 py-2 text-sm text-gray-300 hover:bg-gray-800/50 hover:text-white transition-colors flex justify-between items-center lang-option"
+                        data-lang="zh-CN">
+                        中文 <i class="fas fa-check text-[#00D4FF] text-xs check-icon hidden"></i>
+                    </button>
+                </div>
+
+                <button id="theme-toggle" class="p-2 rounded-full bg-gray-800/50 hover:bg-gray-700/50 transition-all"
+                    title="Toggle Dark/Light Mode">
+                    <i class="fas fa-moon"></i>
+                </button>
+            </div>
+
+            <button id="menu-btn" class="xl:hidden text-2xl focus:outline-none ml-2">
+                <i class="fas fa-bars"></i>
+            </button>
+        </div>
+    </nav>
+
+    <!-- Mobile Menu Overlay -->
+    <div id="mobile-menu"
+        class="fixed inset-0 bg-[#0b0f1a]/95 z-[45] hidden flex-col justify-center items-center space-y-6 text-xl font-bold">
+        <a href="#hero" class="mobile-link">Home</a>
+        <a href="#building" class="mobile-link">Building</a>
+        <a href="#timeline" class="mobile-link">Timeline</a>
+        <a href="#projects" class="mobile-link">Projects</a>
+        <a href="#thoughts" class="mobile-link">Thoughts</a>
+        <a href="#skills" class="mobile-link">Skills</a>
+        <a href="#contact" class="mobile-link">Contact</a>
+        <div class="flex flex-wrap justify-center gap-4 pt-4 px-10">
+            <a href="https://github.com/Mohith535" target="_blank" class="text-gray-400"><i
+                    class="fab fa-github"></i></a>
+            <a href="https://www.linkedin.com/in/mohith53/" target="_blank" class="text-gray-400"><i
+                    class="fab fa-linkedin-in"></i></a>
+            <a href="https://devpost.com/Mohith53" target="_blank" class="text-gray-400"><i
+                    class="fas fa-terminal"></i></a>
+            <a href="https://www.instagram.com/mohith_kannan_53/" target="_blank" class="text-gray-400"><i
+                    class="fab fa-instagram"></i></a>
+            <a href="mailto:promohith.535@gmail.com" class="text-gray-400"><i class="fas fa-envelope"></i></a>
+        </div>
+    </div>
+
+    <!-- Section 1: Hero -->
+    <section id="hero"
+        class="relative h-screen flex flex-col justify-center items-center text-center px-4 overflow-hidden">
+        <div id="particles-js" class="absolute inset-0 z-0"></div>
+
+        <div class="relative z-10 flex flex-col items-center" data-aos="fade-up">
+            <div class="relative mb-8">
+                <div
+                    class="w-32 h-32 md:w-44 md:h-44 rounded-full border-4 border-[#00D4FF] p-1 floating-animation overflow-hidden mx-auto">
+                    <img src="profile.png" alt="Mohith Kannan K" class="w-full h-full rounded-full object-cover">
+                </div>
+            </div>
+
+            <h1
+                class="hero-name text-4xl md:text-6xl lg:text-7xl font-black font-['Poppins'] mb-4 tracking-tighter uppercase whitespace-nowrap">
+                <span class="gradient-text">MOHITH</span>
+                <span class="gradient-text">KANNAN</span>
+                <span class="gradient-text">K</span>
+            </h1>
+            <p class="text-xl md:text-2xl font-medium text-gray-400 mb-8 font-['Poppins'] h-8">
+                <span id="rotating-text" class="text-[#00D4FF]"></span>
+            </p>
+
+            <!-- Stats -->
+            <div class="flex flex-wrap justify-center gap-6 md:gap-16 mb-12">
+                <div class="text-center group">
+                    <div class="text-4xl font-bold text-white group-hover:text-[#00D4FF] transition-colors"
+                        id="stat-hackathons">Hackathons</div>
+                    <div class="text-[10px] uppercase text-gray-500 tracking-widest mt-1">(Active)</div>
+                </div>
+                <div class="text-center group">
+                    <div class="text-4xl font-bold text-white group-hover:text-[#FF6B6B] transition-colors"
+                        id="stat-internships">Internships</div>
+                    <div class="text-[10px] uppercase text-gray-500 tracking-widest mt-1">(Upcoming)</div>
+                </div>
+                <div class="text-center group">
+                    <div class="text-4xl font-bold text-white group-hover:text-[#00D4FF] transition-colors"
+                        id="stat-projects">Projects</div>
+                    <div class="text-[10px] uppercase text-gray-500 tracking-widest mt-1">(2+)</div>
+                </div>
+                <div class="text-center group">
+                    <div class="text-4xl font-bold text-white group-hover:text-[#FF6B6B] transition-colors">Daily</div>
+                    <div class="text-[10px] uppercase text-gray-500 tracking-widest mt-1">Learning</div>
+                </div>
+            </div>
+
+            <div class="flex flex-wrap justify-center gap-6">
+                <a href="#projects" class="btn-primary px-10">Explore Work</a>
+                <a href="./resume.pdf" class="btn-secondary px-10" target="_blank">Resume <i
+                        class="fas fa-file-pdf ml-2"></i></a>
+            </div>
+        </div>
+
+        <a href="#building"
+            class="absolute bottom-10 left-1/2 -translate-x-1/2 text-2xl text-gray-500 animate-bounce cursor-pointer">
+            <i class="fas fa-chevron-down"></i>
+        </a>
+    </section>
+
+    <!-- Section 2: Currently Building -->
+    <section id="building" class="py-24 px-6 md:px-12 bg-[#0d1221] relative">
+        <div class="max-w-6xl mx-auto">
+            <h2 class="text-3xl md:text-4xl font-bold mb-4 gradient-text" data-aos="fade-right">Currently Building</h2>
+            <p class="text-gray-400 mb-12 max-w-2xl" data-aos="fade-right" data-aos-delay="100">Live development update.
+                Active in 2 major AI Hackathons.</p>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <!-- Card 1 -->
+                <div class="glass-container p-8 relative overflow-hidden group" data-aos="flip-up">
+                    <div class="absolute top-0 right-0 p-4">
+                        <span
+                            class="px-3 py-1 bg-orange-600/20 text-orange-400 text-[10px] font-bold rounded-full border border-orange-500/20">HACK2SKILL
+                            x AWS</span>
+                    </div>
+                    <h3 class="text-xl font-bold mb-4 mt-2">AI for Bharat Hackathon</h3>
+                    <p class="text-sm text-gray-400 leading-relaxed mb-6">
+                        Building a centralized AI-powered grievance redressal platform. Integrating multiple complaint
+                        portals into one intelligent multilingual system with speech access.
+                    </p>
+                    <div class="flex flex-wrap gap-2 mb-2">
+                        <span class="badge">AWS</span>
+                        <span class="badge">LLMs</span>
+                        <span class="badge">FastAPI</span>
+                        <span class="badge">Speech AI</span>
+                    </div>
+                </div>
+
+                <!-- Card 2 -->
+                <div class="glass-container p-8 relative overflow-hidden group" data-aos="flip-up" data-aos-delay="200">
+                    <div class="absolute top-0 right-0 p-4">
+                        <span
+                            class="px-3 py-1 bg-blue-600/20 text-blue-400 text-[10px] font-bold rounded-full border border-blue-500/20">DEVPOST
+                            x AMAZON</span>
+                    </div>
+                    <h3 class="text-xl font-bold mb-4 mt-2">Amazon Nova AI Hackathon</h3>
+                    <p class="text-sm text-gray-400 leading-relaxed mb-6">
+                        Developing a unified grievance platform using Amazon Nova LLMs. Integrating Speech AI and RAG
+                        for intelligent automation and accessibility.
+                    </p>
+                    <div class="flex flex-wrap gap-2 mb-2">
+                        <span class="badge">Amazon Nova</span>
+                        <span class="badge">Python</span>
+                        <span class="badge">RAG</span>
+                        <span class="badge">Speech AI</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Section 3: Academic Timeline -->
+    <section id="timeline" class="py-24 px-6 md:px-12 bg-[#0b0f1a] relative overflow-hidden">
+        <h2 class="text-3xl md:text-4xl font-bold text-center mb-16 gradient-text" data-aos="fade-down">Academic &
+            Career Journey</h2>
+
+        <div class="max-w-4xl mx-auto relative">
+            <div
+                class="absolute left-1/2 -translate-x-1/2 w-1 h-full bg-gradient-to-b from-[#00D4FF] to-[#FF6B6B]/20 rounded-full">
+            </div>
+
+            <div class="space-y-16">
+                <!-- 2023 -->
+                <div class="relative flex items-center justify-between md:justify-normal md:flex-row-reverse group"
+                    data-aos="fade-left">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-card md:w-5/12 ml-auto md:ml-0 md:mr-auto">
+                        <span class="text-xs font-bold text-[#FF6B6B] uppercase tracking-widest mb-2 block">2023 -
+                            Present</span>
+                        <h3 class="text-xl font-bold mb-2">SRM University, Chennai</h3>
+                        <p class="text-sm text-gray-400">B.Tech in AI & ML. Building strong foundations in neural
+                            networks, data science, and core AI architectures.</p>
+                        <div class="mt-4 flex flex-wrap gap-2">
+                            <span class="badge">AI/ML</span>
+                            <span class="badge">Python</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 2024 -->
+                <div class="relative flex items-center justify-between md:justify-normal group" data-aos="fade-right">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-card md:w-5/12">
+                        <span class="text-xs font-bold text-[#00D4FF] uppercase tracking-widest mb-2 block">2024 -
+                            Ongoing</span>
+                        <h3 class="text-xl font-bold mb-2">Voice Complaint Bot</h3>
+                        <p class="text-sm text-gray-400">Pioneering multilingual speech AI using Whisper + FastAPI to
+                            streamline user-platform interactions.</p>
+                        <div class="mt-4 flex flex-wrap gap-2">
+                            <span class="badge">Speech AI</span>
+                            <span class="badge">FastAPI</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 2025 -->
+                <div class="relative flex items-center justify-between md:justify-normal md:flex-row-reverse group"
+                    data-aos="fade-left">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-card md:w-5/12 ml-auto md:ml-0 md:mr-auto">
+                        <span class="text-xs font-bold text-[#FF6B6B] uppercase tracking-widest mb-2 block">2025</span>
+                        <h3 class="text-xl font-bold mb-2">Self-Driven Data Analytics</h3>
+                        <p class="text-sm text-gray-400">Mastering data engineering pipelines with Pandas, SQL, and
+                            advanced visualization frameworks.</p>
+                        <div class="mt-4 flex flex-wrap gap-2">
+                            <span class="badge">Pandas</span>
+                            <span class="badge">SQL</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Section 4: Projects -->
+    <section id="projects" class="py-24 px-6 md:px-12 bg-[#0d1221] overflow-hidden">
+        <div class="max-w-6xl mx-auto mb-12">
+            <h2 class="text-3xl md:text-4xl font-bold gradient-text" data-aos="fade-right">Verified Projects</h2>
+            <p class="text-gray-400 mt-2">Authentic codebases built from scratch.</p>
+        </div>
+
+        <div class="carousel-container flex space-x-6 pb-8 overflow-x-auto snap-x scrollbar-hide px-4">
+            <!-- Project 1 -->
+            <div class="project-card min-w-[300px] md:min-w-[400px] snap-center group">
+                <div class="relative h-56 overflow-hidden">
+                    <img src="project1.png" alt="Voice Bot"
+                        class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700">
+                    <div class="absolute inset-0 bg-gradient-to-t from-[#0b0f1a] to-transparent"></div>
+                    <a href="https://github.com/Mohith535/voice-bot" target="_blank"
+                        class="absolute top-4 right-4 w-10 h-10 rounded-full bg-black/50 backdrop-blur-md flex items-center justify-center border border-white/10 hover:border-[#00D4FF] transition-all">
+                        <i class="fab fa-github text-white"></i>
+                    </a>
+                </div>
+                <div class="p-6">
+                    <div
+                        class="w-full h-32 glass-container flex items-center justify-center mb-4 border border-white/5">
+                        <span class="text-[10px] uppercase tracking-widest text-gray-500 font-bold">[ Project Preview
+                            ]</span>
+                    </div>
+                    <h3 class="text-xl font-bold mb-2">Voice Complaint Bot</h3>
+                    <p class="text-sm text-gray-400 mb-4 h-10 line-clamp-2">Multilingual speech-to-text using OpenAI
+                        Whisper + FastAPI for efficient complaint logging.</p>
+
+                    <div class="mb-4">
+                        <h4 class="text-[10px] uppercase tracking-widest text-[#00D4FF] font-bold mb-2">What I Built
+                        </h4>
+                        <ul class="text-[11px] text-gray-400 space-y-1 list-disc ml-4">
+                            <li>• Designed FastAPI backend</li>
+                            <li>• Integrated Whisper speech recognition</li>
+                            <li>• Built multilingual complaint flow</li>
+                        </ul>
+                    </div>
+
+                    <div class="flex gap-4 mb-4">
+                        <button
+                            class="flex-1 btn-secondary py-2 text-[10px] font-bold uppercase tracking-widest border border-gray-700 hover:border-[#00D4FF] transition-all">[
+                            GitHub ]</button>
+                        <button
+                            class="flex-1 btn-secondary py-2 text-[10px] font-bold uppercase tracking-widest border border-gray-700 hover:border-[#FF6B6B] transition-all">[
+                            Live Demo ]</button>
+                    </div>
+
+                    <div class="flex flex-wrap gap-2">
+                        <span class="badge">Whisper</span>
+                        <span class="badge">FastAPI</span>
+                        <span class="badge">Python</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Project 2 -->
+            <div class="project-card min-w-[300px] md:min-w-[400px] snap-center group">
+                <div class="relative h-56 overflow-hidden">
+                    <img src="project2.png" alt="Analytics"
+                        class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700">
+                    <div class="absolute inset-0 bg-gradient-to-t from-[#0b0f1a] to-transparent"></div>
+                    <a href="https://github.com/Mohith535/data-insights" target="_blank"
+                        class="absolute top-4 right-4 w-10 h-10 rounded-full bg-black/50 backdrop-blur-md flex items-center justify-center border border-white/10 hover:border-[#00D4FF] transition-all">
+                        <i class="fab fa-github text-white"></i>
+                    </a>
+                </div>
+                <div class="p-6">
+                    <div
+                        class="w-full h-32 glass-container flex items-center justify-center mb-4 border border-white/5">
+                        <span class="text-[10px] uppercase tracking-widest text-gray-500 font-bold">[ Project Preview
+                            ]</span>
+                    </div>
+                    <h3 class="text-xl font-bold mb-2">Data Insights Portal</h3>
+                    <p class="text-sm text-gray-400 mb-4 h-10 line-clamp-2">Analytical dashboard for social datasets
+                        using Pandas & Plotly to visualize trends.</p>
+
+                    <div class="mb-4">
+                        <h4 class="text-[10px] uppercase tracking-widest text-[#00D4FF] font-bold mb-2">What I Built
+                        </h4>
+                        <ul class="text-[11px] text-gray-400 space-y-1 list-disc ml-4">
+                            <li>• Designed FastAPI backend</li>
+                            <li>• Integrated Whisper speech recognition</li>
+                            <li>• Built multilingual complaint flow</li>
+                        </ul>
+                    </div>
+
+                    <div class="flex gap-4 mb-4">
+                        <button
+                            class="flex-1 btn-secondary py-2 text-[10px] font-bold uppercase tracking-widest border border-gray-700 hover:border-[#00D4FF] transition-all">[
+                            GitHub ]</button>
+                        <button
+                            class="flex-1 btn-secondary py-2 text-[10px] font-bold uppercase tracking-widest border border-gray-700 hover:border-[#FF6B6B] transition-all">[
+                            Live Demo ]</button>
+                    </div>
+
+                    <div class="flex flex-wrap gap-2">
+                        <span class="badge">Pandas</span>
+                        <span class="badge">Plotly</span>
+                        <span class="badge">SQL</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Placeholder -->
+            <div
+                class="project-card min-w-[300px] md:min-w-[400px] snap-center border-dashed border-2 border-gray-800 flex flex-col items-center justify-center p-12 text-center opacity-50">
+                <i class="fas fa-plus text-3xl mb-4 text-gray-700"></i>
+                <h3 class="text-lg font-bold text-gray-700 uppercase">Coming Soon — Currently Building</h3>
+                <p class="text-xs text-gray-800 mt-2 italic">Building for AI for Bharat Hackathon...</p>
+            </div>
+        </div>
+
+        <!-- Flagship Project Section -->
+        <div class="max-w-6xl mx-auto mt-24">
+            <h2 class="text-3xl md:text-4xl font-bold gradient-text mb-8" data-aos="fade-right">Flagship Project</h2>
+            <div class="glass-container p-8 relative overflow-hidden group max-w-2xl" data-aos="fade-up">
+                <div class="absolute top-0 right-0 p-4">
+                    <span
+                        class="px-3 py-1 bg-cyan-600/20 text-cyan-400 text-[10px] font-bold rounded-full border border-cyan-500/20">IN
+                        DEVELOPMENT</span>
+                </div>
+                <div class="w-full h-48 glass-container flex items-center justify-center mb-6 border border-white/5">
+                    <span class="text-[12px] uppercase tracking-widest text-gray-500 font-bold">[ Project Preview
+                        ]</span>
+                </div>
+                <h3 class="text-2xl font-bold mb-4">Nova – Emotion Aware AI Assistant</h3>
+                <p class="text-gray-400 leading-relaxed max-w-lg">
+                    Reserved for next-generation intelligence. A multimodal system designed for emotional awareness and
+                    real-time human resonance.
+                </p>
+            </div>
+        </div>
+
+    </section>
+
+    <!-- Build Notes Section -->
+    <section id="build-notes" class="py-12 px-6 md:px-12 bg-[#0b0f1a] border-t border-gray-800/20">
+        <div class="max-w-6xl mx-auto">
+            <h3 class="text-xl font-bold mb-8 gradient-text" data-aos="fade-right">Build Notes</h3>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6" data-aos="fade-up">
+                <div class="glass-container p-4 border-white/5">
+                    <p class="text-xs text-gray-400 leading-relaxed">• Optimizing real-time speech latency</p>
+                </div>
+                <div class="glass-container p-4 border-white/5">
+                    <p class="text-xs text-gray-400 leading-relaxed">• Experimenting with multilingual AI pipelines</p>
+                </div>
+                <div class="glass-container p-4 border-white/5">
+                    <p class="text-xs text-gray-400 leading-relaxed">• Improving system architecture decisions</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Section 5: Thoughts -->
+    <section id="thoughts" class="py-24 px-6 md:px-12 bg-[#0b0f1a]">
+        <div class="max-w-6xl mx-auto">
+            <h2 class="text-3xl md:text-4xl font-bold text-center mb-16 gradient-text" data-aos="fade-up">Thoughts &
+                Tech Blog</h2>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <!-- Post 1 -->
+                <article class="blog-card" data-aos="fade-up">
+                    <div class="flex justify-between items-center mb-4">
+                        <span class="badge">AI/Speech</span>
+                        <span class="text-[10px] text-gray-500">5 Min Read</span>
+                    </div>
+                    <h3 class="text-xl font-bold mb-3 hover:text-[#00D4FF] transition-colors cursor-pointer">Why Tamil
+                        Voice AI Matters for India</h3>
+                    <p class="text-sm text-gray-400 mb-6">Bridging the digital divide for millions through localized,
+                        high-accuracy speech models.</p>
+                    <div
+                        class="flex items-center justify-between text-[10px] text-gray-600 font-bold uppercase tracking-widest">
+                        <span>Feb 2026</span>
+                        <button class="text-[#FF6B6B] hover:text-[#00D4FF] transition-colors">Read More</button>
+                    </div>
+                </article>
+
+                <!-- Post 2 -->
+                <article class="blog-card" data-aos="fade-up" data-aos-delay="100">
+                    <div class="flex justify-between items-center mb-4">
+                        <span class="badge">Career</span>
+                        <span class="text-[10px] text-gray-500">4 Min Read</span>
+                    </div>
+                    <h3 class="text-xl font-bold mb-3 hover:text-[#00D4FF] transition-colors cursor-pointer">Lessons
+                        from Self Learning AI</h3>
+                    <p class="text-sm text-gray-400 mb-6">Navigating the complex world of deep learning outside the
+                        traditional classroom setup.</p>
+                    <div
+                        class="flex items-center justify-between text-[10px] text-gray-600 font-bold uppercase tracking-widest">
+                        <span>Jan 2026</span>
+                        <button class="text-[#FF6B6B] hover:text-[#00D4FF] transition-colors">Read More</button>
+                    </div>
+                </article>
+
+                <!-- Post 3 -->
+                <article class="blog-card" data-aos="fade-up" data-aos-delay="200">
+                    <div class="flex justify-between items-center mb-4">
+                        <span class="badge">DevStack</span>
+                        <span class="text-[10px] text-gray-500">6 Min Read</span>
+                    </div>
+                    <h3 class="text-xl font-bold mb-3 hover:text-[#00D4FF] transition-colors cursor-pointer">FastAPI +
+                        Whisper: My Dev Stack</h3>
+                    <p class="text-sm text-gray-400 mb-6">Why asynchronicity is vital for building real-world
+                        production-ready AI backends.</p>
+                    <div
+                        class="flex items-center justify-between text-[10px] text-gray-600 font-bold uppercase tracking-widest">
+                        <span>Dec 2025</span>
+                        <button class="text-[#FF6B6B] hover:text-[#00D4FF] transition-colors">Read More</button>
+                    </div>
+                </article>
+            </div>
+        </div>
+    </section>
+
+    <!-- Section 6: Expanded Vision & Skills -->
+    <section id="skills" class="py-24 px-6 md:px-12 bg-[#0d1221]">
+        <div class="max-w-7xl mx-auto">
+            <h2 class="text-3xl md:text-4xl font-bold text-center mb-16 gradient-text" data-aos="fade-up">Vision &
+                Skills</h2>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+                <!-- Column 1: Core Engineering -->
+                <div class="space-y-8" data-aos="fade-up">
+                    <h3 class="text-lg font-bold flex items-center text-[#00D4FF]"><i class="fas fa-code mr-3"></i> Core
+                        Engineering</h3>
+                    <div class="space-y-6">
+                        <div class="skill-item" data-aos="fade-in">
+                            <div class="flex justify-between mb-2 text-[10px] font-bold uppercase tracking-wider">
+                                <span>Python</span><span>Advanced</span>
+                            </div>
+                            <div class="skill-bar-bg">
+                                <div class="skill-bar-fill cyan-glow" style="width: 95%"></div>
+                            </div>
+                        </div>
+                        <div class="skill-item" data-aos="fade-in">
+                            <div class="flex justify-between mb-2 text-[10px] font-bold uppercase tracking-wider">
+                                <span>FastAPI</span><span>Advanced</span>
+                            </div>
+                            <div class="skill-bar-bg">
+                                <div class="skill-bar-fill cyan-glow" style="width: 85%"></div>
+                            </div>
+                        </div>
+                        <div class="skill-item" data-aos="fade-in">
+                            <div class="flex justify-between mb-2 text-[10px] font-bold uppercase tracking-wider">
+                                <span>SQL</span><span>Advanced</span>
+                            </div>
+                            <div class="skill-bar-bg">
+                                <div class="skill-bar-fill cyan-glow" style="width: 80%"></div>
+                            </div>
+                        </div>
+                        <div class="skill-item" data-aos="fade-in">
+                            <div class="flex justify-between mb-2 text-[10px] font-bold uppercase tracking-wider">
+                                <span>Git/GitHub</span><span>Advanced</span>
+                            </div>
+                            <div class="skill-bar-bg">
+                                <div class="skill-bar-fill cyan-glow" style="width: 90%"></div>
+                            </div>
+                        </div>
+                        <div class="skill-item" data-aos="fade-in">
+                            <div class="flex justify-between mb-2 text-[10px] font-bold uppercase tracking-wider">
+                                <span>REST APIs</span><span>Advanced</span>
+                            </div>
+                            <div class="skill-bar-bg">
+                                <div class="skill-bar-fill cyan-glow" style="width: 85%"></div>
+                            </div>
+                        </div>
+                        <div class="skill-item" data-aos="fade-in">
+                            <div class="flex justify-between mb-2 text-[10px] font-bold uppercase tracking-wider">
+                                <span>C/C++</span><span>Intermediate</span>
+                            </div>
+                            <div class="skill-bar-bg">
+                                <div class="skill-bar-fill cyan-glow" style="width: 70%"></div>
+                            </div>
+                        </div>
+                        <div class="skill-item" data-aos="fade-in">
+                            <div class="flex justify-between mb-2 text-[10px] font-bold uppercase tracking-wider">
+                                <span>CLI Tools</span><span>Intermediate</span>
+                            </div>
+                            <div class="skill-bar-bg">
+                                <div class="skill-bar-fill cyan-glow" style="width: 75%"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Column 2: AI & Data -->
+                <div class="space-y-8" data-aos="fade-up" data-aos-delay="100">
+                    <h3 class="text-lg font-bold flex items-center text-[#FF6B6B]"><i class="fas fa-brain mr-3"></i> AI
+                        & Data</h3>
+                    <div class="space-y-6">
+                        <div class="skill-item" data-aos="fade-in">
+                            <div class="flex justify-between mb-2 text-[10px] font-bold uppercase tracking-wider">
+                                <span>Speech Recognition</span><span>Advanced</span>
+                            </div>
+                            <div class="skill-bar-bg">
+                                <div class="skill-bar-fill orange-glow" style="width: 85%"></div>
+                            </div>
+                        </div>
+                        <div class="skill-item" data-aos="fade-in">
+                            <div class="flex justify-between mb-2 text-[10px] font-bold uppercase tracking-wider">
+                                <span>NLP Basics</span><span>Intermediate</span>
+                            </div>
+                            <div class="skill-bar-bg">
+                                <div class="skill-bar-fill orange-glow" style="width: 75%"></div>
+                            </div>
+                        </div>
+                        <div class="skill-item" data-aos="fade-in">
+                            <div class="flex justify-between mb-2 text-[10px] font-bold uppercase tracking-wider">
+                                <span>Generative AI</span><span>Advanced</span>
+                            </div>
+                            <div class="skill-bar-bg">
+                                <div class="skill-bar-fill orange-glow" style="width: 80%"></div>
+                            </div>
+                        </div>
+                        <div class="skill-item" data-aos="fade-in">
+                            <div class="flex justify-between mb-2 text-[10px] font-bold uppercase tracking-wider">
+                                <span>Pandas</span><span>Advanced</span>
+                            </div>
+                            <div class="skill-bar-bg">
+                                <div class="skill-bar-fill orange-glow" style="width: 85%"></div>
+                            </div>
+                        </div>
+                        <div class="skill-item" data-aos="fade-in">
+                            <div class="flex justify-between mb-2 text-[10px] font-bold uppercase tracking-wider">
+                                <span>Multilingual AI</span><span>Intermediate</span>
+                            </div>
+                            <div class="skill-bar-bg">
+                                <div class="skill-bar-fill orange-glow" style="width: 75%"></div>
+                            </div>
+                        </div>
+                        <div class="skill-item" data-aos="fade-in">
+                            <div class="flex justify-between mb-2 text-[10px] font-bold uppercase tracking-wider">
+                                <span>Emotion Detection</span><span>Intermediate</span>
+                            </div>
+                            <div class="skill-bar-bg">
+                                <div class="skill-bar-fill orange-glow" style="width: 65%"></div>
+                            </div>
+                        </div>
+                        <div class="skill-item" data-aos="fade-in">
+                            <div class="flex justify-between mb-2 text-[10px] font-bold uppercase tracking-wider">
+                                <span>Financial Data</span><span>Learning</span>
+                            </div>
+                            <div class="skill-bar-bg">
+                                <div class="skill-bar-fill orange-glow" style="width: 60%"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Column 3: System Design -->
+                <div class="space-y-8" data-aos="fade-up" data-aos-delay="200">
+                    <h3 class="text-lg font-bold flex items-center text-[#00D4FF]"><i
+                            class="fas fa-project-diagram mr-3"></i> System Design</h3>
+                    <div class="space-y-6">
+                        <div class="skill-item" data-aos="fade-in">
+                            <div class="flex justify-between mb-2 text-[10px] font-bold uppercase tracking-wider">
+                                <span>Architecture</span><span>Intermediate</span>
+                            </div>
+                            <div class="skill-bar-bg">
+                                <div class="skill-bar-fill cyan-glow" style="width: 70%"></div>
+                            </div>
+                        </div>
+                        <div class="skill-item" data-aos="fade-in">
+                            <div class="flex justify-between mb-2 text-[10px] font-bold uppercase tracking-wider">
+                                <span>Software Design</span><span>Intermediate</span>
+                            </div>
+                            <div class="skill-bar-bg">
+                                <div class="skill-bar-fill cyan-glow" style="width: 75%"></div>
+                            </div>
+                        </div>
+                        <div class="skill-item" data-aos="fade-in">
+                            <div class="flex justify-between mb-2 text-[10px] font-bold uppercase tracking-wider">
+                                <span>Data Persistence</span><span>Intermediate</span>
+                            </div>
+                            <div class="skill-bar-bg">
+                                <div class="skill-bar-fill cyan-glow" style="width: 70%"></div>
+                            </div>
+                        </div>
+                        <div class="skill-item" data-aos="fade-in">
+                            <div class="flex justify-between mb-2 text-[10px] font-bold uppercase tracking-wider">
+                                <span>Algorithms</span><span>Advanced</span>
+                            </div>
+                            <div class="skill-bar-bg">
+                                <div class="skill-bar-fill cyan-glow" style="width: 80%"></div>
+                            </div>
+                        </div>
+                        <div class="skill-item" data-aos="fade-in">
+                            <div class="flex justify-between mb-2 text-[10px] font-bold uppercase tracking-wider">
+                                <span>Data Structures</span><span>Advanced</span>
+                            </div>
+                            <div class="skill-bar-bg">
+                                <div class="skill-bar-fill cyan-glow" style="width: 85%"></div>
+                            </div>
+                        </div>
+                        <div class="skill-item" data-aos="fade-in">
+                            <div class="flex justify-between mb-2 text-[10px] font-bold uppercase tracking-wider">
+                                <span>Logical Reasoning</span><span>Advanced</span>
+                            </div>
+                            <div class="skill-bar-bg">
+                                <div class="skill-bar-fill cyan-glow" style="width: 90%"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Column 4: Professional Skills -->
+                <div class="space-y-8" data-aos="fade-up" data-aos-delay="300">
+                    <h3 class="text-lg font-bold flex items-center text-[#FF6B6B]"><i class="fas fa-users-cog mr-3"></i>
+                        Professional Skills</h3>
+                    <div class="space-y-6">
+                        <div class="skill-item" data-aos="fade-in">
+                            <div class="flex justify-between mb-2 text-[10px] font-bold uppercase tracking-wider">
+                                <span>Leadership</span><span>Advanced</span>
+                            </div>
+                            <div class="skill-bar-bg">
+                                <div class="skill-bar-fill orange-glow" style="width: 80%"></div>
+                            </div>
+                        </div>
+                        <div class="skill-item" data-aos="fade-in">
+                            <div class="flex justify-between mb-2 text-[10px] font-bold uppercase tracking-wider">
+                                <span>Team Management</span><span>Advanced</span>
+                            </div>
+                            <div class="skill-bar-bg">
+                                <div class="skill-bar-fill orange-glow" style="width: 85%"></div>
+                            </div>
+                        </div>
+                        <div class="skill-item" data-aos="fade-in">
+                            <div class="flex justify-between mb-2 text-[10px] font-bold uppercase tracking-wider">
+                                <span>Adaptability</span><span>Advanced</span>
+                            </div>
+                            <div class="skill-bar-bg">
+                                <div class="skill-bar-fill orange-glow" style="width: 90%"></div>
+                            </div>
+                        </div>
+                        <div class="skill-item" data-aos="fade-in">
+                            <div class="flex justify-between mb-2 text-[10px] font-bold uppercase tracking-wider">
+                                <span>Time Management</span><span>Advanced</span>
+                            </div>
+                            <div class="skill-bar-bg">
+                                <div class="skill-bar-fill orange-glow" style="width: 85%"></div>
+                            </div>
+                        </div>
+                        <div class="skill-item" data-aos="fade-in">
+                            <div class="flex justify-between mb-2 text-[10px] font-bold uppercase tracking-wider">
+                                <span>Problem Solving</span><span>Advanced</span>
+                            </div>
+                            <div class="skill-bar-bg">
+                                <div class="skill-bar-fill orange-glow" style="width: 95%"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Section 7: Contact -->
+    <section id="contact" class="py-24 px-6 md:px-12 bg-[#0b0f1a] relative">
+        <div class="max-w-4xl mx-auto">
+            <h2 class="text-3xl font-bold mb-12 text-center gradient-text">Contact Me</h2>
+            <div class="glass-container p-8 relative">
+                <!-- Toast Notification -->
+                <div id="toast-notification"
+                    class="absolute -top-16 left-1/2 -translate-x-1/2 glass-container px-6 py-3 flex items-center space-x-3 opacity-0 invisible transition-all duration-300 z-50">
+                    <i id="toast-icon" class="fas fa-check-circle text-green-400"></i>
+                    <span id="toast-message" class="text-sm font-bold text-white">Message sent successfully 🚀</span>
+                </div>
+
+                <form id="contact-form" class="space-y-6">
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <div class="space-y-2">
+                            <label class="text-[10px] uppercase tracking-widest text-gray-500 font-bold">Your
+                                Name</label>
+                            <input type="text" id="from_name" required class="form-input" placeholder="Mohith">
+                        </div>
+                        <div class="space-y-2">
+                            <label class="text-[10px] uppercase tracking-widest text-gray-500 font-bold">Subject</label>
+                            <input type="text" id="subject" required class="form-input"
+                                placeholder="Project Inquiry / Collaboration">
+                        </div>
+                    </div>
+                    <div class="space-y-2">
+                        <label class="text-[10px] uppercase tracking-widest text-gray-500 font-bold">Message</label>
+                        <textarea id="message" rows="5" required class="form-input"
+                            placeholder="Let's build AI together..."></textarea>
+                    </div>
+                    <button type="submit" id="submit-btn"
+                        class="w-full btn-primary text-sm font-bold uppercase tracking-widest py-4 flex justify-center items-center">
+                        <span id="btn-text">FIRE MESSAGE 🚀</span>
+                        <i id="btn-spinner" class="fas fa-spinner animate-spin hidden ml-2"></i>
+                    </button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="py-16 border-t border-gray-800/50 bg-[#0b0f1a] text-center">
+        <div class="max-w-6xl mx-auto px-6 grid grid-cols-1 md:grid-cols-3 gap-8 items-center mb-12">
+            <div class="text-left">
+                <h4 class="text-xl font-bold gradient-text mb-2">MOHITH KANNAN K</h4>
+                <p class="text-xs text-gray-500 font-medium">Building AI for Bharat</p>
+            </div>
+            <div class="flex justify-center space-x-6">
+                <a href="https://github.com/Mohith535" target="_blank" class="social-icon" title="GitHub"><i
+                        class="fab fa-github"></i></a>
+                <a href="https://www.linkedin.com/in/mohith53/" target="_blank" class="social-icon" title="LinkedIn"><i
+                        class="fab fa-linkedin-in"></i></a>
+                <a href="https://www.instagram.com/mohith_kannan_53/" target="_blank" class="social-icon"
+                    title="Instagram"><i class="fab fa-instagram"></i></a>
+                <a href="mailto:promohith.535@gmail.com" class="social-icon" title="Email"><i
+                        class="fas fa-envelope"></i></a>
+            </div>
+            <div class="text-right">
+                <a href="mailto:promohith.535@gmail.com"
+                    class="text-sm font-bold text-gray-400 hover:text-[#00D4FF] transition-colors">promohith.535@gmail.com</a>
+            </div>
+        </div>
+
+        <div
+            class="flex flex-wrap justify-center gap-6 mb-8 text-[11px] font-bold uppercase tracking-widest text-gray-500">
+            <a href="https://github.com/Mohith535" class="hover:text-white">GitHub</a>
+            <a href="https://www.linkedin.com/in/mohith53/" class="hover:text-white">LinkedIn</a>
+            <a href="https://devpost.com/Mohith53" class="hover:text-white">Devpost</a>
+            <a href="https://www.instagram.com/mohith_kannan_53/" class="hover:text-white">Instagram</a>
+            <a href="mailto:promohith.535@gmail.com" class="hover:text-white">Email</a>
+        </div>
+
+        <p class="text-[10px] text-gray-700 uppercase tracking-widest">
+            © 2026 Mohith Kannan K. Crafted for Bharat 🇮🇳
+        </p>
+    </footer>
+
+    <!-- Command Palette -->
+    <div id="command-palette"
+        class="fixed inset-0 z-[200] bg-black/80 backdrop-blur-sm hidden flex-col transition-all duration-300">
+        <div
+            class="max-w-2xl w-full mx-auto mt-[10vh] bg-[#1a1f2e] border border-gray-700/50 rounded-2xl overflow-hidden shadow-2xl">
+            <div class="px-6 py-4 border-b border-gray-700/50 flex items-center">
+                <i class="fas fa-terminal text-[#00D4FF] mr-3"></i>
+                <input type="text" id="cmd-input"
+                    placeholder="Jump to... (building, timeline, projects, thoughts, skills)"
+                    class="bg-transparent border-none outline-none w-full text-white">
+                <kbd class="px-2 py-0.5 bg-gray-800 text-[10px] rounded border border-gray-700">ESC</kbd>
+            </div>
+            <div id="cmd-results" class="max-h-[50vh] overflow-y-auto px-2 py-4 space-y-1">
+                <div class="cmd-item" data-target="#hero">Home</div>
+                <div class="cmd-item" data-target="#building">Currently Building</div>
+                <div class="cmd-item" data-target="#timeline">Academic Timeline</div>
+                <div class="cmd-item" data-target="#projects">Verified Projects</div>
+                <div class="cmd-item" data-target="#thoughts">Tech Blog</div>
+                <div class="cmd-item" data-target="#skills">Skills & Vision</div>
+                <div class="cmd-item" data-target="#contact">Contact</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <div id="google_translate_element" style="display:none;"></div>
+
+    <script type="text/javascript">
+        function googleTranslateElementInit() {
+            new google.translate.TranslateElement({
+                pageLanguage: 'en',
+                includedLanguages: 'en,ta,te,ml,kn,hi,es,fr,de,zh-CN',
+                autoDisplay: false
+            }, 'google_translate_element');
+        }
+    </script>
+    <script src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+    <script src="script.js"></script>
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>
+        AOS.init();
+    </script>
+</body>
+
+</html>
