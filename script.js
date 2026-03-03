@@ -1,366 +1,788 @@
-// Initialize AOS
-AOS.init({
-    duration: 1000,
-    once: true,
-    offset: 100,
-});
+// ==================== script.js ====================
+document.addEventListener('DOMContentLoaded', function () {
 
-// Custom Language Dropdown Logic
-document.addEventListener('DOMContentLoaded', () => {
-    const langToggle = document.getElementById('lang-toggle');
-    const langDropdown = document.getElementById('lang-dropdown');
-    const langOptions = document.querySelectorAll('.lang-option');
-    const currentLangText = document.getElementById('current-lang');
-
-    // Toggle dropdown visibility
-    langToggle.addEventListener('click', (e) => {
-        e.stopPropagation();
-        langDropdown.classList.toggle('active');
-        const icon = langToggle.querySelector('i');
-        icon.classList.toggle('fa-chevron-down');
-        icon.classList.toggle('fa-chevron-up');
+    // --- Initialize AOS ---
+    AOS.init({
+        duration: 1000,
+        once: true,
+        offset: 100,
     });
 
-    // Close dropdown when clicking outside
-    document.addEventListener('click', (e) => {
-        if (!langDropdown.contains(e.target) && !langToggle.contains(e.target)) {
-            langDropdown.classList.remove('active');
-            langToggle.querySelector('i').classList.add('fa-chevron-down');
-            langToggle.querySelector('i').classList.remove('fa-chevron-up');
-        }
-    });
+    // ============================================
+    // LANGUAGE SELECTOR (Google Translate Integration)
+    // ============================================
+    (function setupLanguageSelector() {
+        const langToggle = document.getElementById('lang-toggle');
+        const langDropdown = document.getElementById('lang-dropdown');
+        const langOptions = document.querySelectorAll('.lang-option');
+        const currentLangText = document.getElementById('current-lang');
 
-    // Initialize EmailJS
-    emailjs.init("S0nB3ZKrklbEVDggT");
-
-    // Programmatic language switch logic
-    function setLanguage(lang) {
-        const select = document.querySelector('.goog-te-combo');
-        if (!select) {
-            // Re-try after a delay in case google translate is still loading
-            setTimeout(() => setLanguage(lang), 500);
+        if (!langToggle || !langDropdown || !currentLangText) {
             return;
         }
 
-        select.value = lang;
-        select.dispatchEvent(new Event('change'));
-
-        localStorage.setItem('selectedLanguage', lang);
-
-        // Update Label
-        let shortText = "ENG";
-        const labelMap = {
-            'en': 'ENG', 'ta': 'TAM', 'te': 'TEL', 'ml': 'MAL',
-            'kn': 'KAN', 'hi': 'HIN', 'es': 'ESP', 'fr': 'FRA',
-            'de': 'DEU', 'zh-CN': 'CHN'
+        // Language code mapping for Google Translate
+        const langCodeMap = {
+            'ta': 'ta', 'te': 'te', 'ml': 'ml', 'kn': 'kn',
+            'hi': 'hi', 'es': 'es', 'fr': 'fr', 'de': 'de',
+            'zh-CN': 'zh-CN', 'en': 'en'
         };
-        shortText = labelMap[lang] || 'ENG';
-        if (currentLangText) currentLangText.textContent = shortText;
 
-        updateCheckmarks(lang);
-    }
-
-    function updateCheckmarks(activeLangCode) {
-        langOptions.forEach(opt => {
-            const checkIcon = opt.querySelector('.check-icon');
-            if (opt.getAttribute('data-lang') === activeLangCode) {
-                checkIcon.classList.remove('hidden');
-            } else {
-                checkIcon.classList.add('hidden');
-            }
-        });
-    }
-
-    // Handle language selection
-    langOptions.forEach(option => {
-        option.addEventListener('click', (e) => {
+        // Toggle dropdown
+        langToggle.addEventListener('click', (e) => {
             e.stopPropagation();
-            const langCode = option.getAttribute('data-lang');
-            setLanguage(langCode);
-
-            // Close dropdown
-            langDropdown.classList.remove('active');
-            langToggle.querySelector('i').classList.add('fa-chevron-down');
-            langToggle.querySelector('i').classList.remove('fa-chevron-up');
+            langDropdown.classList.toggle('active');
+            const icon = langToggle.querySelector('i');
+            if (icon) {
+                icon.classList.toggle('fa-chevron-down');
+                icon.classList.toggle('fa-chevron-up');
+            }
         });
-    });
 
-    // On page load restore language
-    window.addEventListener('load', () => {
-        const savedLang = localStorage.getItem('selectedLanguage');
-        if (savedLang && savedLang !== 'en') {
-            setTimeout(() => {
-                setLanguage(savedLang);
-            }, 1000);
-        }
-    });
-});
-
-
-// Particles.js Configuration
-// ... (rest of particles, AOS, rotating text, scroll, stats, mobile menu, dark mode, cmd palette) ...
-if (document.getElementById('particles-js')) {
-    particlesJS('particles-js', {
-        "particles": {
-            "number": { "value": 60, "density": { "enable": true, "value_area": 800 } },
-            "color": { "value": "#00D4FF" },
-            "shape": { "type": "circle" },
-            "opacity": { "value": 0.4, "random": false },
-            "size": { "value": 2, "random": true },
-            "line_linked": { "enable": true, "distance": 150, "color": "#00D4FF", "opacity": 0.15, "width": 1 },
-            "move": { "enable": true, "speed": 1.5, "direction": "none", "random": false, "straight": false, "out_mode": "out", "bounce": false }
-        },
-        "interactivity": {
-            "detect_on": "canvas",
-            "events": { "onhover": { "enable": true, "mode": "grab" }, "onclick": { "enable": true, "mode": "push" }, "resize": true },
-            "modes": { "grab": { "distance": 140, "line_linked": { "opacity": 0.8 } } }
-        },
-        "retina_detect": true
-    });
-}
-
-// Rotating Text Animation
-const rotatingText = document.getElementById('rotating-text');
-const phrases = [
-    "Open for AI Internships",
-    "Open to Startup Collaboration",
-    "Hackathon Teammate",
-    "Building AI for Bharat 🇮🇳"
-];
-let phraseIndex = 0;
-
-function rotateText() {
-    if (!rotatingText) return;
-    rotatingText.style.opacity = 0;
-    setTimeout(() => {
-        rotatingText.textContent = phrases[phraseIndex];
-        rotatingText.style.opacity = 1;
-        phraseIndex = (phraseIndex + 1) % phrases.length;
-    }, 500);
-}
-
-if (rotatingText) {
-    rotatingText.style.transition = "opacity 0.5s ease";
-    rotateText();
-    setInterval(rotateText, 3000);
-}
-
-// Navigation Scroll Effect
-const navbar = document.getElementById('navbar');
-const scrollProgress = document.getElementById('scroll-progress');
-
-window.addEventListener('scroll', () => {
-    if (window.scrollY > 50) {
-        navbar.classList.add('scrolled');
-    } else {
-        navbar.classList.remove('scrolled');
-    }
-
-    const winScroll = document.body.scrollTop || document.documentElement.scrollTop;
-    const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
-    const scrolled = (winScroll / height) * 100;
-    if (scrollProgress) scrollProgress.style.width = scrolled + "%";
-});
-
-// Stats Counter Animation
-const stats = document.querySelectorAll('[id^="stat-"]');
-const observerOptions = { threshold: 0.5 };
-
-const statsObserver = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-        if (entry.isIntersecting) {
-            const target = entry.target;
-            const targetText = target.innerText;
-
-            // If target contains a number or is numeric, animate it
-            const numericMatch = targetText.match(/\d+/);
-            if (numericMatch) {
-                const targetValue = parseInt(numericMatch[0]);
-                let startValue = 0;
-                const duration = 2000;
-                const startTime = performance.now();
-
-                function updateCounter(currentTime) {
-                    const elapsed = currentTime - startTime;
-                    const progress = Math.min(elapsed / duration, 1);
-                    const current = Math.floor(progress * targetValue);
-                    target.innerText = targetText.replace(/\d+/, current);
-                    if (progress < 1) requestAnimationFrame(updateCounter);
+        // Close dropdown when clicking outside
+        document.addEventListener('click', (e) => {
+            if (!langDropdown.contains(e.target) && !langToggle.contains(e.target)) {
+                langDropdown.classList.remove('active');
+                const icon = langToggle.querySelector('i');
+                if (icon) {
+                    icon.classList.add('fa-chevron-down');
+                    icon.classList.remove('fa-chevron-up');
                 }
-                requestAnimationFrame(updateCounter);
-                statsObserver.unobserve(target);
+            }
+        });
+
+        // Function to trigger Google Translate
+        function triggerGoogleTranslate(langCode) {
+            // If English, clear cookies and reload to restore original
+            if (langCode === 'en') {
+                document.cookie = "googtrans=/en/en; path=/; domain=" + window.location.hostname;
+                document.cookie = "googtrans=/en/en; path=/";
+                location.reload();
+                return;
+            }
+
+            // Find the hidden Google Translate select element
+            const selectElement = document.querySelector('.goog-te-combo');
+
+            if (selectElement) {
+                // Set the value
+                selectElement.value = langCode;
+                // Dispatch event to trigger translation
+                selectElement.dispatchEvent(new Event('change'));
+
+                // Also set the cookie just in case for persistence
+                document.cookie = "googtrans=/en/" + langCode + "; path=/; domain=" + window.location.hostname;
+                document.cookie = "googtrans=/en/" + langCode + "; path=/";
             } else {
-                // Not numeric, just show it
-                target.style.opacity = 0;
-                setTimeout(() => {
-                    target.style.transition = "opacity 1s ease";
-                    target.style.opacity = 1;
-                }, 100);
-                statsObserver.unobserve(target);
+                // Fallback: If widget hasn't loaded yet, set cookie and reload
+                document.cookie = "googtrans=/en/" + langCode + "; path=/; domain=" + window.location.hostname;
+                document.cookie = "googtrans=/en/" + langCode + "; path=/";
+                location.reload();
             }
         }
-    });
-}, observerOptions);
 
-stats.forEach(stat => statsObserver.observe(stat));
+        // Update checkmarks
+        function updateCheckmarks(activeLangCode) {
+            langOptions.forEach(opt => {
+                const checkIcon = opt.querySelector('.check-icon');
+                if (checkIcon) {
+                    if (opt.getAttribute('data-lang') === activeLangCode) {
+                        checkIcon.classList.remove('hidden');
+                    } else {
+                        checkIcon.classList.add('hidden');
+                    }
+                }
+            });
+        }
 
-// Mobile Menu Toggle
-const menuBtn = document.getElementById('menu-btn');
-const mobileMenu = document.getElementById('mobile-menu');
-const mobileLinks = document.querySelectorAll('.mobile-link');
+        // Get current language from cookie
+        function getCurrentLanguage() {
+            const match = document.cookie.match(/googtrans=\/en\/([^;]+)/);
+            return match ? match[1] : 'en';
+        }
 
-if (menuBtn && mobileMenu) {
-    menuBtn.addEventListener('click', () => {
-        mobileMenu.classList.toggle('hidden');
-        mobileMenu.classList.toggle('flex');
-        const icon = menuBtn.querySelector('i');
-        icon.classList.toggle('fa-bars');
-        icon.classList.toggle('fa-times');
-        document.body.classList.toggle('overflow-hidden');
-    });
+        // Update UI Text
+        function updateUIText(lang) {
+            const labelMap = {
+                'en': 'ENG', 'ta': 'TAM', 'te': 'TEL', 'ml': 'MAL',
+                'kn': 'KAN', 'hi': 'HIN', 'es': 'ESP', 'fr': 'FRA',
+                'de': 'DEU', 'zh-CN': 'CHN'
+            };
+            currentLangText.textContent = labelMap[lang] || 'ENG';
+            updateCheckmarks(lang);
+        }
 
-    mobileLinks.forEach(link => {
-        link.addEventListener('click', () => {
-            mobileMenu.classList.add('hidden');
-            mobileMenu.classList.remove('flex');
-            const icon = menuBtn.querySelector('i');
-            icon.classList.add('fa-bars');
-            icon.classList.remove('fa-times');
-            document.body.classList.remove('overflow-hidden');
+        // Set initial UI state
+        const currentLang = getCurrentLanguage();
+        updateUIText(currentLang);
+
+        // Attach click handlers
+        langOptions.forEach(option => {
+            option.addEventListener('click', (e) => {
+                e.preventDefault();
+                e.stopPropagation();
+
+                const langCode = option.getAttribute('data-lang');
+
+                // Update UI immediately
+                updateUIText(langCode);
+
+                // Close dropdown
+                langDropdown.classList.remove('active');
+                const icon = langToggle.querySelector('i');
+                if (icon) {
+                    icon.classList.add('fa-chevron-down');
+                    icon.classList.remove('fa-chevron-up');
+                }
+
+                // Trigger translation
+                triggerGoogleTranslate(langCode);
+            });
         });
+
+    })();
+
+    // ============================================
+    // REST OF YOUR UI FEATURES
+    // ============================================
+
+    // --- Particles.js ---
+    if (document.getElementById('particles-js')) {
+        particlesJS('particles-js', {
+            "particles": {
+                "number": { "value": 60, "density": { "enable": true, "value_area": 800 } },
+                "color": { "value": "#00D4FF" },
+                "shape": { "type": "circle" },
+                "opacity": { "value": 0.4, "random": false },
+                "size": { "value": 2, "random": true },
+                "line_linked": { "enable": true, "distance": 150, "color": "#00D4FF", "opacity": 0.15, "width": 1 },
+                "move": { "enable": true, "speed": 1.5, "direction": "none", "random": false, "straight": false, "out_mode": "out", "bounce": false }
+            },
+            "interactivity": {
+                "detect_on": "canvas",
+                "events": { "onhover": { "enable": true, "mode": "grab" }, "onclick": { "enable": true, "mode": "push" }, "resize": true },
+                "modes": { "grab": { "distance": 140, "line_linked": { "opacity": 0.8 } } }
+            },
+            "retina_detect": true
+        });
+    }
+
+    // --- Rotating Text ---
+    const rotatingText = document.getElementById('rotating-text');
+    if (rotatingText) {
+        const phrases = [
+            "Open for AI Internships",
+            "Open to Startup Collaboration",
+            "Hackathon Teammate",
+            "Building AI for Bharat \uD83C\uDDEE\uD83C\uDDF3"
+        ];
+        let phraseIndex = 0;
+
+        rotatingText.style.transition = "opacity 0.5s ease";
+
+        function rotateText() {
+            rotatingText.style.opacity = 0;
+            setTimeout(() => {
+                rotatingText.textContent = phrases[phraseIndex];
+                rotatingText.style.opacity = 1;
+                phraseIndex = (phraseIndex + 1) % phrases.length;
+            }, 500);
+        }
+
+        rotateText();
+        setInterval(rotateText, 3000);
+    }
+
+    // --- Scroll Progress & Navbar ---
+    const navbar = document.getElementById('navbar');
+    const scrollProgress = document.getElementById('scroll-progress');
+
+    window.addEventListener('scroll', () => {
+        if (window.scrollY > 50) {
+            navbar?.classList.add('scrolled');
+        } else {
+            navbar?.classList.remove('scrolled');
+        }
+
+        if (scrollProgress) {
+            const winScroll = document.body.scrollTop || document.documentElement.scrollTop;
+            const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+            const scrolled = (winScroll / height) * 100;
+            scrollProgress.style.width = scrolled + "%";
+        }
     });
-}
 
-// Dark/Light Mode Toggle
-const themeToggle = document.getElementById('theme-toggle');
-const body = document.body;
+    // --- Mobile Menu Toggle ---
+    const menuBtn = document.getElementById('menu-btn');
+    const mobileMenu = document.getElementById('mobile-menu');
+    const mobileLinks = document.querySelectorAll('.mobile-link');
 
-function setTheme(isLight) {
-    if (isLight) {
-        body.classList.add('light-mode');
-        themeToggle.querySelector('i').className = 'fas fa-sun';
-        localStorage.setItem('theme', 'light');
-    } else {
-        body.classList.remove('light-mode');
-        themeToggle.querySelector('i').className = 'fas fa-moon';
-        localStorage.setItem('theme', 'dark');
+    if (menuBtn && mobileMenu) {
+        menuBtn.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+            mobileMenu.classList.toggle('flex');
+            const icon = menuBtn.querySelector('i');
+            if (icon) {
+                icon.classList.toggle('fa-bars');
+                icon.classList.toggle('fa-times');
+            }
+            document.body.classList.toggle('overflow-hidden');
+        });
+
+        mobileLinks.forEach(link => {
+            link.addEventListener('click', () => {
+                mobileMenu.classList.add('hidden');
+                mobileMenu.classList.remove('flex');
+                const icon = menuBtn?.querySelector('i');
+                if (icon) {
+                    icon.classList.add('fa-bars');
+                    icon.classList.remove('fa-times');
+                }
+                document.body.classList.remove('overflow-hidden');
+            });
+        });
     }
-}
 
-const savedTheme = localStorage.getItem('theme');
-if (savedTheme === 'light') setTheme(true);
+    // --- Dark Mode Toggle ---
+    const themeToggle = document.getElementById('theme-toggle');
+    const body = document.body;
 
-if (themeToggle) {
-    themeToggle.addEventListener('click', () => {
-        setTheme(!body.classList.contains('light-mode'));
-    });
-}
-
-// Command Palette (Ctrl+K)
-const palette = document.getElementById('command-palette');
-const cmdInput = document.getElementById('cmd-input');
-const cmdItems = document.querySelectorAll('.cmd-item');
-
-document.addEventListener('keydown', (e) => {
-    if (e.ctrlKey && e.key === 'k') {
-        e.preventDefault();
-        palette.classList.toggle('hidden');
-        palette.classList.toggle('flex');
-        if (!palette.classList.contains('hidden')) cmdInput.focus();
+    function setTheme(isLight) {
+        if (isLight) {
+            body.classList.add('light-mode');
+            if (themeToggle) themeToggle.querySelector('i').className = 'fas fa-sun';
+            localStorage.setItem('theme', 'light');
+        } else {
+            body.classList.remove('light-mode');
+            if (themeToggle) themeToggle.querySelector('i').className = 'fas fa-moon';
+            localStorage.setItem('theme', 'dark');
+        }
     }
-    if (e.key === 'Escape' && palette && !palette.classList.contains('hidden')) {
-        palette.classList.add('hidden');
-        palette.classList.remove('flex');
-    }
-});
 
-if (cmdItems.length > 0) {
-    cmdItems.forEach(item => {
-        item.addEventListener('click', () => {
-            const target = item.getAttribute('data-target');
-            const element = document.querySelector(target);
-            if (element) {
-                element.scrollIntoView({ behavior: 'smooth' });
+    const savedTheme = localStorage.getItem('theme');
+    if (savedTheme === 'light') setTheme(true);
+
+    if (themeToggle) {
+        themeToggle.addEventListener('click', () => {
+            setTheme(!body.classList.contains('light-mode'));
+        });
+    }
+
+    // --- Command Palette (Ctrl+K) ---
+    const palette = document.getElementById('command-palette');
+    const cmdInput = document.getElementById('cmd-input');
+    const cmdItems = document.querySelectorAll('.cmd-item');
+
+    if (palette) {
+        document.addEventListener('keydown', (e) => {
+            if (e.ctrlKey && e.key === 'k') {
+                e.preventDefault();
+                palette.classList.toggle('hidden');
+                palette.classList.toggle('flex');
+                if (!palette.classList.contains('hidden') && cmdInput) {
+                    cmdInput.focus();
+                }
+            }
+            if (e.key === 'Escape' && !palette.classList.contains('hidden')) {
                 palette.classList.add('hidden');
                 palette.classList.remove('flex');
-                if (cmdInput) cmdInput.value = '';
             }
         });
-    });
-}
 
-// EmailJS Contact Form
-document.addEventListener('DOMContentLoaded', () => {
-    const contactForm = document.getElementById('contact-form');
-    const submitBtn = document.getElementById('submit-btn');
-    const btnText = document.getElementById('btn-text');
-    const btnSpinner = document.getElementById('btn-spinner');
-    const toastNotification = document.getElementById('toast-notification');
-    const toastIcon = document.getElementById('toast-icon');
-    const toastMessage = document.getElementById('toast-message');
-
-    function showToast(message, isSuccess) {
-        toastMessage.textContent = message;
-        if (isSuccess) {
-            toastIcon.className = 'fas fa-check-circle text-green-400';
-            toastNotification.style.border = '1px solid rgba(74, 222, 128, 0.3)';
-        } else {
-            toastIcon.className = 'fas fa-times-circle text-red-500';
-            toastNotification.style.border = '1px solid rgba(239, 68, 68, 0.3)';
-        }
-
-        toastNotification.classList.add('show');
-
-        setTimeout(() => {
-            toastNotification.classList.remove('show');
-        }, 3000);
+        cmdItems.forEach(item => {
+            item.addEventListener('click', () => {
+                const target = item.getAttribute('data-target');
+                const element = document.querySelector(target);
+                if (element) {
+                    element.scrollIntoView({ behavior: 'smooth' });
+                    palette.classList.add('hidden');
+                    palette.classList.remove('flex');
+                    if (cmdInput) cmdInput.value = '';
+                }
+            });
+        });
     }
 
-    if (contactForm) {
+    // --- EmailJS Contact Form ---
+    const contactForm = document.getElementById('contact-form');
+
+    if (contactForm && typeof emailjs !== 'undefined') {
+        emailjs.init("S0nB3ZKrklbEVDggT");
+
+        const submitBtn = document.getElementById('submit-btn');
+        const btnText = document.getElementById('btn-text');
+        const btnSpinner = document.getElementById('btn-spinner');
+        const toastNotification = document.getElementById('toast-notification');
+        const toastIcon = document.getElementById('toast-icon');
+        const toastMessage = document.getElementById('toast-message');
+
+        function showToast(message, isSuccess) {
+            if (!toastNotification || !toastMessage || !toastIcon) return;
+
+            toastMessage.textContent = message;
+            toastIcon.className = isSuccess ? 'fas fa-check-circle text-green-400' : 'fas fa-times-circle text-red-500';
+            if (isSuccess) {
+                toastNotification.style.border = '1px solid rgba(74, 222, 128, 0.3)';
+            } else {
+                toastNotification.style.border = '1px solid rgba(239, 68, 68, 0.3)';
+            }
+
+            toastNotification.classList.add('show');
+
+            setTimeout(() => {
+                toastNotification.classList.remove('show');
+            }, 3000);
+        }
+
         contactForm.addEventListener('submit', (e) => {
             e.preventDefault();
 
-            // Get form values
-            const from_name = document.getElementById('from_name').value;
-            const subject = document.getElementById('subject').value;
-            const message = document.getElementById('message').value;
+            const from_name = document.getElementById('from_name')?.value;
+            const subject = document.getElementById('subject')?.value;
+            const message = document.getElementById('message')?.value;
 
-            // Update UI to loading state
-            submitBtn.disabled = true;
-            btnText.textContent = 'Sending...';
-            btnSpinner.classList.remove('hidden');
+            if (!from_name || !subject || !message) {
+                showToast('Please fill all fields', false);
+                return;
+            }
 
-            // Payload
-            const templateParams = {
+            if (submitBtn && btnText && btnSpinner) {
+                submitBtn.disabled = true;
+                btnText.textContent = 'Sending...';
+                btnSpinner.classList.remove('hidden');
+            }
+
+            emailjs.send("service_gktuwsk", "template_rzlkqm9", {
                 from_name: from_name,
                 subject: subject,
                 message: message
-            };
-
-            // Send via EmailJS
-            emailjs.send("service_gktuwsk", "template_rzlkqm9", templateParams)
-                .then(function (response) {
-                    // Success
-                    showToast('Message sent successfully 🚀', true);
+            })
+                .then(() => {
+                    showToast('Message sent successfully \uD83D\uDE80', true);
                     contactForm.reset();
-
-                    // Reset UI
-                    submitBtn.disabled = false;
-                    btnText.textContent = 'FIRE MESSAGE 🚀';
-                    btnSpinner.classList.add('hidden');
-                }, function (error) {
-                    // Error
+                })
+                .catch((error) => {
                     showToast('Failed to send message. Please try again.', false);
                     console.error('EmailJS Error:', error);
-
-                    // Reset UI
-                    submitBtn.disabled = false;
-                    btnText.textContent = 'FIRE MESSAGE 🚀';
-                    btnSpinner.classList.add('hidden');
+                })
+                .finally(() => {
+                    if (submitBtn && btnText && btnSpinner) {
+                        submitBtn.disabled = false;
+                        btnText.textContent = 'FIRE MESSAGE \uD83D\uDE80';
+                        btnSpinner.classList.add('hidden');
+                    }
                 });
         });
     }
-});
 
-// Console Easter Egg
-console.log("%c MOHITH KANNAN K | AI Portfolio v3.2 (Custom UI) ", "background: #00D4FF; color: #fff; font-weight: bold; padding: 5px; border-radius: 5px;");
+    // ============================================
+    // TIMELINE INTERACTION LOGIC
+    // ============================================
+
+    // Timeline Panel Toggle
+    window.toggleTimelinePanel = function (panelId) {
+        const panel = document.getElementById(panelId);
+        const iconId = panelId.replace('panel-', 'icon-');
+        const icon = document.getElementById(iconId);
+        const card = panel.closest('.timeline-card');
+
+        // Check if panel is currently expanded
+        const isExpanded = panel.style.maxHeight && panel.style.maxHeight !== '0px';
+
+        if (isExpanded) {
+            // Collapse
+            panel.style.maxHeight = '0px';
+            panel.style.opacity = '0';
+            panel.style.marginTop = '0';
+            panel.classList.remove('mt-6');
+            if (icon) icon.style.transform = 'rotate(0deg)';
+            if (card) card.classList.remove('active-phase', 'shadow-[0_0_15px_rgba(0,212,255,0.15)]', 'border-[#00D4FF]/30');
+        } else {
+            // Expand
+            // Calculate height needed (using scrollHeight)
+            const scrollHeight = panel.scrollHeight + 50; // Add some padding buffer
+            panel.style.maxHeight = scrollHeight + 'px';
+            panel.style.opacity = '1';
+            panel.classList.add('mt-6');
+            if (icon) icon.style.transform = 'rotate(180deg)';
+
+            // Highlight active phase
+            if (card) {
+                // Remove highlight from all other cards
+                document.querySelectorAll('.timeline-card').forEach(c => {
+                    c.classList.remove('active-phase', 'shadow-[0_0_15px_rgba(0,212,255,0.15)]', 'border-[#00D4FF]/30');
+                });
+                card.classList.add('active-phase', 'shadow-[0_0_15px_rgba(0,212,255,0.15)]', 'border-[#00D4FF]/30');
+            }
+
+            // If expanding Phase 2 (which contains the cert carousel), force a render 
+            // once it has dimensions to ensure the 3D transforms apply correctly.
+            if (panelId === 'panel-phase2') {
+                setTimeout(() => {
+                    if (typeof renderCertificates === 'function') {
+                        renderCertificates();
+                    }
+                }, 300); // matching the CSS transition duration roughly
+            }
+        }
+    };
+
+    // Phase 1: Toggle Story Expansion
+    window.toggleStory = function (event, storyId) {
+        event.stopPropagation(); // Prevent triggering the panel toggle
+        const storyDiv = document.getElementById(storyId);
+        const btn = event.currentTarget;
+        const icon = btn.querySelector('i');
+
+        if (storyDiv.classList.contains('hidden')) {
+            storyDiv.classList.remove('hidden');
+            storyDiv.classList.add('block');
+            btn.innerHTML = '[ Collapse Journey ] <i class="fas fa-arrow-up ml-2 text-[10px]"></i>';
+
+            // Update parent panel max-height to accommodate new content
+            const panel = storyDiv.closest('[id^="panel-"]');
+            if (panel && panel.style.maxHeight !== '0px') {
+                panel.style.maxHeight = (panel.scrollHeight + storyDiv.scrollHeight + 50) + 'px';
+            }
+        } else {
+            storyDiv.classList.add('hidden');
+            storyDiv.classList.remove('block');
+            btn.innerHTML = '[ Read Full Journey ] <i class="fas fa-arrow-right ml-2 text-[10px]"></i>';
+
+            // Optionally adjust height back down (not strictly necessary as max-height can be large, but clean)
+        }
+    };
+
+    // Phase 2: Tabbed Interface Logic
+    const phase2Tabs = document.querySelectorAll('.phase2-tab');
+    if (phase2Tabs.length > 0) {
+        phase2Tabs.forEach(tab => {
+            tab.addEventListener('click', (e) => {
+                e.stopPropagation(); // Prevent panel toggle
+
+                // Remove active styling from all tabs
+                phase2Tabs.forEach(t => {
+                    t.classList.remove('active-tab', 'text-[#00D4FF]', 'border-[#00D4FF]');
+                    t.classList.add('text-gray-500', 'border-transparent');
+                });
+
+                // Add active styling to clicked tab
+                tab.classList.add('active-tab', 'text-[#00D4FF]', 'border-[#00D4FF]');
+                tab.classList.remove('text-gray-500', 'border-transparent');
+
+                // Hide all tab contents
+                const allTabContents = tab.closest('.timeline-card').querySelectorAll('.tab-content');
+                allTabContents.forEach(content => {
+                    content.classList.remove('opacity-100');
+                    content.classList.add('opacity-0');
+
+                    // Wait for fade out to hide
+                    setTimeout(() => {
+                        content.classList.add('hidden');
+                    }, 150);
+                });
+
+                // Show targeted tab content after slight delay for fade transition
+                const targetId = tab.getAttribute('data-target');
+                const targetContent = document.getElementById(targetId);
+
+                if (targetContent) {
+                    setTimeout(() => {
+                        targetContent.classList.remove('hidden');
+
+                        // If it's the certifications tab, we force a render now that constraints are visible
+                        if (targetId === 'tab-certifications') {
+                            renderCertificates();
+                        }
+
+                        // Use a tiny timeout to allow display block to process before opacity transition
+                        setTimeout(() => {
+                            targetContent.classList.remove('opacity-0');
+                            targetContent.classList.add('opacity-100');
+
+                            // Recalculate parent panel height for dynamic content
+                            const panel = document.getElementById('panel-phase2');
+                            if (panel && panel.classList.contains('active')) {
+                                panel.style.maxHeight = (panel.scrollHeight + 100) + 'px';
+                            }
+                        }, 50);
+                    }, 150);
+                }
+            });
+        });
+    }
+
+    // Photo Gallery Modal Logic
+    const galleryModal = document.getElementById('gallery-modal');
+    window.openGalleryModal = function (imageDesc) {
+        if (!galleryModal) return;
+
+        const descElem = document.getElementById('modal-description');
+        if (descElem) descElem.textContent = imageDesc;
+
+        galleryModal.classList.remove('hidden');
+        galleryModal.classList.add('flex');
+
+        // Prevent body scrolling
+        document.body.style.overflow = 'hidden';
+
+        // Trigger fade in
+        setTimeout(() => {
+            galleryModal.classList.add('show');
+        }, 10);
+    };
+
+    window.closeGalleryModal = function () {
+        if (!galleryModal) return;
+
+        galleryModal.classList.remove('show');
+
+        setTimeout(() => {
+            galleryModal.classList.add('hidden');
+            galleryModal.classList.remove('flex');
+            document.body.style.overflow = ''; // Restore scrolling
+        }, 300); // Wait for transition
+    };
+
+    // Close modal on escape key
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && galleryModal && galleryModal.classList.contains('show')) {
+            closeGalleryModal();
+        }
+    });
+
+    // ============================================
+    // CERTIFICATION VAULT SYSTEM
+    // ============================================
+    const certifications = [
+        { title: "BCG GenAI Job Simulation", issuer: "BCG – Forage", date: "Feb 6, 2026", category: "AI", file: "certifications/BCG's GenAI on Forage feb 6.jpg", type: "image" },
+        { title: "Critical Thinking in AI", issuer: "HP", date: "Feb 2026", category: "AI", file: "certifications/Critical Thinking in the AI Era from hp feb 2026.jpg", type: "image" },
+        { title: "Deloitte Data Analytics", issuer: "Deloitte – Forage", date: "Feb 3, 2026", category: "AI", file: "certifications/Deloitte data anali 2026 fed 3.jpg", type: "image" },
+        { title: "Tata GenAI Data Analytics", issuer: "Tata", date: "Feb 9, 2026", category: "AI", file: "certifications/tata GenAI powered Data Analytics Job Simulation feb 9 2026.jpg", type: "image" },
+        { title: "Outskill GenAI Mastermind", issuer: "Outskill", date: "2026", category: "AI", file: "certifications/Outskill Generative AI Mastermind.jpg", type: "image" },
+        { title: "SSA SkySkill Drone", issuer: "SSA", date: "Feb 13", category: "Workshops", file: "certifications/SSA skyyskill fed 13 drone.png", type: "image" },
+        { title: "IBM LLM Certification", issuer: "IBM", date: "Feb 4, 2026", category: "AI", file: "certifications/ibm llm 2026 feb 4.PNG", type: "image" }
+    ];
+
+    const certFilters = document.querySelectorAll('.cert-filter-btn');
+    const desktopCarousel = document.getElementById('desktop-cert-carousel');
+    const mobileStack = document.getElementById('mobile-cert-stack');
+    const certModal = document.getElementById('cert-modal');
+    const certModalBody = document.getElementById('cert-modal-body');
+    const certModalTitle = document.getElementById('cert-modal-title');
+    const closeCertModalBtn = document.getElementById('close-cert-modal');
+
+    let currentCertIndex = 0;
+    let filteredCerts = [...certifications];
+
+    function renderCertificates() {
+        if (!desktopCarousel || !mobileStack) return;
+
+        desktopCarousel.innerHTML = '';
+        mobileStack.innerHTML = '';
+
+        if (filteredCerts.length === 0) {
+            desktopCarousel.innerHTML = '<p class="text-gray-500 font-bold mt-10">No certificates found in this category.</p>';
+            mobileStack.innerHTML = '<p class="text-gray-500 font-bold text-center mt-10">No certificates found in this category.</p>';
+            return;
+        }
+
+        // Render Desktop Carousel
+        filteredCerts.forEach((cert, index) => {
+            const slide = document.createElement('div');
+
+            let positionClass = 'hidden-slide';
+            if (index === currentCertIndex) positionClass = 'active';
+            else if (filteredCerts.length > 1 && index === (currentCertIndex - 1 + filteredCerts.length) % filteredCerts.length) positionClass = 'prev';
+            else if (filteredCerts.length > 2 && index === (currentCertIndex + 1) % filteredCerts.length) positionClass = 'next';
+
+            slide.className = `cert-slide ${positionClass}`;
+            slide.dataset.index = index;
+
+            const thumbHtml = cert.type === 'image'
+                ? `<img src="${cert.file}" alt="${cert.title}" loading="lazy">`
+                : `<i class="fas fa-file-pdf text-6xl text-red-500/80 icon-zoom"></i>`;
+
+            slide.innerHTML = `
+                <div class="cert-image-wrapper">
+                    ${thumbHtml}
+                </div>
+                <div class="cert-info">
+                    <h5 class="text-sm md:text-base font-bold text-white mb-1 truncate">${cert.title}</h5>
+                    <p class="text-[10px] md:text-xs text-[#00D4FF] mb-2">${cert.issuer} • ${cert.date}</p>
+                    <div class="flex gap-2">
+                        <span class="badge">${cert.category}</span>
+                    </div>
+                </div>
+            `;
+
+            slide.addEventListener('click', () => {
+                if (index === currentCertIndex) {
+                    openCertModal(cert);
+                } else {
+                    currentCertIndex = index;
+                    updateCarouselPositions();
+                }
+            });
+
+            desktopCarousel.appendChild(slide);
+
+            // Render Mobile Stack
+            const mobileCard = document.createElement('div');
+            mobileCard.className = 'cert-mobile-card';
+
+            const mobileThumb = cert.type === 'image'
+                ? `<img src="${cert.file}" alt="${cert.title}" class="cert-mobile-img" loading="lazy">`
+                : `<div class="cert-mobile-img"><i class="fas fa-file-pdf text-3xl text-red-500/80"></i></div>`;
+
+            mobileCard.innerHTML = `
+                ${mobileThumb}
+                <div class="flex-1 min-w-0">
+                    <h5 class="text-sm font-bold text-white mb-1 truncate">${cert.title}</h5>
+                    <p class="text-[10px] text-[#00D4FF]">${cert.issuer} • ${cert.date}</p>
+                </div>
+                <button class="w-8 h-8 rounded-full bg-gray-800 flex flex-shrink-0 items-center justify-center text-gray-400">
+                    <i class="fas fa-external-link-alt text-[10px]"></i>
+                </button>
+            `;
+
+            mobileCard.addEventListener('click', () => openCertModal(cert));
+            mobileStack.appendChild(mobileCard);
+        });
+
+        updateCarouselPositions();
+
+        if (desktopCarousel) desktopCarousel.style.opacity = '1';
+        if (mobileStack) mobileStack.style.opacity = '1';
+
+        console.log(`[Cert Vault Debug] Rendered ${filteredCerts.length} certificates. Desktop elements: ${desktopCarousel.children.length}, Mobile: ${mobileStack.children.length}`);
+    }
+
+    function updateCarouselPositions() {
+        if (!desktopCarousel) return;
+        const slides = desktopCarousel.querySelectorAll('.cert-slide');
+        const total = slides.length;
+        if (total === 0) return;
+
+        slides.forEach((slide, index) => {
+            slide.classList.remove('active', 'prev', 'next', 'hidden-slide');
+
+            if (index === currentCertIndex) {
+                slide.classList.add('active');
+            } else if (total > 1 && index === (currentCertIndex - 1 + total) % total) {
+                slide.classList.add('prev');
+            } else if (total > 2 && index === (currentCertIndex + 1) % total) {
+                slide.classList.add('next');
+            } else {
+                slide.classList.add('hidden-slide');
+            }
+        });
+    }
+
+    const certPrevBtn = document.getElementById('cert-prev');
+    const certNextBtn = document.getElementById('cert-next');
+
+    if (certPrevBtn) {
+        certPrevBtn.addEventListener('click', () => {
+            if (filteredCerts.length > 0) {
+                currentCertIndex = (currentCertIndex - 1 + filteredCerts.length) % filteredCerts.length;
+                updateCarouselPositions();
+            }
+        });
+    }
+
+    if (certNextBtn) {
+        certNextBtn.addEventListener('click', () => {
+            if (filteredCerts.length > 0) {
+                currentCertIndex = (currentCertIndex + 1) % filteredCerts.length;
+                updateCarouselPositions();
+            }
+        });
+    }
+
+    function openCertModal(cert) {
+        if (!certModal) return;
+        certModalTitle.textContent = cert.title;
+
+        if (cert.type === 'pdf') {
+            certModalBody.innerHTML = `<div class="iframe-wrapper"><iframe src="${cert.file}#toolbar=0" title="${cert.title}"></iframe></div>`;
+        } else {
+            certModalBody.innerHTML = `<img src="${cert.file}" alt="${cert.title}" class="modal-image">`;
+        }
+
+        certModal.classList.remove('hidden');
+        certModal.classList.add('flex');
+        document.body.style.overflow = 'hidden';
+
+        setTimeout(() => {
+            certModal.classList.add('show');
+        }, 10);
+    }
+
+    function closeCertModal() {
+        if (!certModal) return;
+        certModal.classList.remove('show');
+        setTimeout(() => {
+            certModal.classList.add('hidden');
+            certModal.classList.remove('flex');
+            certModalBody.innerHTML = '';
+            // Only restore if gallery isn't open
+            if (!document.getElementById('gallery-modal')?.classList.contains('show')) {
+                document.body.style.overflow = '';
+            }
+        }, 300);
+    }
+
+    if (closeCertModalBtn) closeCertModalBtn.addEventListener('click', closeCertModal);
+
+    if (certModal) {
+        certModal.addEventListener('click', (e) => {
+            if (e.target === certModal) closeCertModal();
+        });
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape' && certModal.classList.contains('show')) {
+                closeCertModal();
+            }
+        });
+    }
+
+    certFilters.forEach(btn => {
+        btn.addEventListener('click', () => {
+            certFilters.forEach(b => b.classList.remove('active'));
+            btn.classList.add('active');
+
+            const filter = btn.dataset.filter;
+            if (filter === 'All') {
+                filteredCerts = [...certifications];
+            } else {
+                filteredCerts = certifications.filter(c => c.category === filter);
+            }
+
+            currentCertIndex = 0;
+
+            if (desktopCarousel) {
+                desktopCarousel.style.transition = 'opacity 0.2s';
+                desktopCarousel.style.opacity = '0';
+            }
+            if (mobileStack) {
+                mobileStack.style.transition = 'opacity 0.2s';
+                mobileStack.style.opacity = '0';
+            }
+
+            setTimeout(() => {
+                renderCertificates();
+                if (desktopCarousel) desktopCarousel.style.opacity = '1';
+                if (mobileStack) mobileStack.style.opacity = '1';
+            }, 200);
+        });
+    });
+
+    // Initial render setup
+    if (desktopCarousel || mobileStack) {
+        renderCertificates();
+    }
+
+    // --- Console Easter Egg ---
+    console.log("%c MOHITH KANNAN K | AI Portfolio v3.2 (with Google Translate & Upgraded Timeline) ", "background: #00D4FF; color: #fff; font-weight: bold; padding: 5px; border-radius: 5px;");
+
+});

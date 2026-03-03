@@ -51,6 +51,20 @@
     </script>
 
     <link rel="stylesheet" href="style.css">
+
+    <!-- Google Translate -->
+    <script type="text/javascript">
+        function googleTranslateElementInit() {
+            new google.translate.TranslateElement({
+                pageLanguage: 'en',
+                includedLanguages: 'ta,te,ml,kn,hi,es,fr,de,zh-CN',
+                layout: google.translate.TranslateElement.InlineLayout.SIMPLE,
+                autoDisplay: false
+            }, 'google_translate_element');
+        }
+    </script>
+    <script type="text/javascript"
+        src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
 </head>
 
 <body class="bg-[#0b0f1a] text-gray-200 font-['Inter'] overflow-x-hidden selection:bg-[#00D4FF] selection:text-white">
@@ -97,14 +111,15 @@
 
             <!-- Language & Theme -->
             <div class="flex items-center space-x-3 relative">
+                <!-- Google Translate Widget Container -->
+                <div id="google_translate_element" class="hidden"></div>
+
                 <!-- Custom Language Dropdown Toggle -->
                 <button id="lang-toggle"
                     class="flex items-center space-x-1 text-sm font-bold text-gray-400 hover:text-white transition-colors tracking-widest">
                     <span id="current-lang">ENG</span>
                     <i class="fas fa-chevron-down text-[10px] ml-1"></i>
                 </button>
-
-                <!-- Hidden Google Translate Element -->
 
                 <!-- Custom Dropdown Panel -->
                 <div id="lang-dropdown"
@@ -122,7 +137,7 @@
 
                     <div
                         class="px-4 py-2 mt-2 text-[10px] text-gray-500 font-bold uppercase tracking-widest border-b border-gray-800/50 border-t">
-                        Dravidian Languages</div>
+                        More Languages</div>
                     <button
                         class="w-full text-left px-4 py-2 text-sm text-gray-300 hover:bg-gray-800/50 hover:text-white transition-colors flex justify-between items-center lang-option"
                         data-lang="te">
@@ -138,10 +153,6 @@
                         data-lang="kn">
                         ಕನ್ನಡ (Kannada) <i class="fas fa-check text-[#00D4FF] text-xs check-icon hidden"></i>
                     </button>
-
-                    <div
-                        class="px-4 py-2 mt-2 text-[10px] text-gray-500 font-bold uppercase tracking-widest border-b border-gray-800/50 border-t">
-                        Global</div>
                     <button
                         class="w-full text-left px-4 py-2 text-sm text-gray-300 hover:bg-gray-800/50 hover:text-white transition-colors flex justify-between items-center lang-option"
                         data-lang="hi">
@@ -165,7 +176,7 @@
                     <button
                         class="w-full text-left px-4 py-2 text-sm text-gray-300 hover:bg-gray-800/50 hover:text-white transition-colors flex justify-between items-center lang-option"
                         data-lang="zh-CN">
-                        中文 <i class="fas fa-check text-[#00D4FF] text-xs check-icon hidden"></i>
+                        中文 (Chinese) <i class="fas fa-check text-[#00D4FF] text-xs check-icon hidden"></i>
                     </button>
                 </div>
 
@@ -230,18 +241,18 @@
             <!-- Stats -->
             <div class="flex flex-wrap justify-center gap-6 md:gap-16 mb-12">
                 <div class="text-center group">
-                    <div class="text-4xl font-bold text-white group-hover:text-[#00D4FF] transition-colors"
-                        id="stat-hackathons">Hackathons</div>
+                    <div class="text-4xl font-bold text-white group-hover:text-[#00D4FF] transition-colors">Hackathons
+                    </div>
                     <div class="text-[10px] uppercase text-gray-500 tracking-widest mt-1">(Active)</div>
                 </div>
                 <div class="text-center group">
-                    <div class="text-4xl font-bold text-white group-hover:text-[#FF6B6B] transition-colors"
-                        id="stat-internships">Internships</div>
+                    <div class="text-4xl font-bold text-white group-hover:text-[#FF6B6B] transition-colors">Internships
+                    </div>
                     <div class="text-[10px] uppercase text-gray-500 tracking-widest mt-1">(Upcoming)</div>
                 </div>
                 <div class="text-center group">
-                    <div class="text-4xl font-bold text-white group-hover:text-[#00D4FF] transition-colors"
-                        id="stat-projects">Projects</div>
+                    <div class="text-4xl font-bold text-white group-hover:text-[#00D4FF] transition-colors">Projects
+                    </div>
                     <div class="text-[10px] uppercase text-gray-500 tracking-widest mt-1">(2+)</div>
                 </div>
                 <div class="text-center group">
@@ -325,57 +336,496 @@
             </div>
 
             <div class="space-y-16">
-                <!-- 2023 -->
-                <div class="relative flex items-center justify-between md:justify-normal md:flex-row-reverse group"
-                    data-aos="fade-left">
-                    <div class="timeline-dot"></div>
-                    <div class="timeline-card md:w-5/12 ml-auto md:ml-0 md:mr-auto">
-                        <span class="text-xs font-bold text-[#FF6B6B] uppercase tracking-widest mb-2 block">2023 -
-                            Present</span>
-                        <h3 class="text-xl font-bold mb-2">SRM University, Chennai</h3>
-                        <p class="text-sm text-gray-400">B.Tech in AI & ML. Building strong foundations in neural
-                            networks, data science, and core AI architectures.</p>
-                        <div class="mt-4 flex flex-wrap gap-2">
-                            <span class="badge">AI/ML</span>
-                            <span class="badge">Python</span>
+                <!-- Phase 1: Foundation (Sainik School) -->
+                <div class="relative flex flex-col md:flex-row items-center md:items-start group" data-aos="fade-up">
+                    <div class="timeline-dot md:mt-6"></div>
+                    <div class="timeline-card w-full md:w-5/12 ml-auto md:ml-8 md:mr-auto cursor-pointer"
+                        onclick="toggleTimelinePanel('panel-phase1')">
+                        <div class="flex justify-between items-center mb-2">
+                            <span class="text-xs font-bold text-[#FF6B6B] uppercase tracking-widest block">2017 -
+                                2024</span>
+                            <i class="fas fa-chevron-down text-gray-400 transition-transform duration-300 panel-icon"
+                                id="icon-phase1"></i>
+                        </div>
+                        <h3 class="text-xl font-bold mb-1">Sainik School Amaravathinagar</h3>
+                        <p class="text-sm text-gray-400 font-medium">Foundation of Discipline & Leadership</p>
+
+                        <!-- Expandable Panel -->
+                        <div id="panel-phase1"
+                            class="overflow-hidden transition-all duration-400 max-h-0 opacity-0 mt-0">
+                            <div class="pt-6 space-y-8">
+
+                                <!-- Section A: Environment -->
+                                <div>
+                                    <h4
+                                        class="text-sm font-bold text-[#FF6B6B] uppercase tracking-widest mb-3 border-b border-gray-800 pb-2">
+                                        Environment</h4>
+                                    <p class="text-sm text-gray-300 leading-relaxed">
+                                        "A disciplined military boarding environment that shaped resilience, leadership,
+                                        and mental endurance."
+                                    </p>
+                                    <button
+                                        class="mt-3 text-xs text-[#00D4FF] hover:text-white transition-colors font-bold uppercase tracking-wider flex items-center"
+                                        onclick="toggleStory(event, 'story-phase1')">
+                                        [ Read Full Journey ] <i class="fas fa-arrow-right ml-2 text-[10px]"></i>
+                                    </button>
+                                    <div id="story-phase1"
+                                        class="hidden mt-4 p-4 rounded-xl bg-gray-900/50 border border-gray-800 text-sm text-gray-400 italic">
+                                        <!-- Long-story placeholder -->
+                                        [Detailed story content to be added here detailing the full experience,
+                                        challenges, and growth during the military boarding years...]
+                                    </div>
+                                </div>
+
+                                <!-- Section B: Skills Developed -->
+                                <div>
+                                    <h4
+                                        class="text-sm font-bold text-[#FF6B6B] uppercase tracking-widest mb-3 border-b border-gray-800 pb-2">
+                                        Skills Developed</h4>
+                                    <div class="flex flex-wrap gap-2">
+                                        <span
+                                            class="px-3 py-1 bg-orange-900/30 text-orange-300 border border-orange-700/50 rounded-full text-[10px] font-bold tracking-wider shadow-[0_0_10px_rgba(255,107,107,0.1)]">Leadership</span>
+                                        <span
+                                            class="px-3 py-1 bg-orange-900/30 text-orange-300 border border-orange-700/50 rounded-full text-[10px] font-bold tracking-wider shadow-[0_0_10px_rgba(255,107,107,0.1)]">Team
+                                            Leadership</span>
+                                        <span
+                                            class="px-3 py-1 bg-orange-900/30 text-orange-300 border border-orange-700/50 rounded-full text-[10px] font-bold tracking-wider shadow-[0_0_10px_rgba(255,107,107,0.1)]">Time
+                                            Management</span>
+                                        <span
+                                            class="px-3 py-1 bg-orange-900/30 text-orange-300 border border-orange-700/50 rounded-full text-[10px] font-bold tracking-wider shadow-[0_0_10px_rgba(255,107,107,0.1)]">Stress
+                                            Management</span>
+                                        <span
+                                            class="px-3 py-1 bg-orange-900/30 text-orange-300 border border-orange-700/50 rounded-full text-[10px] font-bold tracking-wider shadow-[0_0_10px_rgba(255,107,107,0.1)]">Adaptability</span>
+                                        <span
+                                            class="px-3 py-1 bg-orange-900/30 text-orange-300 border border-orange-700/50 rounded-full text-[10px] font-bold tracking-wider shadow-[0_0_10px_rgba(255,107,107,0.1)]">Problem
+                                            Solving</span>
+                                    </div>
+                                </div>
+
+                                <!-- Section C: The Spark -->
+                                <div
+                                    class="bg-gradient-to-br from-[#1a1f2e] to-[#0b0f1a] p-5 rounded-xl border border-[#00D4FF]/20 relative overflow-hidden group/spark">
+                                    <div
+                                        class="absolute top-0 right-0 w-24 h-24 bg-[#00D4FF]/5 rounded-full blur-2xl -mr-10 -mt-10 transition-all duration-500 group-hover/spark:bg-[#00D4FF]/20">
+                                    </div>
+                                    <h5 class="text-sm font-bold text-white mb-2 relative z-10 flex items-center">
+                                        <i class="fas fa-bolt text-[#00D4FF] mr-2"></i> The Spark – Class 8 Computer Lab
+                                        Incident
+                                    </h5>
+                                    <p class="text-xs text-gray-400 relative z-10">
+                                        "First exposure to computing triggered long-term curiosity and analytical
+                                        thinking."
+                                    </p>
+                                </div>
+
+                                <!-- Section D: Photo Gallery -->
+                                <div>
+                                    <h4
+                                        class="text-sm font-bold text-[#FF6B6B] uppercase tracking-widest mb-3 border-b border-gray-800 pb-2">
+                                        Photo Gallery</h4>
+                                    <div class="grid grid-cols-2 gap-3">
+                                        <!-- Gallery Slots -->
+                                        <div class="gallery-slot relative group/img cursor-pointer"
+                                            onclick="openGalleryModal('Placeholder Image 1')">
+                                            <div class="aspect-video bg-gray-800 rounded-lg overflow-hidden relative">
+                                                <div
+                                                    class="absolute inset-0 flex items-center justify-center text-gray-600 transition-transform duration-500 group-hover/img:scale-110">
+                                                    <i class="fas fa-image text-2xl"></i>
+                                                </div>
+                                                <div
+                                                    class="absolute inset-0 bg-black/60 opacity-0 group-hover/img:opacity-100 transition-opacity duration-300 flex items-center justify-center">
+                                                    <i class="fas fa-search-plus text-white"></i>
+                                                </div>
+                                            </div>
+                                            <p
+                                                class="text-[9px] text-center text-gray-500 mt-1 uppercase tracking-wider">
+                                                Memories Placeholder 1</p>
+                                        </div>
+                                        <div class="gallery-slot relative group/img cursor-pointer"
+                                            onclick="openGalleryModal('Placeholder Image 2')">
+                                            <div class="aspect-video bg-gray-800 rounded-lg overflow-hidden relative">
+                                                <div
+                                                    class="absolute inset-0 flex items-center justify-center text-gray-600 transition-transform duration-500 group-hover/img:scale-110">
+                                                    <i class="fas fa-image text-2xl"></i>
+                                                </div>
+                                                <div
+                                                    class="absolute inset-0 bg-black/60 opacity-0 group-hover/img:opacity-100 transition-opacity duration-300 flex items-center justify-center">
+                                                    <i class="fas fa-search-plus text-white"></i>
+                                                </div>
+                                            </div>
+                                            <p
+                                                class="text-[9px] text-center text-gray-500 mt-1 uppercase tracking-wider">
+                                                Memories Placeholder 2</p>
+                                        </div>
+                                        <div class="gallery-slot relative group/img cursor-pointer"
+                                            onclick="openGalleryModal('Placeholder Image 3')">
+                                            <div class="aspect-video bg-gray-800 rounded-lg overflow-hidden relative">
+                                                <div
+                                                    class="absolute inset-0 flex items-center justify-center text-gray-600 transition-transform duration-500 group-hover/img:scale-110">
+                                                    <i class="fas fa-image text-2xl"></i>
+                                                </div>
+                                                <div
+                                                    class="absolute inset-0 bg-black/60 opacity-0 group-hover/img:opacity-100 transition-opacity duration-300 flex items-center justify-center">
+                                                    <i class="fas fa-search-plus text-white"></i>
+                                                </div>
+                                            </div>
+                                            <p
+                                                class="text-[9px] text-center text-gray-500 mt-1 uppercase tracking-wider">
+                                                Memories Placeholder 3</p>
+                                        </div>
+                                        <div class="gallery-slot relative group/img cursor-pointer"
+                                            onclick="openGalleryModal('Placeholder Image 4')">
+                                            <div class="aspect-video bg-gray-800 rounded-lg overflow-hidden relative">
+                                                <div
+                                                    class="absolute inset-0 flex items-center justify-center text-gray-600 transition-transform duration-500 group-hover/img:scale-110">
+                                                    <i class="fas fa-image text-2xl"></i>
+                                                </div>
+                                                <div
+                                                    class="absolute inset-0 bg-black/60 opacity-0 group-hover/img:opacity-100 transition-opacity duration-300 flex items-center justify-center">
+                                                    <i class="fas fa-search-plus text-white"></i>
+                                                </div>
+                                            </div>
+                                            <p
+                                                class="text-[9px] text-center text-gray-500 mt-1 uppercase tracking-wider">
+                                                Memories Placeholder 4</p>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
                         </div>
                     </div>
                 </div>
 
-                <!-- 2024 -->
-                <div class="relative flex items-center justify-between md:justify-normal group" data-aos="fade-right">
-                    <div class="timeline-dot"></div>
-                    <div class="timeline-card md:w-5/12">
-                        <span class="text-xs font-bold text-[#00D4FF] uppercase tracking-widest mb-2 block">2024 -
-                            Ongoing</span>
-                        <h3 class="text-xl font-bold mb-2">Voice Complaint Bot</h3>
-                        <p class="text-sm text-gray-400">Pioneering multilingual speech AI using Whisper + FastAPI to
-                            streamline user-platform interactions.</p>
-                        <div class="mt-4 flex flex-wrap gap-2">
-                            <span class="badge">Speech AI</span>
-                            <span class="badge">FastAPI</span>
+                <!-- Phase 2: Acceleration (SRM IST) -->
+                <div class="relative flex flex-col md:flex-row items-center md:items-start md:flex-row-reverse group"
+                    data-aos="fade-up" data-aos-delay="100">
+                    <div class="timeline-dot md:mt-6"></div>
+                    <div class="timeline-card w-full md:w-7/12 ml-auto md:ml-0 md:mr-8 cursor-pointer active-phase shadow-[0_0_15px_rgba(0,212,255,0.15)] border-[#00D4FF]/30"
+                        onclick="toggleTimelinePanel('panel-phase2')">
+                        <div class="flex justify-between items-center mb-2">
+                            <div class="flex items-center gap-2">
+                                <span class="text-xs font-bold text-[#00D4FF] uppercase tracking-widest block">2023 -
+                                    Present</span>
+                            </div>
+                            <i class="fas fa-chevron-down text-[#00D4FF] transition-transform duration-300 panel-icon"
+                                id="icon-phase2" style="transform: rotate(180deg);"></i>
                         </div>
-                    </div>
-                </div>
+                        <h3 class="text-xl font-bold mb-1 text-white">SRM Institute of Science & Technology</h3>
+                        <p class="text-sm text-[#00D4FF] font-medium mb-1">B.Tech CSE (AI & ML)</p>
+                        <p class="text-xs text-gray-400">Acceleration Phase – AI & ML Engineering</p>
 
-                <!-- 2025 -->
-                <div class="relative flex items-center justify-between md:justify-normal md:flex-row-reverse group"
-                    data-aos="fade-left">
-                    <div class="timeline-dot"></div>
-                    <div class="timeline-card md:w-5/12 ml-auto md:ml-0 md:mr-auto">
-                        <span class="text-xs font-bold text-[#FF6B6B] uppercase tracking-widest mb-2 block">2025</span>
-                        <h3 class="text-xl font-bold mb-2">Self-Driven Data Analytics</h3>
-                        <p class="text-sm text-gray-400">Mastering data engineering pipelines with Pandas, SQL, and
-                            advanced visualization frameworks.</p>
-                        <div class="mt-4 flex flex-wrap gap-2">
-                            <span class="badge">Pandas</span>
-                            <span class="badge">SQL</span>
+                        <!-- Expandable Panel -->
+                        <div id="panel-phase2"
+                            class="panel-content overflow-hidden transition-all duration-500 ease-in-out opacity-0 max-h-0">
+
+                            <!-- Tab Navigation -->
+                            <div class="flex border-b border-gray-800 mb-6 overflow-x-auto scrollbar-hide"
+                                onclick="event.stopPropagation()">
+                                <button
+                                    class="phase2-tab active-tab px-4 py-2 text-xs font-bold uppercase tracking-wider text-[#00D4FF] border-b-2 border-[#00D4FF] whitespace-nowrap"
+                                    data-target="tab-certifications">Certifications</button>
+                                <button
+                                    class="phase2-tab px-4 py-2 text-xs font-bold uppercase tracking-wider text-gray-500 border-b-2 border-transparent hover:text-gray-300 transition-colors whitespace-nowrap"
+                                    data-target="tab-competitive">Competitive Coding</button>
+                                <button
+                                    class="phase2-tab px-4 py-2 text-xs font-bold uppercase tracking-wider text-gray-500 border-b-2 border-transparent hover:text-gray-300 transition-colors whitespace-nowrap"
+                                    data-target="tab-projects">Projects Built</button>
+                                <button
+                                    class="phase2-tab px-4 py-2 text-xs font-bold uppercase tracking-wider text-gray-500 border-b-2 border-transparent hover:text-gray-300 transition-colors whitespace-nowrap"
+                                    data-target="tab-tech-stack">Technical Stack</button>
+                            </div>
+
+                            <!-- Tab Content Area -->
+                            <div class="relative" onclick="event.stopPropagation()">
+
+                                <!-- Tab 1: Certifications -->
+                                <div id="tab-certifications"
+                                    class="tab-content transition-opacity duration-300 opacity-100"
+                                    style="display: block;">
+
+                                    <!-- Filter Pills -->
+                                    <div class="flex flex-wrap gap-2 mb-6 justify-center" id="cert-filters">
+                                        <button class="cert-filter-btn active" data-filter="All">All</button>
+                                        <button class="cert-filter-btn" data-filter="AI">AI</button>
+                                        <button class="cert-filter-btn" data-filter="Programming">Programming</button>
+                                        <button class="cert-filter-btn" data-filter="Competitive">Competitive</button>
+                                        <button class="cert-filter-btn" data-filter="Workshops">Workshops</button>
+                                    </div>
+
+                                    <!-- Desktop 3D Carousel Container -->
+                                    <div class="hidden md:flex relative w-full h-[400px] perspective-1000 items-center justify-center cert-carousel-container"
+                                        id="desktop-cert-carousel" style="min-height: 400px;">
+                                        <!-- JS will populate cards here -->
+                                    </div>
+
+                                    <!-- Carousel Controls (Desktop) -->
+                                    <div class="hidden md:flex justify-center mt-6 gap-6 relative z-10">
+                                        <button id="cert-prev"
+                                            class="w-12 h-12 rounded-full glass-container text-gray-400 hover:text-[#00D4FF] hover:border-[#00D4FF]/50 hover:shadow-[0_0_15px_rgba(0,212,255,0.3)] transition-all flex items-center justify-center">
+                                            <i class="fas fa-chevron-left"></i>
+                                        </button>
+                                        <button id="cert-next"
+                                            class="w-12 h-12 rounded-full glass-container text-gray-400 hover:text-[#00D4FF] hover:border-[#00D4FF]/50 hover:shadow-[0_0_15px_rgba(0,212,255,0.3)] transition-all flex items-center justify-center">
+                                            <i class="fas fa-chevron-right"></i>
+                                        </button>
+                                    </div>
+
+                                    <!-- Mobile Vertical Stack Container -->
+                                    <div class="md:hidden flex flex-col gap-4" id="mobile-cert-stack"
+                                        style="min-height: 200px;">
+                                        <!-- JS will populate cards here -->
+                                    </div>
+                                </div>
+
+
+                                <!-- Tab 2: Competitive Coding -->
+                                <div id="tab-competitive"
+                                    class="tab-content hidden transition-opacity duration-300 opacity-0">
+                                    <div class="space-y-6">
+                                        <!-- Large Image to Fill Gap -->
+                                        <div
+                                            class="relative w-full aspect-video rounded-2xl overflow-hidden border border-white/10 shadow-2xl mb-8 group/hero">
+                                            <img src="advent%20of%20code%20calender.PNG" alt="Advent of Code 2025"
+                                                class="w-full h-full object-cover opacity-80 group-hover/hero:scale-105 transition-transform duration-[2s]">
+                                            <div
+                                                class="absolute inset-0 bg-gradient-to-t from-[#0a0c10] via-transparent to-transparent">
+                                            </div>
+                                            <div class="absolute bottom-6 left-8">
+                                                <span
+                                                    class="text-[10px] font-black text-[#00D4FF] uppercase tracking-[0.3em] bg-[#00D4FF]/10 px-3 py-1 rounded-sm border border-[#00D4FF]/20 mb-3 inline-block">2025
+                                                    Season Milestone</span>
+                                                <h4 class="text-3xl font-black text-white italic tracking-tighter">
+                                                    Advent of Code</h4>
+                                            </div>
+                                        </div>
+
+                                        <!-- Original Stats card -->
+                                        <div class="glass-container border-[#00D4FF]/20 p-6 grid grid-cols-2 gap-4">
+                                            <div class="flex flex-col">
+                                                <span
+                                                    class="text-[10px] text-gray-500 uppercase font-bold tracking-widest">Problems
+                                                    Solved</span>
+                                                <span class="text-2xl font-bold text-white tracking-tighter">12 <span
+                                                        class="text-xs text-[#00D4FF]">/ 25</span></span>
+                                            </div>
+                                            <div class="flex flex-col text-right">
+                                                <span
+                                                    class="text-[10px] text-gray-500 uppercase font-bold tracking-widest">Efficiency</span>
+                                                <span class="text-xl font-bold text-white">Top 5%</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Tab 3: Projects Built -->
+                                <div id="tab-projects"
+                                    class="tab-content hidden transition-opacity duration-300 opacity-0">
+                                    <div class="space-y-6">
+                                        <!-- Large Image to Fill Gap -->
+                                        <div
+                                            class="relative w-full aspect-video rounded-2xl overflow-hidden border border-white/10 shadow-2xl group/projhero">
+                                            <img src="taskflow%20logo.jpg" alt="TaskFlow Ecosystem"
+                                                class="w-full h-full object-cover group-hover/projhero:scale-105 transition-transform duration-[2s]">
+                                            <div
+                                                class="absolute inset-0 bg-gradient-to-t from-[#0a0c10] via-transparent to-transparent">
+                                            </div>
+                                            <div class="absolute bottom-6 left-8">
+                                                <h4 class="text-2xl font-black text-white italic tracking-tighter">
+                                                    TaskFlow Pro</h4>
+                                                <p class="text-[10px] text-gray-400 mt-1 uppercase tracking-widest">
+                                                    Enterprise Productivity System</p>
+                                            </div>
+                                        </div>
+
+                                        <!-- Project List -->
+                                        <div class="grid grid-cols-1 gap-4">
+                                            <div
+                                                class="glass-container p-4 border border-white/5 flex items-center gap-4 group/item hover:border-indigo-500/30 transition-colors">
+                                                <div
+                                                    class="w-12 h-12 rounded-lg bg-indigo-500/10 flex items-center justify-center border border-indigo-500/20">
+                                                    <i class="fas fa-tasks text-indigo-400"></i>
+                                                </div>
+                                                <div class="flex-1">
+                                                    <h5 class="text-sm font-bold text-white">Core Application Layer</h5>
+                                                    <div class="flex gap-2 mt-1">
+                                                        <span
+                                                            class="text-[8px] font-bold text-indigo-400 uppercase">Python</span>
+                                                        <span class="text-[8px] font-bold text-indigo-400 uppercase">CLI
+                                                            Core</span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- Tab 4: Technical Stack -->
+                                <div id="tab-tech-stack"
+                                    class="tab-content hidden transition-opacity duration-300 opacity-0">
+                                    <div class="space-y-6">
+                                        <!-- Large Image to Fill Gap -->
+                                        <div
+                                            class="relative w-full aspect-video rounded-2xl overflow-hidden border border-white/10 shadow-2xl group/techhero">
+                                            <img src="techinical%20skills%20banner.jpg" alt="Technical Skills"
+                                                class="w-full h-full object-cover group-hover/techhero:scale-105 transition-transform duration-[2s]">
+                                            <div
+                                                class="absolute inset-0 bg-gradient-to-t from-[#0a0c10] via-transparent to-transparent">
+                                            </div>
+                                            <div class="absolute bottom-6 left-8">
+                                                <h4 class="text-2xl font-black text-white italic tracking-tighter">
+                                                    Technical Arsenal</h4>
+                                                <p class="text-[10px] text-gray-400 mt-1 uppercase tracking-widest">
+                                                    Modern AI & ML Stack</p>
+                                            </div>
+                                        </div>
+
+                                        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+                                            <!-- Pillar 1: AI & Data -->
+                                            <div
+                                                class="bg-gray-900/50 border border-gray-800 rounded-xl p-4 hover:border-[#FF6B6B]/40 transition-colors">
+                                                <div
+                                                    class="w-8 h-8 rounded-lg bg-[#FF6B6B]/10 flex items-center justify-center mb-4 border border-[#FF6B6B]/20">
+                                                    <i class="fas fa-brain text-[#FF6B6B]"></i>
+                                                </div>
+                                                <h4 class="text-xs font-bold text-white mb-3 uppercase tracking-wider">
+                                                    AI &
+                                                    Data</h4>
+                                                <ul class="space-y-2">
+                                                    <li class="flex items-center text-xs text-gray-400"><i
+                                                            class="fas fa-check text-[8px] text-[#FF6B6B] mr-2"></i>
+                                                        LangChain & RAG</li>
+                                                    <li class="flex items-center text-xs text-gray-400"><i
+                                                            class="fas fa-check text-[8px] text-[#FF6B6B] mr-2"></i>
+                                                        Generative AI</li>
+                                                    <li class="flex items-center text-xs text-gray-400"><i
+                                                            class="fas fa-check text-[8px] text-[#FF6B6B] mr-2"></i> NLP
+                                                        (Speech AI)</li>
+                                                    <li class="flex items-center text-xs text-gray-400"><i
+                                                            class="fas fa-check text-[8px] text-[#FF6B6B] mr-2"></i>
+                                                        PyTorch
+                                                        & Pandas</li>
+                                                </ul>
+                                            </div>
+
+                                            <!-- Pillar 2: Backend & Cloud -->
+                                            <div
+                                                class="bg-gray-900/50 border border-gray-800 rounded-xl p-4 hover:border-[#00D4FF]/40 transition-colors">
+                                                <div
+                                                    class="w-8 h-8 rounded-lg bg-[#00D4FF]/10 flex items-center justify-center mb-4 border border-[#00D4FF]/20">
+                                                    <i class="fas fa-server text-[#00D4FF]"></i>
+                                                </div>
+                                                <h4 class="text-xs font-bold text-white mb-3 uppercase tracking-wider">
+                                                    Backend & Cloud</h4>
+                                                <ul class="space-y-2">
+                                                    <li class="flex items-center text-xs text-gray-400"><i
+                                                            class="fas fa-check text-[8px] text-[#00D4FF] mr-2"></i>
+                                                        FastAPI
+                                                        (Python)</li>
+                                                    <li class="flex items-center text-xs text-gray-400"><i
+                                                            class="fas fa-check text-[8px] text-[#00D4FF] mr-2"></i> AWS
+                                                        (Amazon Nova)</li>
+                                                    <li class="flex items-center text-xs text-gray-400"><i
+                                                            class="fas fa-check text-[8px] text-[#00D4FF] mr-2"></i>
+                                                        Docker
+                                                        & Redis</li>
+                                                    <li class="flex items-center text-xs text-gray-400"><i
+                                                            class="fas fa-check text-[8px] text-[#00D4FF] mr-2"></i>
+                                                        System
+                                                        Architecture</li>
+                                                </ul>
+                                            </div>
+
+                                            <!-- Pillar 4: Frontend & Design -->
+                                            <div
+                                                class="bg-gray-900/50 border border-gray-800 rounded-xl p-4 hover:border-orange-400/40 transition-colors">
+                                                <div
+                                                    class="w-8 h-8 rounded-lg bg-orange-900/20 flex items-center justify-center mb-4 border border-orange-500/20">
+                                                    <i class="fas fa-code text-orange-400"></i>
+                                                </div>
+                                                <h4 class="text-xs font-bold text-white mb-3 uppercase tracking-wider">
+                                                    Frontend & Design</h4>
+                                                <ul class="space-y-2">
+                                                    <li class="flex items-center text-xs text-gray-400"><i
+                                                            class="fas fa-check text-[8px] text-orange-400 mr-2"></i>
+                                                        Javascript (ES6+)</li>
+                                                    <li class="flex items-center text-xs text-gray-400"><i
+                                                            class="fas fa-check text-[8px] text-orange-400 mr-2"></i>
+                                                        Tailwind & CSS3</li>
+                                                    <li class="flex items-center text-xs text-gray-400"><i
+                                                            class="fas fa-check text-[8px] text-orange-400 mr-2"></i>
+                                                        Responsive Design</li>
+                                                    <li class="flex items-center text-xs text-gray-400"><i
+                                                            class="fas fa-check text-[8px] text-orange-400 mr-2"></i>
+                                                        UI/UX
+                                                        Principles</li>
+                                                </ul>
+                                            </div>
+
+                                            <!-- Pillar 3: Tools & Deployment -->
+                                            <div
+                                                class="bg-gray-900/50 border border-gray-800 rounded-xl p-4 hover:border-green-400/40 transition-colors">
+                                                <div
+                                                    class="w-8 h-8 rounded-lg bg-green-900/20 flex items-center justify-center mb-4 border border-green-500/20">
+                                                    <i class="fas fa-tools text-green-400"></i>
+                                                </div>
+                                                <h4 class="text-xs font-bold text-white mb-3 uppercase tracking-wider">
+                                                    Tools
+                                                    & Deploy</h4>
+                                                <ul class="space-y-2">
+                                                    <li class="flex items-center text-xs text-gray-400"><i
+                                                            class="fas fa-check text-[8px] text-green-500 mr-2"></i> Git
+                                                        &
+                                                        GitHub</li>
+                                                    <li class="flex items-center text-xs text-gray-400"><i
+                                                            class="fas fa-check text-[8px] text-green-500 mr-2"></i> VS
+                                                        Code
+                                                        & Postman</li>
+                                                    <li class="flex items-center text-xs text-gray-400"><i
+                                                            class="fas fa-check text-[8px] text-green-500 mr-2"></i>
+                                                        Vercel
+                                                        & Netlify</li>
+                                                    <li class="flex items-center text-xs text-gray-400"><i
+                                                            class="fas fa-check text-[8px] text-green-500 mr-2"></i>
+                                                        Linux
+                                                        CLI</li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+
                         </div>
                     </div>
                 </div>
             </div>
         </div>
+        </div>
     </section>
+
+    <!-- Photo Gallery Modal -->
+    <div id="gallery-modal" class="fixed inset-0 z-[100] hidden items-center justify-center p-4">
+        <div class="absolute inset-0 bg-[#0b0f1a]/90 backdrop-blur-md transition-opacity duration-300"
+            onclick="closeGalleryModal()"></div>
+        <div
+            class="modal-content relative bg-gray-900 border border-gray-700 rounded-2xl max-w-4xl w-full max-h-[90vh] flex flex-col overflow-hidden shadow-2xl z-10">
+            <div
+                class="flex justify-between items-center p-4 border-b border-gray-800 bg-gray-900 absolute top-0 w-full z-20">
+                <h3 id="modal-title" class="text-white font-bold text-lg">Photo View</h3>
+                <button onclick="closeGalleryModal()"
+                    class="text-gray-400 hover:text-white transition-colors p-2 rounded-lg hover:bg-gray-800">
+                    <i class="fas fa-times text-xl"></i>
+                </button>
+            </div>
+            <div class="p-4 pt-20 flex-1 overflow-y-auto flex items-center justify-center min-h-[50vh]">
+                <div class="text-center text-gray-500">
+                    <i class="fas fa-image text-6xl mb-4 opacity-50"></i>
+                    <p class="text-sm font-medium" id="modal-description">Image placeholder description</p>
+                </div>
+            </div>
+        </div>
+    </div>
 
     <!-- Section 4: Projects -->
     <section id="projects" class="py-24 px-6 md:px-12 bg-[#0d1221] overflow-hidden">
@@ -399,7 +849,7 @@
                 <div class="p-6">
                     <div
                         class="w-full h-32 glass-container flex items-center justify-center mb-4 border border-white/5">
-                        <span class="text-[10px] uppercase tracking-widest text-gray-500 font-bold">[ Project Preview
+                        <span class="text-[10px] uppercase tracking-widest text-gray-500 font-bold">[ PROJECT PREVIEW
                             ]</span>
                     </div>
                     <h3 class="text-xl font-bold mb-2">Voice Complaint Bot</h3>
@@ -407,12 +857,12 @@
                         Whisper + FastAPI for efficient complaint logging.</p>
 
                     <div class="mb-4">
-                        <h4 class="text-[10px] uppercase tracking-widest text-[#00D4FF] font-bold mb-2">What I Built
+                        <h4 class="text-[10px] uppercase tracking-widest text-[#00D4FF] font-bold mb-2">WHAT I BUILT:
                         </h4>
                         <ul class="text-[11px] text-gray-400 space-y-1 list-disc ml-4">
-                            <li>• Designed FastAPI backend</li>
-                            <li>• Integrated Whisper speech recognition</li>
-                            <li>• Built multilingual complaint flow</li>
+                            <li>• Backend architecture placeholder</li>
+                            <li>• AI integration placeholder</li>
+                            <li>• System flow placeholder</li>
                         </ul>
                     </div>
 
@@ -447,7 +897,7 @@
                 <div class="p-6">
                     <div
                         class="w-full h-32 glass-container flex items-center justify-center mb-4 border border-white/5">
-                        <span class="text-[10px] uppercase tracking-widest text-gray-500 font-bold">[ Project Preview
+                        <span class="text-[10px] uppercase tracking-widest text-gray-500 font-bold">[ PROJECT PREVIEW
                             ]</span>
                     </div>
                     <h3 class="text-xl font-bold mb-2">Data Insights Portal</h3>
@@ -455,12 +905,12 @@
                         using Pandas & Plotly to visualize trends.</p>
 
                     <div class="mb-4">
-                        <h4 class="text-[10px] uppercase tracking-widest text-[#00D4FF] font-bold mb-2">What I Built
+                        <h4 class="text-[10px] uppercase tracking-widest text-[#00D4FF] font-bold mb-2">WHAT I BUILT:
                         </h4>
                         <ul class="text-[11px] text-gray-400 space-y-1 list-disc ml-4">
-                            <li>• Designed FastAPI backend</li>
-                            <li>• Integrated Whisper speech recognition</li>
-                            <li>• Built multilingual complaint flow</li>
+                            <li>• Backend architecture placeholder</li>
+                            <li>• AI integration placeholder</li>
+                            <li>• System flow placeholder</li>
                         </ul>
                     </div>
 
@@ -513,23 +963,7 @@
 
     </section>
 
-    <!-- Build Notes Section -->
-    <section id="build-notes" class="py-12 px-6 md:px-12 bg-[#0b0f1a] border-t border-gray-800/20">
-        <div class="max-w-6xl mx-auto">
-            <h3 class="text-xl font-bold mb-8 gradient-text" data-aos="fade-right">Build Notes</h3>
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-6" data-aos="fade-up">
-                <div class="glass-container p-4 border-white/5">
-                    <p class="text-xs text-gray-400 leading-relaxed">• Optimizing real-time speech latency</p>
-                </div>
-                <div class="glass-container p-4 border-white/5">
-                    <p class="text-xs text-gray-400 leading-relaxed">• Experimenting with multilingual AI pipelines</p>
-                </div>
-                <div class="glass-container p-4 border-white/5">
-                    <p class="text-xs text-gray-400 leading-relaxed">• Improving system architecture decisions</p>
-                </div>
-            </div>
-        </div>
-    </section>
+
 
     <!-- Section 5: Thoughts -->
     <section id="thoughts" class="py-24 px-6 md:px-12 bg-[#0b0f1a]">
@@ -617,7 +1051,7 @@
                                 <span>FastAPI</span><span>Advanced</span>
                             </div>
                             <div class="skill-bar-bg">
-                                <div class="skill-bar-fill cyan-glow" style="width: 85%"></div>
+                                <div class="skill-bar-fill cyan-glow" style="width: 95%"></div>
                             </div>
                         </div>
                         <div class="skill-item" data-aos="fade-in">
@@ -625,7 +1059,7 @@
                                 <span>SQL</span><span>Advanced</span>
                             </div>
                             <div class="skill-bar-bg">
-                                <div class="skill-bar-fill cyan-glow" style="width: 80%"></div>
+                                <div class="skill-bar-fill cyan-glow" style="width: 95%"></div>
                             </div>
                         </div>
                         <div class="skill-item" data-aos="fade-in">
@@ -633,7 +1067,7 @@
                                 <span>Git/GitHub</span><span>Advanced</span>
                             </div>
                             <div class="skill-bar-bg">
-                                <div class="skill-bar-fill cyan-glow" style="width: 90%"></div>
+                                <div class="skill-bar-fill cyan-glow" style="width: 95%"></div>
                             </div>
                         </div>
                         <div class="skill-item" data-aos="fade-in">
@@ -641,7 +1075,7 @@
                                 <span>REST APIs</span><span>Advanced</span>
                             </div>
                             <div class="skill-bar-bg">
-                                <div class="skill-bar-fill cyan-glow" style="width: 85%"></div>
+                                <div class="skill-bar-fill cyan-glow" style="width: 95%"></div>
                             </div>
                         </div>
                         <div class="skill-item" data-aos="fade-in">
@@ -649,7 +1083,7 @@
                                 <span>C/C++</span><span>Intermediate</span>
                             </div>
                             <div class="skill-bar-bg">
-                                <div class="skill-bar-fill cyan-glow" style="width: 70%"></div>
+                                <div class="skill-bar-fill cyan-glow" style="width: 75%"></div>
                             </div>
                         </div>
                         <div class="skill-item" data-aos="fade-in">
@@ -673,7 +1107,7 @@
                                 <span>Speech Recognition</span><span>Advanced</span>
                             </div>
                             <div class="skill-bar-bg">
-                                <div class="skill-bar-fill orange-glow" style="width: 85%"></div>
+                                <div class="skill-bar-fill orange-glow" style="width: 95%"></div>
                             </div>
                         </div>
                         <div class="skill-item" data-aos="fade-in">
@@ -689,7 +1123,7 @@
                                 <span>Generative AI</span><span>Advanced</span>
                             </div>
                             <div class="skill-bar-bg">
-                                <div class="skill-bar-fill orange-glow" style="width: 80%"></div>
+                                <div class="skill-bar-fill orange-glow" style="width: 95%"></div>
                             </div>
                         </div>
                         <div class="skill-item" data-aos="fade-in">
@@ -697,7 +1131,7 @@
                                 <span>Pandas</span><span>Advanced</span>
                             </div>
                             <div class="skill-bar-bg">
-                                <div class="skill-bar-fill orange-glow" style="width: 85%"></div>
+                                <div class="skill-bar-fill orange-glow" style="width: 95%"></div>
                             </div>
                         </div>
                         <div class="skill-item" data-aos="fade-in">
@@ -713,7 +1147,7 @@
                                 <span>Emotion Detection</span><span>Intermediate</span>
                             </div>
                             <div class="skill-bar-bg">
-                                <div class="skill-bar-fill orange-glow" style="width: 65%"></div>
+                                <div class="skill-bar-fill orange-glow" style="width: 75%"></div>
                             </div>
                         </div>
                         <div class="skill-item" data-aos="fade-in">
@@ -737,7 +1171,7 @@
                                 <span>Architecture</span><span>Intermediate</span>
                             </div>
                             <div class="skill-bar-bg">
-                                <div class="skill-bar-fill cyan-glow" style="width: 70%"></div>
+                                <div class="skill-bar-fill cyan-glow" style="width: 75%"></div>
                             </div>
                         </div>
                         <div class="skill-item" data-aos="fade-in">
@@ -753,7 +1187,7 @@
                                 <span>Data Persistence</span><span>Intermediate</span>
                             </div>
                             <div class="skill-bar-bg">
-                                <div class="skill-bar-fill cyan-glow" style="width: 70%"></div>
+                                <div class="skill-bar-fill cyan-glow" style="width: 75%"></div>
                             </div>
                         </div>
                         <div class="skill-item" data-aos="fade-in">
@@ -761,7 +1195,7 @@
                                 <span>Algorithms</span><span>Advanced</span>
                             </div>
                             <div class="skill-bar-bg">
-                                <div class="skill-bar-fill cyan-glow" style="width: 80%"></div>
+                                <div class="skill-bar-fill cyan-glow" style="width: 95%"></div>
                             </div>
                         </div>
                         <div class="skill-item" data-aos="fade-in">
@@ -769,7 +1203,7 @@
                                 <span>Data Structures</span><span>Advanced</span>
                             </div>
                             <div class="skill-bar-bg">
-                                <div class="skill-bar-fill cyan-glow" style="width: 85%"></div>
+                                <div class="skill-bar-fill cyan-glow" style="width: 95%"></div>
                             </div>
                         </div>
                         <div class="skill-item" data-aos="fade-in">
@@ -777,7 +1211,7 @@
                                 <span>Logical Reasoning</span><span>Advanced</span>
                             </div>
                             <div class="skill-bar-bg">
-                                <div class="skill-bar-fill cyan-glow" style="width: 90%"></div>
+                                <div class="skill-bar-fill cyan-glow" style="width: 95%"></div>
                             </div>
                         </div>
                     </div>
@@ -793,7 +1227,7 @@
                                 <span>Leadership</span><span>Advanced</span>
                             </div>
                             <div class="skill-bar-bg">
-                                <div class="skill-bar-fill orange-glow" style="width: 80%"></div>
+                                <div class="skill-bar-fill orange-glow" style="width: 95%"></div>
                             </div>
                         </div>
                         <div class="skill-item" data-aos="fade-in">
@@ -801,7 +1235,7 @@
                                 <span>Team Management</span><span>Advanced</span>
                             </div>
                             <div class="skill-bar-bg">
-                                <div class="skill-bar-fill orange-glow" style="width: 85%"></div>
+                                <div class="skill-bar-fill orange-glow" style="width: 95%"></div>
                             </div>
                         </div>
                         <div class="skill-item" data-aos="fade-in">
@@ -809,7 +1243,7 @@
                                 <span>Adaptability</span><span>Advanced</span>
                             </div>
                             <div class="skill-bar-bg">
-                                <div class="skill-bar-fill orange-glow" style="width: 90%"></div>
+                                <div class="skill-bar-fill orange-glow" style="width: 95%"></div>
                             </div>
                         </div>
                         <div class="skill-item" data-aos="fade-in">
@@ -817,7 +1251,7 @@
                                 <span>Time Management</span><span>Advanced</span>
                             </div>
                             <div class="skill-bar-bg">
-                                <div class="skill-bar-fill orange-glow" style="width: 85%"></div>
+                                <div class="skill-bar-fill orange-glow" style="width: 95%"></div>
                             </div>
                         </div>
                         <div class="skill-item" data-aos="fade-in">
@@ -829,6 +1263,24 @@
                             </div>
                         </div>
                     </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Build Notes Section -->
+    <section id="build-notes" class="py-12 px-6 md:px-12 bg-[#0b0f1a] border-t border-gray-800/20">
+        <div class="max-w-6xl mx-auto">
+            <h3 class="text-xl font-bold mb-8 gradient-text" data-aos="fade-right">Build Notes</h3>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6" data-aos="fade-up">
+                <div class="glass-container p-4 border-white/5">
+                    <p class="text-xs text-gray-400 leading-relaxed">• Optimizing real-time speech latency</p>
+                </div>
+                <div class="glass-container p-4 border-white/5">
+                    <p class="text-xs text-gray-400 leading-relaxed">• Experimenting with multilingual AI pipelines</p>
+                </div>
+                <div class="glass-container p-4 border-white/5">
+                    <p class="text-xs text-gray-400 leading-relaxed">• Improving system architecture decisions</p>
                 </div>
             </div>
         </div>
@@ -937,23 +1389,30 @@
 
     <!-- Scripts -->
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
-    <div id="google_translate_element" style="display:none;"></div>
 
-    <script type="text/javascript">
-        function googleTranslateElementInit() {
-            new google.translate.TranslateElement({
-                pageLanguage: 'en',
-                includedLanguages: 'en,ta,te,ml,kn,hi,es,fr,de,zh-CN',
-                autoDisplay: false
-            }, 'google_translate_element');
-        }
-    </script>
-    <script src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
     <script src="script.js"></script>
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
     <script>
         AOS.init();
     </script>
+    <!-- Certification Modal Viewer -->
+    <div id="cert-modal"
+        class="fixed inset-0 z-[100] hidden items-center justify-center bg-black/80 backdrop-blur-md opacity-0 transition-opacity duration-300">
+        <div class="glass-container relative w-[95%] md:w-[80%] h-[90%] md:h-[85%] flex flex-col overflow-hidden max-w-5xl scale-95 transition-transform duration-300"
+            id="cert-modal-content">
+            <div class="flex justify-between items-center p-4 border-b border-white/10 bg-black/40">
+                <h3 class="text-white font-bold text-lg" id="cert-modal-title">Certificate</h3>
+                <button id="close-cert-modal"
+                    class="w-8 h-8 rounded-full bg-white/10 flex items-center justify-center text-gray-400 hover:text-white hover:bg-red-500/80 transition-all">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <div class="flex-1 overflow-auto relative bg-black/60 flex items-center justify-center p-2 md:p-4"
+                id="cert-modal-body">
+                <!-- Content Injected via JS -->
+            </div>
+        </div>
+    </div>
 </body>
 
 </html>

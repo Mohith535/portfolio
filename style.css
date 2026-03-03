@@ -197,11 +197,58 @@ nav.scrolled {
     border-radius: 24px;
     padding: 1.5rem;
     transition: all 0.3s ease;
-    cursor: default;
+    cursor: pointer;
+    /* Updated for expansible panels */
 }
 
 .timeline-card:hover {
     box-shadow: 0 0 20px rgba(0, 212, 255, 0.15);
+}
+
+.timeline-card.active-phase {
+    box-shadow: 0 0 15px rgba(0, 212, 255, 0.15);
+    border-color: rgba(0, 212, 255, 0.3);
+}
+
+/* Timeline Tabs */
+.phase2-tab {
+    position: relative;
+}
+
+.phase2-tab::after {
+    content: '';
+    position: absolute;
+    bottom: -2px;
+    left: 0;
+    width: 100%;
+    height: 2px;
+    background-color: var(--cyan);
+    transform: scaleX(0);
+    transition: transform 0.3s ease;
+    transform-origin: left;
+}
+
+.phase2-tab.active-tab::after {
+    transform: scaleX(1);
+}
+
+/* Modal styles for Photo Gallery */
+#gallery-modal {
+    backdrop-filter: blur(10px);
+}
+
+#gallery-modal.show {
+    opacity: 1;
+    visibility: visible;
+}
+
+#gallery-modal .modal-content {
+    transform: scale(0.9);
+    transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+#gallery-modal.show .modal-content {
+    transform: scale(1);
 }
 
 /* Carousel / Projects */
@@ -271,12 +318,32 @@ nav.scrolled {
 
 .cyan-glow {
     background: linear-gradient(to right, var(--cyan), #00A3FF);
-    box-shadow: 0 0 10px rgba(0, 212, 255, 0.5);
+    animation: cyan-glow-pulse 2s infinite alternate;
 }
 
 .orange-glow {
     background: linear-gradient(to right, var(--orange), #FF4D4D);
-    box-shadow: 0 0 10px rgba(255, 107, 107, 0.5);
+    animation: orange-glow-pulse 2s infinite alternate;
+}
+
+@keyframes cyan-glow-pulse {
+    from {
+        box-shadow: 0 0 5px rgba(0, 212, 255, 0.3);
+    }
+
+    to {
+        box-shadow: 0 0 15px rgba(0, 212, 255, 0.7);
+    }
+}
+
+@keyframes orange-glow-pulse {
+    from {
+        box-shadow: 0 0 5px rgba(255, 107, 107, 0.3);
+    }
+
+    to {
+        box-shadow: 0 0 15px rgba(255, 107, 107, 0.7);
+    }
 }
 
 /* Forms */
@@ -332,25 +399,7 @@ nav.scrolled {
     color: white;
 }
 
-/* Google Translate Widget Styling */
-.goog-te-gadget {
-    font-family: 'Inter', sans-serif !important;
-    font-size: 0 !important;
-    /* Hide "Powered by" */
-    color: transparent !important;
-}
 
-.goog-te-gadget .goog-te-combo {
-    margin: 0 !important;
-    background: rgba(31, 41, 55, 0.5) !important;
-    border: 1px solid rgba(255, 255, 255, 0.1) !important;
-    border-radius: 8px !important;
-    padding: 2px 4px !important;
-    color: #d1d5db !important;
-    outline: none !important;
-    font-size: 10px !important;
-    cursor: pointer;
-}
 
 /* Ensure navbar links and icons are always clickable */
 .social-nav-icon,
@@ -360,12 +409,208 @@ nav.scrolled {
     z-index: 60;
 }
 
-.goog-te-banner-frame.skiptranslate {
-    display: none !important;
+
+
+/* Certification Vault System */
+/* Filter Pills */
+#cert-filters {
+    position: relative;
+    z-index: 20;
 }
 
-body {
-    top: 0 !important;
+.cert-filter-btn {
+    padding: 0.4rem 1.2rem;
+    border-radius: 9999px;
+    font-size: 0.75rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    background: rgba(31, 41, 55, 0.5);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    color: #9ca3af;
+    transition: all 0.3s ease;
+    backdrop-filter: blur(4px);
+}
+
+.cert-filter-btn:hover {
+    color: white;
+    border-color: rgba(255, 255, 255, 0.3);
+}
+
+.cert-filter-btn.active {
+    background: rgba(0, 212, 255, 0.15);
+    border-color: var(--cyan);
+    color: var(--cyan);
+    box-shadow: 0 0 15px rgba(0, 212, 255, 0.2);
+}
+
+/* 3D Carousel (Desktop) */
+.perspective-1000 {
+    perspective: 1000px;
+}
+
+.cert-carousel-container {
+    transform-style: preserve-3d;
+    min-height: 400px;
+    width: 100%;
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.cert-slide {
+    position: absolute;
+    width: 60%;
+    max-width: 450px;
+    height: 100%;
+    transition: transform 0.6s cubic-bezier(0.25, 1, 0.5, 1), opacity 0.6s ease, filter 0.6s ease, z-index 0s;
+    cursor: pointer;
+    border-radius: 12px;
+    overflow: hidden;
+    background: var(--card-bg);
+    border: 1px solid var(--glass-border);
+    backdrop-filter: blur(10px);
+    display: flex;
+    flex-direction: column;
+    opacity: 1;
+}
+
+.cert-slide.hidden-slide {
+    transform: translateX(0) translateZ(-300px) scale(0.5);
+    opacity: 0;
+    z-index: 1;
+    pointer-events: none;
+}
+
+/* Slide states */
+.cert-slide.active {
+    transform: translateX(0) translateZ(50px) scale(1);
+    opacity: 1;
+    z-index: 10;
+    box-shadow: 0 15px 35px rgba(0, 212, 255, 0.2);
+    filter: brightness(1);
+}
+
+.cert-slide.prev {
+    transform: translateX(-45%) translateZ(-100px) rotateY(15deg) scale(0.85);
+    opacity: 0.6;
+    z-index: 5;
+    filter: brightness(0.6);
+}
+
+.cert-slide.next {
+    transform: translateX(45%) translateZ(-100px) rotateY(-15deg) scale(0.85);
+    opacity: 0.6;
+    z-index: 5;
+    filter: brightness(0.6);
+}
+
+.cert-image-wrapper {
+    width: 100%;
+    height: 60%;
+    overflow: hidden;
+    position: relative;
+    background: #000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.cert-image-wrapper img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.5s ease;
+}
+
+.cert-slide.active:hover .cert-image-wrapper img,
+.cert-slide.active:hover .cert-image-wrapper .icon-zoom {
+    transform: scale(1.05);
+}
+
+.icon-zoom {
+    transition: transform 0.5s ease;
+}
+
+.cert-info {
+    padding: 1.2rem;
+    height: 40%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+/* Mobile Stack */
+.cert-mobile-card {
+    background: var(--card-bg);
+    border: 1px solid var(--glass-border);
+    border-radius: 16px;
+    overflow: hidden;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    padding: 0.75rem;
+    cursor: pointer;
+    transition: transform 0.3s ease, border-color 0.3s ease;
+}
+
+.cert-mobile-card:active {
+    transform: scale(0.98);
+    border-color: var(--cyan);
+}
+
+.cert-mobile-img {
+    width: 80px;
+    height: 80px;
+    border-radius: 8px;
+    object-fit: cover;
+    background: #000;
+    margin-right: 1rem;
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Modal */
+#cert-modal.show {
+    opacity: 1;
+    pointer-events: auto;
+}
+
+#cert-modal {
+    pointer-events: none;
+}
+
+#cert-modal-content {
+    box-shadow: 0 0 50px rgba(0, 212, 255, 0.15);
+}
+
+#cert-modal.show #cert-modal-content {
+    transform: scale(1);
+}
+
+.iframe-wrapper {
+    width: 100%;
+    height: 100%;
+    border-radius: 8px;
+    overflow: auto;
+    background: #fff;
+    -webkit-overflow-scrolling: touch;
+}
+
+.iframe-wrapper iframe {
+    width: 100%;
+    height: 100%;
+    border: none;
+}
+
+.modal-image {
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: contain;
+    border-radius: 8px;
 }
 
 /* Light Mode Overrides */
@@ -417,4 +662,29 @@ body.light-mode .form-input {
     .timeline-card {
         margin-left: 1.5rem;
     }
+}
+
+/* Hide Google Translate top bar */
+.goog-te-banner-frame {
+    display: none !important;
+}
+
+body {
+    top: 0px !important;
+}
+
+/* Hide Google Translate attribution */
+.goog-logo-link,
+.goog-te-gadget span {
+    display: none !important;
+}
+
+.goog-te-gadget {
+    color: transparent !important;
+    font-size: 0 !important;
+}
+
+/* Hide the default Google Translate dropdown */
+#google_translate_element {
+    display: none !important;
 }
