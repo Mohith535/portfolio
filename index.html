@@ -538,261 +538,223 @@
 
                             <!-- Tab Content Area -->
                             <div class="relative" onclick="event.stopPropagation()">
+                                <div class="tabs-wrapper">
+                                    <!-- Tab 1: Certifications -->
+                                    <div id="tab-certifications"
+                                        class="tab-content certifications active transition-opacity duration-300 opacity-100">
 
-                                <!-- Tab 1: Certifications -->
-                                <div id="tab-certifications"
-                                    class="tab-content transition-opacity duration-300 opacity-100"
-                                    style="display: block;">
+                                        <!-- Filter Pills -->
+                                        <div class="flex flex-wrap gap-2 mb-8 justify-center" id="cert-filters">
+                                            <button class="cert-filter-btn active" data-filter="All">All</button>
+                                            <button class="cert-filter-btn" data-filter="AI">AI</button>
+                                            <button class="cert-filter-btn"
+                                                data-filter="Programming">Programming</button>
+                                            <button class="cert-filter-btn"
+                                                data-filter="Competitive">Competitive</button>
+                                            <button class="cert-filter-btn" data-filter="Workshops">Workshops</button>
+                                        </div>
 
-                                    <!-- Filter Pills -->
-                                    <div class="flex flex-wrap gap-2 mb-6 justify-center" id="cert-filters">
-                                        <button class="cert-filter-btn active" data-filter="All">All</button>
-                                        <button class="cert-filter-btn" data-filter="AI">AI</button>
-                                        <button class="cert-filter-btn" data-filter="Programming">Programming</button>
-                                        <button class="cert-filter-btn" data-filter="Competitive">Competitive</button>
-                                        <button class="cert-filter-btn" data-filter="Workshops">Workshops</button>
-                                    </div>
-
-                                    <!-- Desktop 3D Carousel Container -->
-                                    <div class="hidden md:flex relative w-full h-[400px] perspective-1000 items-center justify-center cert-carousel-container"
-                                        id="desktop-cert-carousel" style="min-height: 400px;">
-                                        <!-- JS will populate cards here -->
-                                    </div>
-
-                                    <!-- Carousel Controls (Desktop) -->
-                                    <div class="hidden md:flex justify-center mt-6 gap-6 relative z-10">
-                                        <button id="cert-prev"
-                                            class="w-12 h-12 rounded-full glass-container text-gray-400 hover:text-[#00D4FF] hover:border-[#00D4FF]/50 hover:shadow-[0_0_15px_rgba(0,212,255,0.3)] transition-all flex items-center justify-center">
-                                            <i class="fas fa-chevron-left"></i>
-                                        </button>
-                                        <button id="cert-next"
-                                            class="w-12 h-12 rounded-full glass-container text-gray-400 hover:text-[#00D4FF] hover:border-[#00D4FF]/50 hover:shadow-[0_0_15px_rgba(0,212,255,0.3)] transition-all flex items-center justify-center">
-                                            <i class="fas fa-chevron-right"></i>
-                                        </button>
-                                    </div>
-
-                                    <!-- Mobile Vertical Stack Container -->
-                                    <div class="md:hidden flex flex-col gap-4" id="mobile-cert-stack"
-                                        style="min-height: 200px;">
-                                        <!-- JS will populate cards here -->
-                                    </div>
-                                </div>
-
-
-                                <!-- Tab 2: Competitive Coding -->
-                                <div id="tab-competitive"
-                                    class="tab-content hidden transition-opacity duration-300 opacity-0">
-                                    <div class="space-y-6">
-                                        <!-- Large Image to Fill Gap -->
-                                        <div
-                                            class="relative w-full aspect-video rounded-2xl overflow-hidden border border-white/10 shadow-2xl mb-8 group/hero">
-                                            <img src="advent%20of%20code%20calender.PNG" alt="Advent of Code 2025"
-                                                class="w-full h-full object-cover opacity-80 group-hover/hero:scale-105 transition-transform duration-[2s]">
-                                            <div
-                                                class="absolute inset-0 bg-gradient-to-t from-[#0a0c10] via-transparent to-transparent">
-                                            </div>
-                                            <div class="absolute bottom-6 left-8">
-                                                <span
-                                                    class="text-[10px] font-black text-[#00D4FF] uppercase tracking-[0.3em] bg-[#00D4FF]/10 px-3 py-1 rounded-sm border border-[#00D4FF]/20 mb-3 inline-block">2025
-                                                    Season Milestone</span>
-                                                <h4 class="text-3xl font-black text-white italic tracking-tighter">
-                                                    Advent of Code</h4>
+                                        <!-- Horizontal Slider Container - NEW -->
+                                        <div class="cert-carousel" id="cert-carousel">
+                                            <div class="cert-track" id="cert-track">
+                                                <!-- JS will populate cards here -->
                                             </div>
                                         </div>
 
-                                        <!-- Original Stats card -->
-                                        <div class="glass-container border-[#00D4FF]/20 p-6 grid grid-cols-2 gap-4">
-                                            <div class="flex flex-col">
-                                                <span
-                                                    class="text-[10px] text-gray-500 uppercase font-bold tracking-widest">Problems
-                                                    Solved</span>
-                                                <span class="text-2xl font-bold text-white tracking-tighter">12 <span
-                                                        class="text-xs text-[#00D4FF]">/ 25</span></span>
+                                        <!-- Carousel Controls - RESTORED -->
+                                        <div class="flex justify-center mt-6 gap-6 relative z-10">
+                                            <button id="cert-prev"
+                                                class="w-12 h-12 rounded-full glass-container text-gray-400 hover:text-[#00D4FF] hover:border-[#00D4FF]/50 hover:shadow-[0_0_15px_rgba(0,212,255,0.3)] transition-all flex items-center justify-center">
+                                                <i class="fas fa-chevron-left"></i>
+                                            </button>
+                                            <button id="cert-next"
+                                                class="w-12 h-12 rounded-full glass-container text-gray-400 hover:text-[#00D4FF] hover:border-[#00D4FF]/50 hover:shadow-[0_0_15px_rgba(0,212,255,0.3)] transition-all flex items-center justify-center">
+                                                <i class="fas fa-chevron-right"></i>
+                                            </button>
+                                        </div>
+
+                                        <!-- Mobile Vertical Stack Container -->
+                                        <div class="md:hidden flex flex-col gap-4" id="mobile-cert-stack">
+                                            <!-- JS will populate cards here -->
+                                        </div>
+                                    </div>
+
+
+                                    <!-- Tab 2: Competitive Coding -->
+                                    <div id="tab-competitive"
+                                        class="tab-content competitive hidden transition-opacity duration-300 opacity-0">
+                                        <!-- Item 1 -->
+                                        <div class="content-card">
+                                            <div class="card-image">
+                                                <img src="advent%20of%20code%20calender.PNG" alt="Advent of Code 2025">
                                             </div>
-                                            <div class="flex flex-col text-right">
-                                                <span
-                                                    class="text-[10px] text-gray-500 uppercase font-bold tracking-widest">Efficiency</span>
-                                                <span class="text-xl font-bold text-white">Top 5%</span>
+                                            <div class="card-body">
+                                                <h3 class="card-title">Advent of Code</h3>
+                                                <p class="card-description">Participated in the annual coding challenge,
+                                                    solving complex algorithmic problems daily during the 2025 season.
+                                                </p>
+                                                <div class="card-meta">Problems Solved: 12/25 • Top 5% Efficiency</div>
                                             </div>
                                         </div>
                                     </div>
-                                </div>
 
-                                <!-- Tab 3: Projects Built -->
-                                <div id="tab-projects"
-                                    class="tab-content hidden transition-opacity duration-300 opacity-0">
-                                    <div class="space-y-6">
-                                        <!-- Large Image to Fill Gap -->
-                                        <div
-                                            class="relative w-full aspect-video rounded-2xl overflow-hidden border border-white/10 shadow-2xl group/projhero">
-                                            <img src="taskflow%20logo.jpg" alt="TaskFlow Ecosystem"
-                                                class="w-full h-full object-cover group-hover/projhero:scale-105 transition-transform duration-[2s]">
-                                            <div
-                                                class="absolute inset-0 bg-gradient-to-t from-[#0a0c10] via-transparent to-transparent">
+                                    <!-- Tab 3: Projects Built -->
+                                    <div id="tab-projects"
+                                        class="tab-content projects hidden transition-opacity duration-300 opacity-0">
+                                        <!-- Item 1 -->
+                                        <div class="content-card">
+                                            <div class="card-image">
+                                                <img src="taskflow%20logo.jpg" alt="TaskFlow Pro">
                                             </div>
-                                            <div class="absolute bottom-6 left-8">
-                                                <h4 class="text-2xl font-black text-white italic tracking-tighter">
-                                                    TaskFlow Pro</h4>
-                                                <p class="text-[10px] text-gray-400 mt-1 uppercase tracking-widest">
-                                                    Enterprise Productivity System</p>
+                                            <div class="card-body">
+                                                <h3 class="card-title">TaskFlow Pro</h3>
+                                                <p class="card-description">An enterprise-grade productivity system
+                                                    focused on CLI core and advanced application layers.</p>
+                                                <div class="card-meta">Python • CLI Core • Enterprise</div>
                                             </div>
                                         </div>
+                                    </div>
 
-                                        <!-- Project List -->
-                                        <div class="grid grid-cols-1 gap-4">
-                                            <div
-                                                class="glass-container p-4 border border-white/5 flex items-center gap-4 group/item hover:border-indigo-500/30 transition-colors">
-                                                <div
-                                                    class="w-12 h-12 rounded-lg bg-indigo-500/10 flex items-center justify-center border border-indigo-500/20">
-                                                    <i class="fas fa-tasks text-indigo-400"></i>
+                                    <!-- Tab 4: Technical Stack -->
+                                    <div id="tab-tech-stack"
+                                        class="tab-content tech hidden transition-opacity duration-300 opacity-0">
+                                        <div class="space-y-6">
+                                            <!-- Item 1: The Banner/Hero Card -->
+                                            <div class="content-card">
+                                                <div class="card-image">
+                                                    <img src="techinical%20skills%20banner.jpg" alt="Technical Arsenal">
                                                 </div>
-                                                <div class="flex-1">
-                                                    <h5 class="text-sm font-bold text-white">Core Application Layer</h5>
-                                                    <div class="flex gap-2 mt-1">
-                                                        <span
-                                                            class="text-[8px] font-bold text-indigo-400 uppercase">Python</span>
-                                                        <span class="text-[8px] font-bold text-indigo-400 uppercase">CLI
-                                                            Core</span>
+                                                <div class="card-body">
+                                                    <h3 class="card-title">Technical Arsenal</h3>
+                                                    <p class="card-description">A deep dive into the modern AI & ML
+                                                        stack
+                                                        powering my builds.</p>
+                                                    <div class="card-meta">AI-First • Modern Stack</div>
+                                                </div>
+                                            </div>
+
+                                            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+                                                <!-- Pillar 1: AI & Data -->
+                                                <div
+                                                    class="bg-gray-900/50 border border-gray-800 rounded-xl p-4 hover:border-[#FF6B6B]/40 transition-colors">
+                                                    <div
+                                                        class="w-8 h-8 rounded-lg bg-[#FF6B6B]/10 flex items-center justify-center mb-4 border border-[#FF6B6B]/20">
+                                                        <i class="fas fa-brain text-[#FF6B6B]"></i>
                                                     </div>
+                                                    <h4
+                                                        class="text-xs font-bold text-white mb-3 uppercase tracking-wider">
+                                                        AI &
+                                                        Data</h4>
+                                                    <ul class="space-y-2">
+                                                        <li class="flex items-center text-xs text-gray-400"><i
+                                                                class="fas fa-check text-[8px] text-[#FF6B6B] mr-2"></i>
+                                                            LangChain & RAG</li>
+                                                        <li class="flex items-center text-xs text-gray-400"><i
+                                                                class="fas fa-check text-[8px] text-[#FF6B6B] mr-2"></i>
+                                                            Generative AI</li>
+                                                        <li class="flex items-center text-xs text-gray-400"><i
+                                                                class="fas fa-check text-[8px] text-[#FF6B6B] mr-2"></i>
+                                                            NLP
+                                                            (Speech AI)</li>
+                                                        <li class="flex items-center text-xs text-gray-400"><i
+                                                                class="fas fa-check text-[8px] text-[#FF6B6B] mr-2"></i>
+                                                            PyTorch
+                                                            & Pandas</li>
+                                                    </ul>
+                                                </div>
+
+                                                <!-- Pillar 2: Backend & Cloud -->
+                                                <div
+                                                    class="bg-gray-900/50 border border-gray-800 rounded-xl p-4 hover:border-[#00D4FF]/40 transition-colors">
+                                                    <div
+                                                        class="w-8 h-8 rounded-lg bg-[#00D4FF]/10 flex items-center justify-center mb-4 border border-[#00D4FF]/20">
+                                                        <i class="fas fa-server text-[#00D4FF]"></i>
+                                                    </div>
+                                                    <h4
+                                                        class="text-xs font-bold text-white mb-3 uppercase tracking-wider">
+                                                        Backend & Cloud</h4>
+                                                    <ul class="space-y-2">
+                                                        <li class="flex items-center text-xs text-gray-400"><i
+                                                                class="fas fa-check text-[8px] text-[#00D4FF] mr-2"></i>
+                                                            FastAPI
+                                                            (Python)</li>
+                                                        <li class="flex items-center text-xs text-gray-400"><i
+                                                                class="fas fa-check text-[8px] text-[#00D4FF] mr-2"></i>
+                                                            AWS
+                                                            (Amazon Nova)</li>
+                                                        <li class="flex items-center text-xs text-gray-400"><i
+                                                                class="fas fa-check text-[8px] text-[#00D4FF] mr-2"></i>
+                                                            Docker
+                                                            & Redis</li>
+                                                        <li class="flex items-center text-xs text-gray-400"><i
+                                                                class="fas fa-check text-[8px] text-[#00D4FF] mr-2"></i>
+                                                            System
+                                                            Architecture</li>
+                                                    </ul>
+                                                </div>
+
+                                                <!-- Pillar 4: Frontend & Design -->
+                                                <div
+                                                    class="bg-gray-900/50 border border-gray-800 rounded-xl p-4 hover:border-orange-400/40 transition-colors">
+                                                    <div
+                                                        class="w-8 h-8 rounded-lg bg-orange-900/20 flex items-center justify-center mb-4 border border-orange-500/20">
+                                                        <i class="fas fa-code text-orange-400"></i>
+                                                    </div>
+                                                    <h4
+                                                        class="text-xs font-bold text-white mb-3 uppercase tracking-wider">
+                                                        Frontend & Design</h4>
+                                                    <ul class="space-y-2">
+                                                        <li class="flex items-center text-xs text-gray-400"><i
+                                                                class="fas fa-check text-[8px] text-orange-400 mr-2"></i>
+                                                            Javascript (ES6+)</li>
+                                                        <li class="flex items-center text-xs text-gray-400"><i
+                                                                class="fas fa-check text-[8px] text-orange-400 mr-2"></i>
+                                                            Tailwind & CSS3</li>
+                                                        <li class="flex items-center text-xs text-gray-400"><i
+                                                                class="fas fa-check text-[8px] text-orange-400 mr-2"></i>
+                                                            Responsive Design</li>
+                                                        <li class="flex items-center text-xs text-gray-400"><i
+                                                                class="fas fa-check text-[8px] text-orange-400 mr-2"></i>
+                                                            UI/UX
+                                                            Principles</li>
+                                                    </ul>
+                                                </div>
+
+                                                <!-- Pillar 3: Tools & Deployment -->
+                                                <div
+                                                    class="bg-gray-900/50 border border-gray-800 rounded-xl p-4 hover:border-green-400/40 transition-colors">
+                                                    <div
+                                                        class="w-8 h-8 rounded-lg bg-green-900/20 flex items-center justify-center mb-4 border border-green-500/20">
+                                                        <i class="fas fa-tools text-green-400"></i>
+                                                    </div>
+                                                    <h4
+                                                        class="text-xs font-bold text-white mb-3 uppercase tracking-wider">
+                                                        Tools
+                                                        & Deploy</h4>
+                                                    <ul class="space-y-2">
+                                                        <li class="flex items-center text-xs text-gray-400"><i
+                                                                class="fas fa-check text-[8px] text-green-500 mr-2"></i>
+                                                            Git
+                                                            &
+                                                            GitHub</li>
+                                                        <li class="flex items-center text-xs text-gray-400"><i
+                                                                class="fas fa-check text-[8px] text-green-500 mr-2"></i>
+                                                            VS
+                                                            Code
+                                                            & Postman</li>
+                                                        <li class="flex items-center text-xs text-gray-400"><i
+                                                                class="fas fa-check text-[8px] text-green-500 mr-2"></i>
+                                                            Vercel
+                                                            & Netlify</li>
+                                                        <li class="flex items-center text-xs text-gray-400"><i
+                                                                class="fas fa-check text-[8px] text-green-500 mr-2"></i>
+                                                            Linux
+                                                            CLI</li>
+                                                    </ul>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
-                                </div>
-                                <!-- Tab 4: Technical Stack -->
-                                <div id="tab-tech-stack"
-                                    class="tab-content hidden transition-opacity duration-300 opacity-0">
-                                    <div class="space-y-6">
-                                        <!-- Large Image to Fill Gap -->
-                                        <div
-                                            class="relative w-full aspect-video rounded-2xl overflow-hidden border border-white/10 shadow-2xl group/techhero">
-                                            <img src="techinical%20skills%20banner.jpg" alt="Technical Skills"
-                                                class="w-full h-full object-cover group-hover/techhero:scale-105 transition-transform duration-[2s]">
-                                            <div
-                                                class="absolute inset-0 bg-gradient-to-t from-[#0a0c10] via-transparent to-transparent">
-                                            </div>
-                                            <div class="absolute bottom-6 left-8">
-                                                <h4 class="text-2xl font-black text-white italic tracking-tighter">
-                                                    Technical Arsenal</h4>
-                                                <p class="text-[10px] text-gray-400 mt-1 uppercase tracking-widest">
-                                                    Modern AI & ML Stack</p>
-                                            </div>
-                                        </div>
-
-                                        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
-                                            <!-- Pillar 1: AI & Data -->
-                                            <div
-                                                class="bg-gray-900/50 border border-gray-800 rounded-xl p-4 hover:border-[#FF6B6B]/40 transition-colors">
-                                                <div
-                                                    class="w-8 h-8 rounded-lg bg-[#FF6B6B]/10 flex items-center justify-center mb-4 border border-[#FF6B6B]/20">
-                                                    <i class="fas fa-brain text-[#FF6B6B]"></i>
-                                                </div>
-                                                <h4 class="text-xs font-bold text-white mb-3 uppercase tracking-wider">
-                                                    AI &
-                                                    Data</h4>
-                                                <ul class="space-y-2">
-                                                    <li class="flex items-center text-xs text-gray-400"><i
-                                                            class="fas fa-check text-[8px] text-[#FF6B6B] mr-2"></i>
-                                                        LangChain & RAG</li>
-                                                    <li class="flex items-center text-xs text-gray-400"><i
-                                                            class="fas fa-check text-[8px] text-[#FF6B6B] mr-2"></i>
-                                                        Generative AI</li>
-                                                    <li class="flex items-center text-xs text-gray-400"><i
-                                                            class="fas fa-check text-[8px] text-[#FF6B6B] mr-2"></i> NLP
-                                                        (Speech AI)</li>
-                                                    <li class="flex items-center text-xs text-gray-400"><i
-                                                            class="fas fa-check text-[8px] text-[#FF6B6B] mr-2"></i>
-                                                        PyTorch
-                                                        & Pandas</li>
-                                                </ul>
-                                            </div>
-
-                                            <!-- Pillar 2: Backend & Cloud -->
-                                            <div
-                                                class="bg-gray-900/50 border border-gray-800 rounded-xl p-4 hover:border-[#00D4FF]/40 transition-colors">
-                                                <div
-                                                    class="w-8 h-8 rounded-lg bg-[#00D4FF]/10 flex items-center justify-center mb-4 border border-[#00D4FF]/20">
-                                                    <i class="fas fa-server text-[#00D4FF]"></i>
-                                                </div>
-                                                <h4 class="text-xs font-bold text-white mb-3 uppercase tracking-wider">
-                                                    Backend & Cloud</h4>
-                                                <ul class="space-y-2">
-                                                    <li class="flex items-center text-xs text-gray-400"><i
-                                                            class="fas fa-check text-[8px] text-[#00D4FF] mr-2"></i>
-                                                        FastAPI
-                                                        (Python)</li>
-                                                    <li class="flex items-center text-xs text-gray-400"><i
-                                                            class="fas fa-check text-[8px] text-[#00D4FF] mr-2"></i> AWS
-                                                        (Amazon Nova)</li>
-                                                    <li class="flex items-center text-xs text-gray-400"><i
-                                                            class="fas fa-check text-[8px] text-[#00D4FF] mr-2"></i>
-                                                        Docker
-                                                        & Redis</li>
-                                                    <li class="flex items-center text-xs text-gray-400"><i
-                                                            class="fas fa-check text-[8px] text-[#00D4FF] mr-2"></i>
-                                                        System
-                                                        Architecture</li>
-                                                </ul>
-                                            </div>
-
-                                            <!-- Pillar 4: Frontend & Design -->
-                                            <div
-                                                class="bg-gray-900/50 border border-gray-800 rounded-xl p-4 hover:border-orange-400/40 transition-colors">
-                                                <div
-                                                    class="w-8 h-8 rounded-lg bg-orange-900/20 flex items-center justify-center mb-4 border border-orange-500/20">
-                                                    <i class="fas fa-code text-orange-400"></i>
-                                                </div>
-                                                <h4 class="text-xs font-bold text-white mb-3 uppercase tracking-wider">
-                                                    Frontend & Design</h4>
-                                                <ul class="space-y-2">
-                                                    <li class="flex items-center text-xs text-gray-400"><i
-                                                            class="fas fa-check text-[8px] text-orange-400 mr-2"></i>
-                                                        Javascript (ES6+)</li>
-                                                    <li class="flex items-center text-xs text-gray-400"><i
-                                                            class="fas fa-check text-[8px] text-orange-400 mr-2"></i>
-                                                        Tailwind & CSS3</li>
-                                                    <li class="flex items-center text-xs text-gray-400"><i
-                                                            class="fas fa-check text-[8px] text-orange-400 mr-2"></i>
-                                                        Responsive Design</li>
-                                                    <li class="flex items-center text-xs text-gray-400"><i
-                                                            class="fas fa-check text-[8px] text-orange-400 mr-2"></i>
-                                                        UI/UX
-                                                        Principles</li>
-                                                </ul>
-                                            </div>
-
-                                            <!-- Pillar 3: Tools & Deployment -->
-                                            <div
-                                                class="bg-gray-900/50 border border-gray-800 rounded-xl p-4 hover:border-green-400/40 transition-colors">
-                                                <div
-                                                    class="w-8 h-8 rounded-lg bg-green-900/20 flex items-center justify-center mb-4 border border-green-500/20">
-                                                    <i class="fas fa-tools text-green-400"></i>
-                                                </div>
-                                                <h4 class="text-xs font-bold text-white mb-3 uppercase tracking-wider">
-                                                    Tools
-                                                    & Deploy</h4>
-                                                <ul class="space-y-2">
-                                                    <li class="flex items-center text-xs text-gray-400"><i
-                                                            class="fas fa-check text-[8px] text-green-500 mr-2"></i> Git
-                                                        &
-                                                        GitHub</li>
-                                                    <li class="flex items-center text-xs text-gray-400"><i
-                                                            class="fas fa-check text-[8px] text-green-500 mr-2"></i> VS
-                                                        Code
-                                                        & Postman</li>
-                                                    <li class="flex items-center text-xs text-gray-400"><i
-                                                            class="fas fa-check text-[8px] text-green-500 mr-2"></i>
-                                                        Vercel
-                                                        & Netlify</li>
-                                                    <li class="flex items-center text-xs text-gray-400"><i
-                                                            class="fas fa-check text-[8px] text-green-500 mr-2"></i>
-                                                        Linux
-                                                        CLI</li>
-                                                </ul>
-                                            </div>
-                                        </div>
-                                    </div>
-
                                 </div>
                             </div>
 

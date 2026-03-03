@@ -393,36 +393,30 @@ document.addEventListener('DOMContentLoaded', function () {
             // Collapse
             panel.style.maxHeight = '0px';
             panel.style.opacity = '0';
-            panel.style.marginTop = '0';
             panel.classList.remove('mt-6');
             if (icon) icon.style.transform = 'rotate(0deg)';
             if (card) card.classList.remove('active-phase', 'shadow-[0_0_15px_rgba(0,212,255,0.15)]', 'border-[#00D4FF]/30');
         } else {
-            // Expand
-            // Calculate height needed (using scrollHeight)
-            const scrollHeight = panel.scrollHeight + 50; // Add some padding buffer
-            panel.style.maxHeight = scrollHeight + 'px';
+            // Expand - Use large max-height for transition but allow auto-expansion
+            panel.style.maxHeight = 'none';
             panel.style.opacity = '1';
             panel.classList.add('mt-6');
             if (icon) icon.style.transform = 'rotate(180deg)';
 
             // Highlight active phase
             if (card) {
-                // Remove highlight from all other cards
                 document.querySelectorAll('.timeline-card').forEach(c => {
                     c.classList.remove('active-phase', 'shadow-[0_0_15px_rgba(0,212,255,0.15)]', 'border-[#00D4FF]/30');
                 });
                 card.classList.add('active-phase', 'shadow-[0_0_15px_rgba(0,212,255,0.15)]', 'border-[#00D4FF]/30');
             }
 
-            // If expanding Phase 2 (which contains the cert carousel), force a render 
-            // once it has dimensions to ensure the 3D transforms apply correctly.
             if (panelId === 'panel-phase2') {
                 setTimeout(() => {
                     if (typeof renderCertificates === 'function') {
                         renderCertificates();
                     }
-                }, 300); // matching the CSS transition duration roughly
+                }, 100);
             }
         }
     };
@@ -439,11 +433,7 @@ document.addEventListener('DOMContentLoaded', function () {
             storyDiv.classList.add('block');
             btn.innerHTML = '[ Collapse Journey ] <i class="fas fa-arrow-up ml-2 text-[10px]"></i>';
 
-            // Update parent panel max-height to accommodate new content
-            const panel = storyDiv.closest('[id^="panel-"]');
-            if (panel && panel.style.maxHeight !== '0px') {
-                panel.style.maxHeight = (panel.scrollHeight + storyDiv.scrollHeight + 50) + 'px';
-            }
+            // Update parent panel max-height (REMOVED)
         } else {
             storyDiv.classList.add('hidden');
             storyDiv.classList.remove('block');
@@ -488,7 +478,9 @@ document.addEventListener('DOMContentLoaded', function () {
 
                 if (targetContent) {
                     setTimeout(() => {
+                        allTabContents.forEach(c => c.classList.remove('active'));
                         targetContent.classList.remove('hidden');
+                        targetContent.classList.add('active');
 
                         // If it's the certifications tab, we force a render now that constraints are visible
                         if (targetId === 'tab-certifications') {
@@ -503,14 +495,18 @@ document.addEventListener('DOMContentLoaded', function () {
                             // Recalculate parent panel height for dynamic content
                             const panel = document.getElementById('panel-phase2');
                             if (panel && panel.classList.contains('active')) {
-                                panel.style.maxHeight = (panel.scrollHeight + 100) + 'px';
+                                panel.style.maxHeight = "5000px";
                             }
+
+                            adjustTabHeight();
                         }, 50);
                     }, 150);
                 }
             });
         });
     }
+
+    // Photo Gallery Modal Logic
 
     // Photo Gallery Modal Logic
     const galleryModal = document.getElementById('gallery-modal');
@@ -565,8 +561,7 @@ document.addEventListener('DOMContentLoaded', function () {
     ];
 
     const certFilters = document.querySelectorAll('.cert-filter-btn');
-    const desktopCarousel = document.getElementById('desktop-cert-carousel');
-    const mobileStack = document.getElementById('mobile-cert-stack');
+    const certTrack = document.getElementById('cert-track');
     const certModal = document.getElementById('cert-modal');
     const certModalBody = document.getElementById('cert-modal-body');
     const certModalTitle = document.getElementById('cert-modal-title');
@@ -576,107 +571,148 @@ document.addEventListener('DOMContentLoaded', function () {
     let filteredCerts = [...certifications];
 
     function renderCertificates() {
-        if (!desktopCarousel || !mobileStack) return;
+        if (!certTrack) return;
 
-        desktopCarousel.innerHTML = '';
-        mobileStack.innerHTML = '';
+        certTrack.innerHTML = '';
 
         if (filteredCerts.length === 0) {
-            desktopCarousel.innerHTML = '<p class="text-gray-500 font-bold mt-10">No certificates found in this category.</p>';
-            mobileStack.innerHTML = '<p class="text-gray-500 font-bold text-center mt-10">No certificates found in this category.</p>';
+            certTrack.innerHTML = '<p class="text-gray-500 font-bold mt-10 w-full text-center">No certificates found in this category.</p>';
             return;
         }
 
-        // Render Desktop Carousel
+        // Render Carousel Track
         filteredCerts.forEach((cert, index) => {
-            const slide = document.createElement('div');
-
-            let positionClass = 'hidden-slide';
-            if (index === currentCertIndex) positionClass = 'active';
-            else if (filteredCerts.length > 1 && index === (currentCertIndex - 1 + filteredCerts.length) % filteredCerts.length) positionClass = 'prev';
-            else if (filteredCerts.length > 2 && index === (currentCertIndex + 1) % filteredCerts.length) positionClass = 'next';
-
-            slide.className = `cert-slide ${positionClass}`;
-            slide.dataset.index = index;
+            const card = document.createElement('div');
+            card.className = 'cert-card';
 
             const thumbHtml = cert.type === 'image'
                 ? `<img src="${cert.file}" alt="${cert.title}" loading="lazy">`
-                : `<i class="fas fa-file-pdf text-6xl text-red-500/80 icon-zoom"></i>`;
+                : `<i class="fas fa-file-pdf text-6xl text-red-500/80"></i>`;
 
-            slide.innerHTML = `
-                <div class="cert-image-wrapper">
-                    ${thumbHtml}
-                </div>
-                <div class="cert-info">
-                    <h5 class="text-sm md:text-base font-bold text-white mb-1 truncate">${cert.title}</h5>
-                    <p class="text-[10px] md:text-xs text-[#00D4FF] mb-2">${cert.issuer} • ${cert.date}</p>
-                    <div class="flex gap-2">
-                        <span class="badge">${cert.category}</span>
+            card.innerHTML = `
+                <div class="cert-card-inner">
+                    <div class="cert-image-wrapper">
+                        ${thumbHtml}
+                    </div>
+                    <div class="cert-info">
+                        <h5 class="text-sm font-bold text-white mb-1 truncate">${cert.title}</h5>
+                        <p class="text-[10px] text-[#00D4FF] mb-2">${cert.issuer} • ${cert.date}</p>
+                        <div class="flex gap-2">
+                            <span class="badge text-[8px]">${cert.category}</span>
+                        </div>
                     </div>
                 </div>
             `;
 
-            slide.addEventListener('click', () => {
-                if (index === currentCertIndex) {
-                    openCertModal(cert);
-                } else {
-                    currentCertIndex = index;
-                    updateCarouselPositions();
-                }
+            card.addEventListener('click', () => {
+                openCertModal(cert);
             });
 
-            desktopCarousel.appendChild(slide);
-
-            // Render Mobile Stack
-            const mobileCard = document.createElement('div');
-            mobileCard.className = 'cert-mobile-card';
-
-            const mobileThumb = cert.type === 'image'
-                ? `<img src="${cert.file}" alt="${cert.title}" class="cert-mobile-img" loading="lazy">`
-                : `<div class="cert-mobile-img"><i class="fas fa-file-pdf text-3xl text-red-500/80"></i></div>`;
-
-            mobileCard.innerHTML = `
-                ${mobileThumb}
-                <div class="flex-1 min-w-0">
-                    <h5 class="text-sm font-bold text-white mb-1 truncate">${cert.title}</h5>
-                    <p class="text-[10px] text-[#00D4FF]">${cert.issuer} • ${cert.date}</p>
-                </div>
-                <button class="w-8 h-8 rounded-full bg-gray-800 flex flex-shrink-0 items-center justify-center text-gray-400">
-                    <i class="fas fa-external-link-alt text-[10px]"></i>
-                </button>
-            `;
-
-            mobileCard.addEventListener('click', () => openCertModal(cert));
-            mobileStack.appendChild(mobileCard);
+            certTrack.appendChild(card);
         });
 
         updateCarouselPositions();
 
-        if (desktopCarousel) desktopCarousel.style.opacity = '1';
-        if (mobileStack) mobileStack.style.opacity = '1';
+        if (certTrack) certTrack.style.opacity = '1';
+    }
 
-        console.log(`[Cert Vault Debug] Rendered ${filteredCerts.length} certificates. Desktop elements: ${desktopCarousel.children.length}, Mobile: ${mobileStack.children.length}`);
+    const certCarousel = document.getElementById('cert-carousel');
+    let rotationDeg = 0;
+
+    function updateActiveSlide() {
+        const cards = certTrack ? certTrack.querySelectorAll('.cert-card') : [];
+        const total = filteredCerts.length;
+        if (total === 0) return;
+
+        // Calculate current index based on rotationDeg
+        // currentCertIndex = Math.round(-rotationDeg / theta) % total
+        let theta = 360 / total;
+        let normalizedRot = ((-rotationDeg % 360) + 360) % 360;
+        let activeIndex = Math.round(normalizedRot / theta) % total;
+
+        cards.forEach((card, i) => {
+            card.classList.remove('active-slide');
+            if (i === activeIndex) {
+                card.classList.add('active-slide');
+                card.style.opacity = "1";
+            } else {
+                card.style.opacity = "0.4"; // Visual depth
+            }
+        });
     }
 
     function updateCarouselPositions() {
-        if (!desktopCarousel) return;
-        const slides = desktopCarousel.querySelectorAll('.cert-slide');
-        const total = slides.length;
+        if (!certTrack || !certCarousel) return;
+        const total = filteredCerts.length;
         if (total === 0) return;
 
-        slides.forEach((slide, index) => {
-            slide.classList.remove('active', 'prev', 'next', 'hidden-slide');
+        const containerWidth = certCarousel.offsetWidth;
+        const cardWidth = Math.min(containerWidth * 0.8, 500);
+        const theta = 360 / total;
 
-            if (index === currentCertIndex) {
-                slide.classList.add('active');
-            } else if (total > 1 && index === (currentCertIndex - 1 + total) % total) {
-                slide.classList.add('prev');
-            } else if (total > 2 && index === (currentCertIndex + 1) % total) {
-                slide.classList.add('next');
-            } else {
-                slide.classList.add('hidden-slide');
-            }
+        // Calculate radius for cylindrical layout
+        // For 1 or 2 cards, we use a fixed radius to keep them visible
+        let radius = total > 2
+            ? (cardWidth / 2) / Math.tan(Math.PI / total)
+            : cardWidth * 0.8;
+
+        const cards = certTrack.querySelectorAll('.cert-card');
+        cards.forEach((card, i) => {
+            card.style.width = `${cardWidth}px`;
+            card.style.transform = `rotateY(${i * theta}deg) translateZ(${radius}px)`;
         });
+
+        certTrack.style.transform = `translateZ(${-radius}px) rotateY(${rotationDeg}deg)`;
+        updateActiveSlide();
+    }
+
+    window.addEventListener("resize", updateCarouselPositions);
+
+    // 3D Swipe Physics
+    let isDragging = false;
+    let startX = 0;
+    let startRotation = 0;
+
+    if (certTrack) {
+        certTrack.addEventListener('pointerdown', (e) => {
+            isDragging = true;
+            startX = e.clientX;
+            startRotation = rotationDeg;
+            certTrack.style.transition = "none";
+            if (certTrack.setPointerCapture) certTrack.setPointerCapture(e.pointerId);
+        });
+
+        certTrack.addEventListener('pointermove', (e) => {
+            if (!isDragging) return;
+            const delta = e.clientX - startX;
+            // Sensitivity: adjust pixels to degrees
+            const sensitivity = 0.2;
+            rotationDeg = startRotation + (delta * sensitivity);
+
+            // Apply current rotation
+            const total = filteredCerts.length;
+            const cardWidth = Math.min(certCarousel.offsetWidth * 0.8, 500);
+            const radius = total > 2 ? (cardWidth / 2) / Math.tan(Math.PI / total) : cardWidth * 0.8;
+            certTrack.style.transform = `translateZ(${-radius}px) rotateY(${rotationDeg}deg)`;
+            updateActiveSlide();
+        });
+
+        certTrack.addEventListener('pointerup', (e) => {
+            if (!isDragging) return;
+            isDragging = false;
+            if (certTrack.releasePointerCapture) certTrack.releasePointerCapture(e.pointerId);
+
+            certTrack.style.transition = "transform 0.8s cubic-bezier(0.23, 1, 0.32, 1)";
+
+            // Snapping logic
+            const total = filteredCerts.length;
+            const theta = 360 / total;
+            rotationDeg = Math.round(rotationDeg / theta) * theta;
+
+            updateCarouselPositions();
+        });
+
+        certTrack.addEventListener('dragstart', (e) => e.preventDefault());
     }
 
     const certPrevBtn = document.getElementById('cert-prev');
@@ -685,7 +721,8 @@ document.addEventListener('DOMContentLoaded', function () {
     if (certPrevBtn) {
         certPrevBtn.addEventListener('click', () => {
             if (filteredCerts.length > 0) {
-                currentCertIndex = (currentCertIndex - 1 + filteredCerts.length) % filteredCerts.length;
+                const theta = 360 / filteredCerts.length;
+                rotationDeg += theta;
                 updateCarouselPositions();
             }
         });
@@ -694,12 +731,14 @@ document.addEventListener('DOMContentLoaded', function () {
     if (certNextBtn) {
         certNextBtn.addEventListener('click', () => {
             if (filteredCerts.length > 0) {
-                currentCertIndex = (currentCertIndex + 1) % filteredCerts.length;
+                const theta = 360 / filteredCerts.length;
+                rotationDeg -= theta;
                 updateCarouselPositions();
             }
         });
     }
 
+    // Modal Handling Logic
     function openCertModal(cert) {
         if (!certModal) return;
         certModalTitle.textContent = cert.title;
@@ -760,25 +799,20 @@ document.addEventListener('DOMContentLoaded', function () {
 
             currentCertIndex = 0;
 
-            if (desktopCarousel) {
-                desktopCarousel.style.transition = 'opacity 0.2s';
-                desktopCarousel.style.opacity = '0';
-            }
-            if (mobileStack) {
-                mobileStack.style.transition = 'opacity 0.2s';
-                mobileStack.style.opacity = '0';
+            if (certTrack) {
+                certTrack.style.transition = 'opacity 0.2s';
+                certTrack.style.opacity = '0';
             }
 
             setTimeout(() => {
                 renderCertificates();
-                if (desktopCarousel) desktopCarousel.style.opacity = '1';
-                if (mobileStack) mobileStack.style.opacity = '1';
+                if (certTrack) certTrack.style.opacity = '1';
             }, 200);
         });
     });
 
     // Initial render setup
-    if (desktopCarousel || mobileStack) {
+    if (certTrack) {
         renderCertificates();
     }
 
