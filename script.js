@@ -617,98 +617,84 @@ document.addEventListener('DOMContentLoaded', function () {
     }
 
     const certCarousel = document.getElementById('cert-carousel');
-    let rotationDeg = 0;
-
-    function updateActiveSlide() {
-        const cards = certTrack ? certTrack.querySelectorAll('.cert-card') : [];
-        const total = filteredCerts.length;
-        if (total === 0) return;
-
-        // Calculate current index based on rotationDeg
-        // currentCertIndex = Math.round(-rotationDeg / theta) % total
-        let theta = 360 / total;
-        let normalizedRot = ((-rotationDeg % 360) + 360) % 360;
-        let activeIndex = Math.round(normalizedRot / theta) % total;
-
-        cards.forEach((card, i) => {
-            card.classList.remove('active-slide');
-            if (i === activeIndex) {
-                card.classList.add('active-slide');
-                card.style.opacity = "1";
-            } else {
-                card.style.opacity = "0.4"; // Visual depth
-            }
-        });
-    }
+    let isDragging = false;
+    let startX = 0;
+    let currentX = 0;
 
     function updateCarouselPositions() {
         if (!certTrack || !certCarousel) return;
-        const total = filteredCerts.length;
-        if (total === 0) return;
-
-        const containerWidth = certCarousel.offsetWidth;
-        const cardWidth = Math.min(containerWidth * 0.8, 500);
-        const theta = 360 / total;
-
-        // Calculate radius for cylindrical layout
-        // For 1 or 2 cards, we use a fixed radius to keep them visible
-        let radius = total > 2
-            ? (cardWidth / 2) / Math.tan(Math.PI / total)
-            : cardWidth * 0.8;
-
-        const cards = certTrack.querySelectorAll('.cert-card');
-        cards.forEach((card, i) => {
-            card.style.width = `${cardWidth}px`;
-            card.style.transform = `rotateY(${i * theta}deg) translateZ(${radius}px)`;
-        });
-
-        certTrack.style.transform = `translateZ(${-radius}px) rotateY(${rotationDeg}deg)`;
-        updateActiveSlide();
+        const width = certCarousel.offsetWidth;
+        certTrack.style.transform = `translateX(-${currentCertIndex * width}px)`;
     }
 
     window.addEventListener("resize", updateCarouselPositions);
 
-    // 3D Swipe Physics
-    let isDragging = false;
-    let startX = 0;
-    let startRotation = 0;
-
     if (certTrack) {
+        // Touch Handlers for Mobile
+        certTrack.addEventListener("touchstart", (e) => {
+            startX = e.touches[0].clientX;
+            currentX = startX;
+            isDragging = true;
+            certTrack.style.transition = "none";
+        }, { passive: true });
+
+        certTrack.addEventListener("touchmove", (e) => {
+            if (!isDragging) return;
+            currentX = e.touches[0].clientX;
+            const delta = currentX - startX;
+            const width = certCarousel.offsetWidth;
+            certTrack.style.transform = `translateX(${ -currentCertIndex * width + delta }px)`;
+        }, { passive: true });
+
+        certTrack.addEventListener("touchend", () => {
+            if (!isDragging) return;
+            isDragging = false;
+            const delta = currentX - startX;
+            const threshold = certCarousel.offsetWidth * 0.2;
+
+            if (delta > threshold && currentCertIndex > 0) {
+                currentCertIndex--;
+            } else if (delta < -threshold && currentCertIndex < filteredCerts.length - 1) {
+                currentCertIndex++;
+            }
+
+            certTrack.style.transition = "transform 0.45s cubic-bezier(0.22, 1, 0.36, 1)";
+            updateCarouselPositions();
+        });
+
+        // Pointer Handlers for Desktop Drag
         certTrack.addEventListener('pointerdown', (e) => {
+            if (e.pointerType === 'touch') return; // Handled by touch events
             isDragging = true;
             startX = e.clientX;
-            startRotation = rotationDeg;
+            currentX = startX;
             certTrack.style.transition = "none";
             if (certTrack.setPointerCapture) certTrack.setPointerCapture(e.pointerId);
         });
 
         certTrack.addEventListener('pointermove', (e) => {
-            if (!isDragging) return;
-            const delta = e.clientX - startX;
-            // Sensitivity: adjust pixels to degrees
-            const sensitivity = 0.2;
-            rotationDeg = startRotation + (delta * sensitivity);
-
-            // Apply current rotation
-            const total = filteredCerts.length;
-            const cardWidth = Math.min(certCarousel.offsetWidth * 0.8, 500);
-            const radius = total > 2 ? (cardWidth / 2) / Math.tan(Math.PI / total) : cardWidth * 0.8;
-            certTrack.style.transform = `translateZ(${-radius}px) rotateY(${rotationDeg}deg)`;
-            updateActiveSlide();
+            if (!isDragging || e.pointerType === 'touch') return;
+            currentX = e.clientX;
+            const delta = currentX - startX;
+            const width = certCarousel.offsetWidth;
+            certTrack.style.transform = `translateX(${ -currentCertIndex * width + delta }px)`;
         });
 
         certTrack.addEventListener('pointerup', (e) => {
-            if (!isDragging) return;
+            if (!isDragging || e.pointerType === 'touch') return;
             isDragging = false;
             if (certTrack.releasePointerCapture) certTrack.releasePointerCapture(e.pointerId);
+            
+            const delta = currentX - startX;
+            const threshold = 80; // Desktop specific threshold
 
-            certTrack.style.transition = "transform 0.8s cubic-bezier(0.23, 1, 0.32, 1)";
+            if (delta > threshold && currentCertIndex > 0) {
+                currentCertIndex--;
+            } else if (delta < -threshold && currentCertIndex < filteredCerts.length - 1) {
+                currentCertIndex++;
+            }
 
-            // Snapping logic
-            const total = filteredCerts.length;
-            const theta = 360 / total;
-            rotationDeg = Math.round(rotationDeg / theta) * theta;
-
+            certTrack.style.transition = "transform 0.45s cubic-bezier(0.22, 1, 0.36, 1)";
             updateCarouselPositions();
         });
 
@@ -721,8 +707,7 @@ document.addEventListener('DOMContentLoaded', function () {
     if (certPrevBtn) {
         certPrevBtn.addEventListener('click', () => {
             if (filteredCerts.length > 0) {
-                const theta = 360 / filteredCerts.length;
-                rotationDeg += theta;
+                currentCertIndex = Math.max(0, currentCertIndex - 1);
                 updateCarouselPositions();
             }
         });
@@ -731,8 +716,7 @@ document.addEventListener('DOMContentLoaded', function () {
     if (certNextBtn) {
         certNextBtn.addEventListener('click', () => {
             if (filteredCerts.length > 0) {
-                const theta = 360 / filteredCerts.length;
-                rotationDeg -= theta;
+                currentCertIndex = Math.min(filteredCerts.length - 1, currentCertIndex + 1);
                 updateCarouselPositions();
             }
         });

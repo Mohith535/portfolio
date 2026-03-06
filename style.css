@@ -449,25 +449,15 @@ nav.scrolled {
     overflow: hidden;
     position: relative;
     width: 100%;
-    perspective: 1500px;
-    height: 500px;
-    /* Base height to prevent 3D clipping */
-    display: flex;
-    align-items: center;
-    justify-content: center;
 }
 
 .cert-track {
     display: flex;
-    align-items: center;
-    justify-content: center;
-    transform-style: preserve-3d;
-    transition: transform 0.8s cubic-bezier(0.23, 1, 0.32, 1);
+    transition: transform 0.45s cubic-bezier(0.22, 1, 0.36, 1);
     width: 100%;
-    height: 100%;
     will-change: transform;
+    touch-action: pan-y;
     cursor: grab;
-    position: relative;
 }
 
 .cert-track:active {
@@ -475,14 +465,10 @@ nav.scrolled {
 }
 
 .cert-card {
-    position: absolute;
-    width: 80%;
-    /* Targeted width for 3D focus */
-    max-width: 500px;
+    flex: 0 0 100%;
     padding: 1rem;
     box-sizing: border-box;
-    transition: transform 0.5s ease, opacity 0.5s ease;
-    backface-visibility: hidden;
+    transition: opacity 0.4s ease;
 }
 
 .cert-card-inner {
