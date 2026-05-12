@@ -796,6 +796,60 @@ body {
 }
 
 /* ============================================
+   PROJECTS SECTION OVERHAUL
+   ============================================ */
+#projects-archive {
+    transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+#projects-archive.expanded {
+    max-height: 5000px; /* Large enough to fit content */
+    opacity: 1;
+    margin-top: 2rem;
+}
+
+#toggle-projects-btn i {
+    transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+#toggle-projects-btn.active i {
+    transform: rotate(180deg);
+}
+
+#toggle-projects-btn:active {
+    transform: scale(0.95);
+}
+
+/* Feature pill refinements */
+.feature-pill {
+    padding: 0.4rem 0.8rem;
+    background: rgba(0, 212, 255, 0.1);
+    border: 1px solid rgba(0, 212, 255, 0.2);
+    border-radius: 12px;
+    font-size: 10px;
+    font-weight: 700;
+    color: var(--cyan);
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+/* Ensure project cards in the grid look premium */
+#projects-archive .project-card {
+    background: rgba(13, 18, 33, 0.5);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    transition: all 0.4s ease;
+}
+
+#projects-archive .project-card:hover {
+    background: rgba(26, 31, 46, 0.8);
+    border-color: var(--cyan);
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+}
+
+/* ============================================
    TASKFLOW V8.0.0 SPECIFIC STYLES
    ============================================ */
 
@@ -966,6 +1020,102 @@ body {
     font-weight: 800;
     color: white;
     font-family: 'Poppins', sans-serif;
+}
+
+/* Zen Reader Styles */
+#zen-reader {
+    font-family: 'Inter', system-ui, -apple-system, sans-serif;
+    scrollbar-width: thin;
+    scrollbar-color: rgba(255, 255, 255, 0.1) transparent;
+}
+
+#zen-reader::-webkit-scrollbar {
+    width: 6px;
+}
+
+#zen-reader::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+#zen-reader::-webkit-scrollbar-thumb {
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 10px;
+}
+
+.animate-focus-in {
+    animation: zenFocus 1.2s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+@keyframes zenFocus {
+    0% {
+        opacity: 0;
+        transform: translateY(30px) scale(0.98);
+        filter: blur(10px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+        filter: blur(0);
+    }
+}
+
+#zen-reader article h1, 
+#zen-reader article h2, 
+#zen-reader article h3 {
+    letter-spacing: -0.02em;
+}
+
+#zen-reader article p {
+    color: rgba(255, 255, 255, 0.8);
+    margin-bottom: 2rem;
+}
+
+#zen-reader hr {
+    opacity: 0.1;
+    margin: 4rem 0;
+}
+
+#zen-reader strong {
+    color: #fff;
+    font-weight: 700;
+}
+
+#zen-reader code {
+    background: rgba(0, 212, 255, 0.1);
+    color: #00D4FF;
+    padding: 0.2em 0.4em;
+    border-radius: 4px;
+    font-size: 0.9em;
+}
+
+.prose blockquote {
+    border-left-color: #00D4FF;
+    color: rgba(255, 255, 255, 0.7);
+    font-style: italic;
+    background: rgba(255, 255, 255, 0.03);
+    padding: 2rem;
+    border-radius: 0 1rem 1rem 0;
+}
+
+.animate-zoom-in {
+    animation: zoomIn 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+@keyframes zoomIn {
+    0% {
+        opacity: 0;
+        transform: scale(0.9) translateY(10px);
+    }
+    100% {
+        opacity: 1;
+        transform: scale(1) translateY(0);
+    }
+}
+
+.projects-archive-expanded {
+    max-height: 4000px !important;
+    opacity: 1 !important;
+    margin-top: 3rem;
 }
 
 

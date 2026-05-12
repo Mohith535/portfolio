@@ -508,44 +508,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
     // Photo Gallery Modal Logic
 
-    // Photo Gallery Modal Logic
-    const galleryModal = document.getElementById('gallery-modal');
-    window.openGalleryModal = function (imageDesc) {
-        if (!galleryModal) return;
 
-        const descElem = document.getElementById('modal-description');
-        if (descElem) descElem.textContent = imageDesc;
-
-        galleryModal.classList.remove('hidden');
-        galleryModal.classList.add('flex');
-
-        // Prevent body scrolling
-        document.body.style.overflow = 'hidden';
-
-        // Trigger fade in
-        setTimeout(() => {
-            galleryModal.classList.add('show');
-        }, 10);
-    };
-
-    window.closeGalleryModal = function () {
-        if (!galleryModal) return;
-
-        galleryModal.classList.remove('show');
-
-        setTimeout(() => {
-            galleryModal.classList.add('hidden');
-            galleryModal.classList.remove('flex');
-            document.body.style.overflow = ''; // Restore scrolling
-        }, 300); // Wait for transition
-    };
-
-    // Close modal on escape key
-    document.addEventListener('keydown', (e) => {
-        if (e.key === 'Escape' && galleryModal && galleryModal.classList.contains('show')) {
-            closeGalleryModal();
-        }
-    });
 
     // ============================================
     // CERTIFICATION VAULT SYSTEM
@@ -800,7 +763,248 @@ document.addEventListener('DOMContentLoaded', function () {
         renderCertificates();
     }
 
+    // ============================================
+    // PROJECTS SECTION TOGGLE
+    // ============================================
+    (function setupProjectsToggle() {
+        const toggleBtn = document.getElementById('toggle-projects-btn');
+        const archive = document.getElementById('projects-archive');
+        const btnText = document.getElementById('toggle-btn-text');
+
+        if (!toggleBtn || !archive) return;
+
+        toggleBtn.addEventListener('click', () => {
+            const isExpanded = archive.classList.contains('expanded');
+
+            if (isExpanded) {
+                // Collapse
+                archive.classList.remove('expanded');
+                toggleBtn.classList.remove('active');
+                if (btnText) btnText.textContent = 'Explore More Projects';
+                
+                // Scroll back to the top of projects section after collapse
+                setTimeout(() => {
+                    document.getElementById('projects')?.scrollIntoView({ behavior: 'smooth' });
+                }, 700);
+            } else {
+                // Expand
+                archive.classList.add('expanded');
+                toggleBtn.classList.add('active');
+                if (btnText) btnText.textContent = 'Show Featured Only';
+                
+                // Refresh AOS to trigger animations for newly visible items
+                if (typeof AOS !== 'undefined') {
+                    setTimeout(() => {
+                        AOS.refresh();
+                    }, 400);
+                }
+            }
+        });
+    })();
+
     // --- Console Easter Egg ---
     console.log("%c MOHITH KANNAN K | AI Portfolio v3.2 (with Google Translate & Upgraded Timeline) ", "background: #00D4FF; color: #fff; font-weight: bold; padding: 5px; border-radius: 5px;");
 
+});
+
+// Zen Reader Functions
+function openArticleReader() {
+    const reader = document.getElementById('zen-reader');
+    if (reader) {
+        reader.classList.remove('translate-y-full');
+        reader.classList.add('translate-y-0');
+        document.body.style.overflow = 'hidden';
+        
+        // Refresh AOS to prevent conflicts
+        if (typeof AOS !== 'undefined') {
+            AOS.refresh();
+        }
+    }
+}
+
+function closeArticleReader() {
+    const reader = document.getElementById('zen-reader');
+    if (reader) {
+        reader.classList.remove('translate-y-0');
+        reader.classList.add('translate-y-full');
+        document.body.style.overflow = 'auto';
+    }
+}
+
+// Gallery Modal Functions
+function openGalleryModal(title, imgSrc) {
+    const modal = document.getElementById('cert-modal');
+    const modalTitle = document.getElementById('cert-modal-title');
+    const modalBody = document.getElementById('cert-modal-body');
+    
+    if (!modal || !modalBody) return;
+
+    modalTitle.textContent = title || "Photo View";
+    
+    // Create image element
+    if (imgSrc) {
+        // Append a cache-buster to force fresh load, bypassing aggressive SW caches
+        const safeSrc = encodeURI(imgSrc) + '?v=' + new Date().getTime();
+        modalBody.innerHTML = `
+            <div class="relative w-full h-full flex items-center justify-center p-4">
+                <img src="${safeSrc}" class="w-full h-full object-contain rounded-lg shadow-2xl animate-zoom-in" alt="${title}">
+                <div class="absolute bottom-4 left-1/2 -translate-x-1/2 px-6 py-2 bg-black/60 backdrop-blur-md rounded-full border border-white/10 text-[10px] font-bold uppercase tracking-widest text-gray-300">
+                    ${title}
+                </div>
+            </div>
+        `;
+    } else {
+        modalBody.innerHTML = `
+            <div class="flex flex-col items-center justify-center text-gray-500">
+                <i class="fas fa-image text-6xl mb-4 opacity-20"></i>
+                <p class="text-sm font-medium">Image not available</p>
+            </div>
+        `;
+    }
+
+    modal.style.display = ''; // Clear any inline display=none
+    modal.classList.remove('hidden');
+    modal.classList.add('flex');
+    setTimeout(() => {
+        modal.classList.add('opacity-100');
+        const content = document.getElementById('cert-modal-content');
+        if (content) {
+            content.classList.remove('scale-95');
+            content.classList.add('scale-100');
+        }
+    }, 10);
+    document.body.style.overflow = 'hidden';
+}
+
+window.closeGalleryModal = function() {
+    try {
+        const modal = document.getElementById('cert-modal');
+        if (!modal) return;
+
+        modal.classList.remove('opacity-100');
+        
+        const content = document.getElementById('cert-modal-content');
+        if (content) {
+            content.classList.remove('scale-100');
+            content.classList.add('scale-95');
+        }
+        
+        setTimeout(() => {
+            modal.classList.remove('flex');
+            modal.classList.add('hidden');
+            modal.style.display = 'none'; // Force hide
+            document.body.style.overflow = 'auto';
+        }, 300);
+    } catch (err) {
+        console.error("Error closing modal:", err);
+        // Fallback immediate hide
+        const modal = document.getElementById('cert-modal');
+        if (modal) {
+            modal.classList.add('hidden');
+            modal.style.display = 'none';
+        }
+        document.body.style.overflow = 'auto';
+    }
+}
+
+// Global Modal Listeners (Event Delegation to avoid DOMContentLoaded race conditions)
+document.addEventListener('click', (e) => {
+    // Handle close button click
+    const closeBtn = e.target.closest('#close-cert-modal');
+    if (closeBtn) {
+        closeGalleryModal();
+        return;
+    }
+
+    // Handle backdrop click
+    const modal = document.getElementById('cert-modal');
+    if (modal && e.target === modal) {
+        closeGalleryModal();
+    }
+});
+
+// --- Mobile Menu Auto-Close Logic ---
+const mobileMenu = document.getElementById('mobile-menu');
+const mobileLinks = document.querySelectorAll('.mobile-link');
+if (mobileMenu) {
+        mobileLinks.forEach(link => {
+            link.addEventListener('click', () => {
+                mobileMenu.classList.add('hidden');
+                mobileMenu.classList.remove('flex');
+            });
+        });
+    }
+
+    // --- Projects Archive Toggle Logic ---
+    const toggleProjectsBtn = document.getElementById('toggle-projects-btn');
+    const projectsArchive = document.getElementById('projects-archive');
+    const toggleBtnText = document.getElementById('toggle-btn-text');
+    const toggleBtnIcon = document.getElementById('toggle-btn-icon');
+
+    if (toggleProjectsBtn && projectsArchive) {
+        toggleProjectsBtn.addEventListener('click', () => {
+            projectsArchive.classList.toggle('projects-archive-expanded');
+            
+            if (projectsArchive.classList.contains('projects-archive-expanded')) {
+                if (toggleBtnText) toggleBtnText.textContent = 'Show Less';
+                if (toggleBtnIcon) toggleBtnIcon.style.transform = 'rotate(180deg)';
+            } else {
+                if (toggleBtnText) toggleBtnText.textContent = 'Explore More Projects';
+                if (toggleBtnIcon) toggleBtnIcon.style.transform = 'rotate(0deg)';
+            }
+        });
+    }
+
+    // --- Contact Form Simulation Logic ---
+    const contactForm = document.getElementById('contact-form');
+    const submitBtn = document.getElementById('submit-btn');
+    const btnText = document.getElementById('btn-text');
+    const btnSpinner = document.getElementById('btn-spinner');
+    const toastNotification = document.getElementById('toast-notification');
+
+    if (contactForm && submitBtn) {
+        contactForm.addEventListener('submit', (e) => {
+            e.preventDefault(); // Prevent page reload
+            
+            // Visual loading state
+            if (btnText) btnText.textContent = 'SENDING...';
+            if (btnSpinner) btnSpinner.classList.remove('hidden');
+            submitBtn.disabled = true;
+            submitBtn.classList.add('opacity-75', 'cursor-not-allowed');
+
+            // Simulate network request (1.5s)
+            setTimeout(() => {
+                // Reset button
+                if (btnText) btnText.textContent = 'MESSAGE SENT';
+                if (btnSpinner) btnSpinner.classList.add('hidden');
+                
+                // Show toast
+                if (toastNotification) {
+                    toastNotification.classList.remove('opacity-0', 'invisible', '-top-16');
+                    toastNotification.classList.add('opacity-100', 'visible', 'top-8');
+                }
+                
+                // Clear form
+                contactForm.reset();
+
+                // Hide toast & reset button after 3s
+                setTimeout(() => {
+                    if (toastNotification) {
+                        toastNotification.classList.add('opacity-0', 'invisible', '-top-16');
+                        toastNotification.classList.remove('opacity-100', 'visible', 'top-8');
+                    }
+                    
+                    submitBtn.disabled = false;
+                    submitBtn.classList.remove('opacity-75', 'cursor-not-allowed');
+                    if (btnText) btnText.textContent = 'FIRE MESSAGE 🚀';
+                }, 3000);
+            }, 1500);
+        });
+    }
+// Global Key Listeners (ESC to close everything)
+document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') {
+        closeArticleReader();
+        closeGalleryModal();
+    }
 });
